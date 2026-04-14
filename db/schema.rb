@@ -44,6 +44,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_12_221944) do
     t.string "reset_password_token"
     t.integer "sign_in_count", default: 0, null: false
     t.string "slug", null: false
+    t.string "unconfirmed_email"
     t.datetime "updated_at", null: false
     t.string "username", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

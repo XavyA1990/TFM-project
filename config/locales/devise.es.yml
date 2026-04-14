@@ -6,6 +6,8 @@ es:
       confirmed: "Tu dirección de correo electrónico ha sido confirmada con éxito."
       send_instructions: "Recibirás un correo electrónico con instrucciones sobre cómo confirmar tu dirección de correo electrónico en unos minutos."
       send_paranoid_instructions: "Si tu dirección de correo electrónico existe en nuestra base de datos, recibirás un correo electrónico con instrucciones sobre cómo confirmar tu dirección de correo electrónico en unos minutos."
+      new:
+        did_not_receive_instructions: "¿No recibiste las instrucciones de confirmación?"
     failure:
       already_authenticated: "Ya has iniciado sesión."
       inactive: "Tu cuenta no está activada todavía."
@@ -36,6 +38,8 @@ es:
       send_paranoid_instructions: "Si tu dirección de correo electrónico existe en nuestra base de datos, recibirás un enlace de recuperación de contraseña en tu dirección de correo electrónico en unos minutos."
       updated: "Tu contraseña ha sido cambiada con éxito. Ahora has iniciado sesión."
       updated_not_active: "Tu contraseña ha sido cambiada con éxito."
+      new:
+        forgot_password: "¿Olvidaste tu contraseña?"
     registrations:
       destroyed: "¡Adiós! Tu cuenta ha sido cancelada con éxito. Esperamos verte de nuevo pronto."
       signed_up: "¡Bienvenido! Te has registrado con éxito."
@@ -45,10 +49,14 @@ es:
       update_needs_confirmation: "Has actualizado tu cuenta con éxito, pero necesitamos verificar tu nueva dirección de correo electrónico. Por favor, revisa tu correo electrónico y sigue el enlace de confirmación para confirmar tu nueva dirección de correo electrónico."
       updated: "Tu cuenta ha sido actualizada con éxito."
       updated_but_not_signed_in: "Tu cuenta ha sido actualizada con éxito, pero dado que tu contraseña fue cambiada, necesitas iniciar sesión nuevamente."
+      new:
+        sign_up: "Registrarse"
     sessions:
       signed_in: "Has iniciado sesión con éxito."
       signed_out: "Has cerrado sesión con éxito."
       already_signed_out: "Ya has cerrado sesión."
+      new:
+        sign_in: "Iniciar sesión"
     unlocks:
       send_instructions: "Recibirás un correo electrónico con instrucciones sobre cómo desbloquear tu cuenta en unos minutos."
       send_paranoid_instructions: "Si tu cuenta existe, recibirás un correo electrónico con instrucciones sobre cómo desbloquearla en unos minutos."

@@ -1,2 +1,61 @@
-en:
+es:
   hello: "Hola mundo"
+  email: "Correo electrónico"
+  password: "Contraseña"
+  password_confirmation: "Confirmación de contraseña"
+  characters_minimum: "(%{count} caracteres mínimo)"
+  username: "Nombre de usuario"
+  first_name: "Nombre"
+  last_name: "Apellido"
+  middle_name: "Segundo nombre"
+  remember_me: "Recuérdame"
+  current_password: "Contraseña actual"
+  update: "Actualizar"
+  back: "Volver"
+  devise_views:
+    registrations:
+      edit:
+        title: "Editar cuenta"
+        pending_reconfirmation: "Actualmente esperando confirmación para: %{email}"
+        password_hint: "(déjalo en blanco si no quieres cambiarlo)"
+        current_password_hint: "(necesitamos tu contraseña actual para confirmar tus cambios)"
+        cancel_account_title: "Cancelar mi cuenta"
+        cancel_account_hint: "¿No estás conforme?"
+        cancel_account_button: "Cancelar mi cuenta"
+        cancel_account_confirm: "¿Estás seguro?"
+    confirmations:
+      new:
+        title: "Reenviar instrucciones de confirmación"
+        submit: "Reenviar instrucciones de confirmación"
+    passwords:
+      new:
+        title: "¿Olvidaste tu contraseña?"
+        submit: "Envíame instrucciones para restablecer mi contraseña"
+      edit:
+        title: "Cambia tu contraseña"
+        new_password: "Nueva contraseña"
+        confirm_new_password: "Confirma la nueva contraseña"
+        submit: "Cambiar mi contraseña"
+    mailer:
+      confirmation_instructions:
+        greeting: "Bienvenido %{email}!"
+        message: "Puedes confirmar el correo electrónico de tu cuenta a través del siguiente enlace:"
+        action: "Confirmar mi cuenta"
+      reset_password_instructions:
+        greeting: "Hola %{email}!"
+        message: "Alguien solicitó un enlace para cambiar tu contraseña. Puedes hacerlo a través del siguiente enlace."
+        action: "Cambiar mi contraseña"
+        ignore_message: "Si no solicitaste esto, ignora este correo."
+        footer: "Tu contraseña no cambiará hasta que accedas al enlace anterior y crees una nueva."
+      email_changed:
+        greeting: "Hola %{email}!"
+        unconfirmed_message: "Te contactamos para informarte que tu correo electrónico está siendo cambiado a %{email}."
+        confirmed_message: "Te contactamos para informarte que tu correo electrónico ha sido cambiado a %{email}."
+      password_change:
+        greeting: "Hola %{email}!"
+        message: "Te contactamos para informarte que tu contraseña ha sido cambiada."
+      unlock_instructions:
+        greeting: "Hola %{email}!"
+        message: "Tu cuenta ha sido bloqueada debido a un número excesivo de intentos fallidos de inicio de sesión."
+        action_message: "Haz clic en el siguiente enlace para desbloquear tu cuenta:"
+        action: "Desbloquear mi cuenta"
