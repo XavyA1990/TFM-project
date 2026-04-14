@@ -5,5 +5,7 @@ class CreateUsersTenant < ActiveRecord::Migration[8.1]
       t.references :tenant, null: false, foreign_key: true, type: :uuid
       t.timestamps
     end
+
+    add_index :users_tenants, [:user_id, :tenant_id], unique: true
   end
 end

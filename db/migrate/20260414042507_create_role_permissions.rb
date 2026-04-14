@@ -5,5 +5,7 @@ class CreateRolePermissions < ActiveRecord::Migration[8.1]
       t.references :permission, null: false, foreign_key: true, type: :uuid
       t.timestamps
     end
+
+    add_index :role_permissions, [:role_id, :permission_id], unique: true
   end
 end

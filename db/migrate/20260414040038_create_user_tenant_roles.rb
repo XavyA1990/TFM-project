@@ -6,5 +6,7 @@ class CreateUserTenantRoles < ActiveRecord::Migration[8.1]
       t.string :scope_type, null: false, default: "selected_courses"
       t.timestamps
     end
+
+    add_index :user_tenant_roles, [:users_tenant_id, :role_id], unique: true
   end
 end

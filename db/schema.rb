@@ -40,6 +40,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_042507) do
     t.uuid "role_id", null: false
     t.datetime "updated_at", null: false
     t.index ["permission_id"], name: "index_role_permissions_on_permission_id"
+    t.index ["role_id", "permission_id"], name: "index_role_permissions_on_role_id_and_permission_id", unique: true
     t.index ["role_id"], name: "index_role_permissions_on_role_id"
   end
 
@@ -66,6 +67,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_042507) do
     t.datetime "updated_at", null: false
     t.uuid "users_tenant_id", null: false
     t.index ["role_id"], name: "index_user_tenant_roles_on_role_id"
+    t.index ["users_tenant_id", "role_id"], name: "index_user_tenant_roles_on_users_tenant_id_and_role_id", unique: true
     t.index ["users_tenant_id"], name: "index_user_tenant_roles_on_users_tenant_id"
   end
 
@@ -103,6 +105,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_042507) do
     t.datetime "updated_at", null: false
     t.uuid "user_id", null: false
     t.index ["tenant_id"], name: "index_users_tenants_on_tenant_id"
+    t.index ["user_id", "tenant_id"], name: "index_users_tenants_on_user_id_and_tenant_id", unique: true
     t.index ["user_id"], name: "index_users_tenants_on_user_id"
   end
 
