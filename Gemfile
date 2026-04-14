@@ -46,7 +46,7 @@ group :development, :test do
 
   gem "pry", require: false
 
-  gem "dotenv-rails", require: false
+  gem "dotenv-rails"
 
   gem 'rspec-rails', require: false
 

@@ -41,6 +41,21 @@ en:
   current_password: "Current password"
   update: "Update"
   back: "Back"
+  errors:
+    messages:
+      taken: "has already been taken"
+      blank: "can't be blank"
+      confirmation: "doesn't match the confirmation"
+      too_short: "is too short (minimum %{count} characters)"
+  activerecord:
+    attributes:
+      user:
+        email: "Email"
+        username: "Username"
+        first_name: "First name"
+        last_name: "Last name"
+        password: "Password"
+        password_confirmation: "Password confirmation"
   devise_views:
     registrations:
       edit:

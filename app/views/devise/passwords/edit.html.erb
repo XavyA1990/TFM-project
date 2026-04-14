@@ -9,18 +9,9 @@
         <%= render "devise/shared/error_messages", resource: resource %>
         <%= f.hidden_field :reset_password_token %>
 
-        <div>
-          <%= f.label :password, t('devise_views.passwords.edit.new_password'), class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
-          <% if @minimum_password_length %>
-            <p><em class="text-sm/6 text-gray-500 dark:text-gray-400"><%= t('characters_minimum', count: @minimum_password_length) %></em></p>
-          <% end %>
-          <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500" %>
-        </div>
+        <%= render "devise/shared/form_field", f: f, field: :password, type: :password_field, label: t('devise_views.passwords.edit.new_password'), description: (@minimum_password_length ? t('characters_minimum', count: @minimum_password_length) : nil), input_html: { autofocus: true, autocomplete: "new-password" } %>
 
-        <div>
-          <%= f.label :password_confirmation, t('devise_views.passwords.edit.confirm_new_password'), class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500" %>
-        </div>
+        <%= render "devise/shared/form_field", f: f, field: :password_confirmation, type: :password_field, label: t('devise_views.passwords.edit.confirm_new_password'), input_html: { autocomplete: "new-password" } %>
 
         <div class="actions">
           <%= f.submit t('devise_views.passwords.edit.submit'), class: "flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500 mb-5" %>

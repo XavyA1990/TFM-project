@@ -6,15 +6,9 @@
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md">
     <div class="bg-white px-6 py-12 shadow-sm sm:rounded-lg sm:px-12 dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }) do |f| %>
-        <div>
-          <%= f.label :email, t('email'), class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500" %>
-        </div>
+        <%= render "devise/shared/form_field", f: f, field: :email, type: :email_field, label: t('email'), input_html: { autofocus: true, autocomplete: "email" } %>
 
-        <div>
-          <%= f.label :password, t('password'), class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
-          <%= f.password_field :password, autocomplete: "current-password", class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500" %>
-        </div>
+        <%= render "devise/shared/form_field", f: f, field: :password, type: :password_field, label: t('password'), input_html: { autocomplete: "current-password" } %>
 
         <% if devise_mapping.rememberable? %>
           <div class="flex items-center gap-3">

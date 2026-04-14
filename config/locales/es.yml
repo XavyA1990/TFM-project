@@ -12,6 +12,21 @@ es:
   current_password: "Contraseña actual"
   update: "Actualizar"
   back: "Volver"
+  errors:
+    messages:
+      taken: "ya está en uso"
+      blank: "no puede estar en blanco"
+      confirmation: "no coincide con la confirmación"
+      too_short: "es demasiado corto (mínimo %{count} caracteres)"
+  activerecord:
+    attributes:
+      user:
+        email: "Correo electrónico"
+        username: "Nombre de usuario"
+        first_name: "Nombre"
+        last_name: "Apellido"
+        password: "Contraseña"
+        password_confirmation: "Confirmación de contraseña"
   devise_views:
     registrations:
       edit:
@@ -30,7 +45,7 @@ es:
     passwords:
       new:
         title: "¿Olvidaste tu contraseña?"
-        submit: "Envíame instrucciones para restablecer mi contraseña"
+        submit: "Enviar instrucciones para restablecer contraseña"
       edit:
         title: "Cambia tu contraseña"
         new_password: "Nueva contraseña"
