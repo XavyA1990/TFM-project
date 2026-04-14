@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_12_221944) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_14_042507) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -25,7 +25,51 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_12_221944) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "action", null: false
+    t.datetime "created_at", null: false
+    t.string "description"
+    t.string "name", null: false
+    t.string "subject_class", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "role_permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.uuid "permission_id", null: false
+    t.uuid "role_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["permission_id"], name: "index_role_permissions_on_permission_id"
+    t.index ["role_id"], name: "index_role_permissions_on_role_id"
+  end
+
+  create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "description"
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tenants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "logo_url"
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_tenants_on_slug", unique: true
+  end
+
+  create_table "user_tenant_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.uuid "role_id", null: false
+    t.string "scope_type", default: "selected_courses", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "users_tenant_id", null: false
+    t.index ["role_id"], name: "index_user_tenant_roles_on_role_id"
+    t.index ["users_tenant_id"], name: "index_user_tenant_roles_on_users_tenant_id"
+  end
+
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "avatar_url"
     t.datetime "confirmation_sent_at"
     t.string "confirmation_token"
@@ -52,4 +96,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_12_221944) do
     t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
+
+  create_table "users_tenants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.uuid "tenant_id", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
+    t.index ["tenant_id"], name: "index_users_tenants_on_tenant_id"
+    t.index ["user_id"], name: "index_users_tenants_on_user_id"
+  end
+
+  add_foreign_key "role_permissions", "permissions"
+  add_foreign_key "role_permissions", "roles"
+  add_foreign_key "user_tenant_roles", "roles"
+  add_foreign_key "user_tenant_roles", "users_tenants"
+  add_foreign_key "users_tenants", "tenants"
+  add_foreign_key "users_tenants", "users"
 end

@@ -11,6 +11,9 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
+
+  has_many :users_tenants
+  has_many :tenants, through: :users_tenants
   
   def should_generate_new_friendly_id?
     will_save_change_to_username? || super
