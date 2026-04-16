@@ -6,4 +6,7 @@ class UserTenantRole < ApplicationRecord
     selected_courses: "selected_courses",
     tenant: "tenant"
   }
+
+  validates :scope_type, presence: true
+  validates :users_tenant_id, uniqueness: { scope: :role_id }
 end
