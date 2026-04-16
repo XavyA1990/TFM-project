@@ -28,5 +28,24 @@ class User < ApplicationRecord
     users_tenants.find_by(tenant: tenant)
   end
 
+  def roles_for(tenant)
+    membership = membership_for(tenant)
+    membership ? membership.roles : []
+  end
 
+  def permissions_for(tenant)
+    roles = roles_for(tenant)
+    permissions = roles.flat_map(&:permissions).uniq
+    permissions
+  end
+
+  def has_role_in_tenant?(role_name, tenant)
+    roles_for(tenant).any? { |role| role.name == role_name }
+  end
+
+  def has_permission_in_tenant?(action, subject_class, tenant)
+    permissions_for(tenant).any? do |permission|
+      permission.action == action && permission.subject_class == subject_class
+    end
+  end
 end

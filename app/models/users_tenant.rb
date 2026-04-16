@@ -1,6 +1,9 @@
 class UsersTenant < ApplicationRecord
   belongs_to :user
   belongs_to :tenant
+  
+  has_many :user_tenant_roles
+  has_many :roles, through: :user_tenant_roles
 
   def roles
     user_tenant_roles.includes(:role).map(&:role)
