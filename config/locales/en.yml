@@ -28,6 +28,13 @@
 #       enabled: "ON"
 
 en:
+  app:
+    name: "TFM Project"
+  authorization:
+    denied: "You are not authorized to access this page."
+  pwa:
+    name: "TFM Project"
+    description: "Multi-tenant administration platform."
   hello: "Hello world"
   email: "Email"
   password: "Password"
@@ -103,3 +110,33 @@ en:
         message: "Your account has been locked due to an excessive number of unsuccessful sign in attempts."
         action_message: "Click the link below to unlock your account:"
         action: "Unlock my account"
+  home:
+    index:
+      title: "Platform home"
+      description: "Landing page for the multi-tenant platform."
+  tenants:
+    show:
+      title: "Tenant portal"
+      description: "Overview of the current tenant."
+  admin:
+    tenants:
+      index:
+        title: "Tenants"
+        description: "Global tenant administration for super admins."
+      show:
+        title: "Tenant details"
+        description: "Global details for the selected tenant."
+      new:
+        title: "New tenant"
+        description: "Create a new tenant in the platform."
+      edit:
+        title: "Edit tenant"
+        description: "Update the selected tenant."
+  admin_tenants:
+    tenants:
+      show:
+        title: "Tenant administration"
+        description: "Manage the current tenant."
+      edit:
+        title: "Edit tenant settings"
+        description: "Update the current tenant configuration."

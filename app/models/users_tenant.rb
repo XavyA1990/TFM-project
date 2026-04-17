@@ -2,7 +2,7 @@ class UsersTenant < ApplicationRecord
   belongs_to :user
   belongs_to :tenant
   
-  has_many :user_tenant_roles
+  has_many :user_tenant_roles, dependent: :destroy
   has_many :roles, through: :user_tenant_roles
 
   def roles

@@ -3,30 +3,30 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
-    # Define abilities for the user here. For example:
-    #
-    #   return unless user.present?
-    #   can :read, :all
-    #   return unless user.admin?
-    #   can :manage, :all
-    #
-    # The first argument to `can` is the action you are giving the user
-    # permission to do.
-    # If you pass :manage it will apply to every action. Other common actions
-    # here are :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on.
-    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
-    # class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the
-    # objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, published: true
-    #
-    # See the wiki for details:
-    # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
+  def initialize(user, tenant = nil)
+    user ||= User.new
+
+    if user.is_super_admin?
+      can :manage, :all
+      return
+    end
+
+    return unless user.persisted? 
+    return unless tenant.present?
+    return unless user.membership_for(tenant)
+
+    user.permissions_for(tenant).each do |permission|
+      subject = safe_constantize(permission.subject_class)
+
+      next unless subject
+
+      can permission.action.to_sym, subject
+    end
+  end
+
+  private
+
+  def safe_constantize(class_name)
+    class_name.safe_constantize
   end
 end

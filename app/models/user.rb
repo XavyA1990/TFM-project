@@ -7,7 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :trackable
          
-  has_many :users_tenants
+  has_many :users_tenants, dependent: :destroy
   has_many :tenants, through: :users_tenants
   
   validates :username, presence: true, uniqueness: true

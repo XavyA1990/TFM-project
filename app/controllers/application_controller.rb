@@ -4,6 +4,24 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
   around_action :switch_locale
 
+  rescue_from CanCan::AccessDenied do
+    redirect_to root_path, alert: t("authorization.denied")
+  end
+
+  def current_ability
+    @current_ability ||= Ability.new(current_user, current_tenant_for_ability)
+  end
+
+
+  def current_tenant_for_ability
+    return nil unless respond_to?(:current_tenant, true)
+
+    current_tenant
+  rescue ActiveRecord::RecordNotFound
+    nil
+  end
+
+
   def default_url_options
     { locale: I18n.locale }
   end

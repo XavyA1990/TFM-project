@@ -12,12 +12,6 @@ ROLE_DEFINITIONS = {
 
 PERMISSION_DEFINITIONS = [
   {
-    name: "manage_all",
-    action: "manage",
-    subject_class: "all",
-    description: "Full access to all resources"
-  },
-  {
     name: "read_tenant",
     action: "read",
     subject_class: "Tenant",
@@ -86,7 +80,7 @@ PERMISSION_DEFINITIONS = [
 ].freeze
 
 ROLE_PERMISSION_MAP = {
-  super_admin: %w[manage_all],
+  super_admin: [],
   platform_admin: %w[
     read_tenant update_tenant
     read_user create_user update_user
@@ -134,11 +128,12 @@ def create_permission!(name:, action:, subject_class:, description:)
   permission
 end
 
-def create_user!(email:, username:, first_name:, last_name:)
+def create_user!(email:, username:, first_name:, last_name:, is_super_admin: false)
   user = User.find_or_initialize_by(email: email)
   user.username = username
   user.first_name = first_name
   user.last_name = last_name
+  user.is_super_admin = is_super_admin
   user.password = PASSWORD if user.new_record?
   user.password_confirmation = PASSWORD if user.new_record?
   user.confirmed_at ||= Time.current
@@ -168,6 +163,9 @@ permissions = PERMISSION_DEFINITIONS.to_h do |permission_attrs|
   ]
 end
 
+RolePermission.joins(:permission).where(permissions: { name: "manage_all" }).destroy_all
+Permission.where(name: "manage_all").destroy_all
+
 ROLE_PERMISSION_MAP.each do |role_name, permission_names|
   permission_names.each do |permission_name|
     assign_permission!(role: roles.fetch(role_name), permission: permissions.fetch(permission_name))
@@ -185,7 +183,8 @@ super_admin = create_user!(
   email: ENV["SUPER_ADMIN_EMAIL"] || "superadmin@example.com",
   username: "superadmin",
   first_name: "Super",
-  last_name: "Admin"
+  last_name: "Admin",
+  is_super_admin: true
 )
 
 tenants.each do |tenant|

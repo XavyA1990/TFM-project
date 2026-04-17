@@ -18,7 +18,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_042507) do
     t.datetime "created_at"
     t.string "scope"
     t.string "slug", null: false
-    t.integer "sluggable_id", null: false
+    t.uuid "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
@@ -53,9 +53,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_042507) do
 
   create_table "tenants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.string "description"
+    t.string "header_text"
     t.string "logo_url"
     t.string "name", null: false
     t.string "slug", null: false
+    t.string "subheader_text"
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_tenants_on_slug", unique: true
   end
@@ -82,6 +85,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_14_042507) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "first_name", null: false
+    t.boolean "is_super_admin", default: false, null: false
     t.string "last_name", null: false
     t.datetime "last_sign_in_at"
     t.string "last_sign_in_ip"

@@ -1,4 +1,11 @@
 es:
+  app:
+    name: "TFM Project"
+  authorization:
+    denied: "No tienes permiso para acceder a esta página."
+  pwa:
+    name: "TFM Project"
+    description: "Plataforma multi-tenant de administración."
   hello: "Hola mundo"
   email: "Correo electrónico"
   password: "Contraseña"
@@ -74,3 +81,38 @@ es:
         message: "Tu cuenta ha sido bloqueada debido a un número excesivo de intentos fallidos de inicio de sesión."
         action_message: "Haz clic en el siguiente enlace para desbloquear tu cuenta:"
         action: "Desbloquear mi cuenta"
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " y "
+      last_word_connector: " y "
+  home:
+    index:
+      title: "Inicio de la plataforma"
+      description: "Página principal de la plataforma multi-tenant."
+  tenants:
+    show:
+      title: "Portal del tenant"
+      description: "Resumen del tenant actual."
+  admin:
+    tenants:
+      index:
+        title: "Tenants"
+        description: "Administración global de tenants para super admins."
+      show:
+        title: "Detalle del tenant"
+        description: "Detalles globales del tenant seleccionado."
+      new:
+        title: "Nuevo tenant"
+        description: "Crea un nuevo tenant en la plataforma."
+      edit:
+        title: "Editar tenant"
+        description: "Actualiza el tenant seleccionado."
+  admin_tenants:
+    tenants:
+      show:
+        title: "Administración del tenant"
+        description: "Gestiona el tenant actual."
+      edit:
+        title: "Editar configuración del tenant"
+        description: "Actualiza la configuración del tenant actual."

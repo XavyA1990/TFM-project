@@ -2,7 +2,7 @@ class Tenant < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  has_many :users_tenants
+  has_many :users_tenants, dependent: :destroy
   has_many :users, through: :users_tenants
 
   validates :name, presence: true
