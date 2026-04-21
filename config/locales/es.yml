@@ -86,6 +86,10 @@ es:
       words_connector: ", "
       two_words_connector: " y "
       last_word_connector: " y "
+  navbar:
+    admin: "Administración"
+    profile: "Perfil"
+    dashboard: "Tablero de control"
   home:
     index:
       title: "Inicio de la plataforma"

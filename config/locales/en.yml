@@ -110,6 +110,10 @@ en:
         message: "Your account has been locked due to an excessive number of unsuccessful sign in attempts."
         action_message: "Click the link below to unlock your account:"
         action: "Unlock my account"
+  navbar:
+    admin: "Admin"
+    profile: "Profile"
+    dashboard: "Dashboard"
   home:
     index:
       title: "Platform home"

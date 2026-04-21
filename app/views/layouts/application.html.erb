@@ -25,11 +25,8 @@
 
   <body>
     <main class="bg-gray-900 h-full min-h-screen text-white">
-      <% flash.each do |type, message| %>
-        <div class="p-3 bg-red-600 text-white">
-          <%= message %>
-        </div>
-      <% end %>
+      <%= render "shared/navbar" %>
+      <%= render "shared/info" %>
       <%= yield %>
     </main>
   </body>

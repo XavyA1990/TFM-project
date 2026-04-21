@@ -1,0 +1,21 @@
+<% flash.each do |type, message| %>
+  <% bg_class =
+    case type.to_sym
+    when :notice
+      "bg-blue-600 text-white"
+    when :alert
+      "bg-red-600 text-white"
+    when :success
+      "bg-green-600 text-white"
+    else
+      "bg-gray-600 text-white"
+    end
+  %>
+  <div
+    data-controller="flash"
+    data-flash-delay-value="2000"
+    class="p-3 <%= bg_class %> flex items-center justify-between"
+  >
+    <span><%= message %></span>
+  </div>
+<% end %>

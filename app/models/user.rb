@@ -43,6 +43,22 @@ class User < ApplicationRecord
     roles_for(tenant).any? { |role| role.name == role_name }
   end
 
+  def has_access_to_dashboard?
+    users_tenants.joins(:roles).where(roles: { name: %w[platform_admin course_admin supervisor] }).exists?
+  end
+
+  def get_tenants_dashboard_access_paths
+    tenants.joins(:users_tenants => :roles)
+      .where(roles: { name: %w[platform_admin course_admin supervisor] })
+      .distinct
+      .map do |tenant|
+        {
+          name: tenant.name,
+          path: Rails.application.routes.url_helpers.admin_tenants_tenant_path({tenant_slug: tenant.slug})
+        }
+      end
+  end
+
   def has_permission_in_tenant?(action, subject_class, tenant)
     permissions_for(tenant).any? do |permission|
       permission.action == action && permission.subject_class == subject_class

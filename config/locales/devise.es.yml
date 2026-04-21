@@ -51,6 +51,7 @@ es:
       updated_but_not_signed_in: "Tu cuenta ha sido actualizada con éxito, pero dado que tu contraseña fue cambiada, necesitas iniciar sesión nuevamente."
       new:
         sign_up: "Registrarse"
+        log_out: "Cerrar sesión"
     sessions:
       signed_in: "Has iniciado sesión con éxito."
       signed_out: "Has cerrado sesión con éxito."
