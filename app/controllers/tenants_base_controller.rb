@@ -9,7 +9,7 @@ class TenantsBaseController < ApplicationController
   def set_current_tenant
     @current_tenant = Tenant.friendly.find(params[:tenant_slug])
     rescue ActiveRecord::RecordNotFound
-      render file: "#{Rails.root}/public/404.html", status: :not_found, layout: true
+      render file: "#{Rails.root}/public/404.html", status: :not_found, layout: false
   end
 
   def current_tenant
