@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   scope "(:locale)", locale: /en|es/ do
-    devise_for :users
+    devise_for :users, controllers: {
+      registrations: "users/registrations",
+      sessions: "users/sessions",
+    }
     get "up" => "rails/health#show", as: :rails_health_check
     get "/" => "home#index", as: :root 
 
