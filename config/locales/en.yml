@@ -48,6 +48,12 @@ en:
   current_password: "Current password"
   update: "Update"
   back: "Back"
+  actions:
+    actions: "Actions"
+    confirm_deletion: "Are you sure you want to delete %{name}?"
+    edit: "Edit"
+    view: "View"
+    delete: "Delete"
   errors:
     messages:
       taken: "has already been taken"
@@ -63,6 +69,16 @@ en:
         last_name: "Last name"
         password: "Password"
         password_confirmation: "Password confirmation"
+      tenant:
+        id: "ID"
+        name: "Name"
+        slug: "Slug"
+        description: "Description"
+        header_text: "Header text"
+        subheader_text: "Subheader text"
+        logo_url: "Logo URL"
+        created_at: "Created at"
+        updated_at: "Updated at"
   devise_views:
     registrations:
       edit:
@@ -144,3 +160,10 @@ en:
       edit:
         title: "Edit tenant settings"
         description: "Update the current tenant configuration."
+      index:
+        title: "Tenants administration"
+        description: "Manage all the tenants in the platform."
+      new:
+        title: "New tenant"
+        description: "Create a new tenant in the platform."
+        label: "Create tenant"

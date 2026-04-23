@@ -1,4 +1,15 @@
+<% breadcrumbs(
+  { label: t("admin_tenants.tenants.index.title"), path: admin_tenants_path },
+  { label: t("admin_tenants.tenants.new.title") }
+) %>
+
 <div>
   <h1 class="font-bold text-4xl"><%= t(".title") %></h1>
   <p><%= t(".description") %></p>
 </div>
+
+<%= render "form",
+  tenant: @tenant,
+  url: admin_tenants_path,
+  description: t(".description"),
+  submit_label: t("admin_tenants.tenants.new.label") %>

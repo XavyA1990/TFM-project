@@ -27,7 +27,10 @@
     <main class="bg-gray-900 h-full min-h-screen text-white">
       <%= render "shared/navbar" %>
       <%= render "shared/info" %>
-      <%= yield %>
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <%= yield :breadcrumbs %>
+        <%= yield %>
+      </div>
     </main>
   </body>
 </html>

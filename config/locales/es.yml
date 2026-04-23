@@ -19,6 +19,17 @@ es:
   current_password: "Contraseña actual"
   update: "Actualizar"
   back: "Volver"
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M:%S"
+      short: "%Y-%m-%d %H:%M"
+      long: "%B %d, %Y %H:%M"
+  actions:
+    actions: "Acciones"
+    edit: "Editar"
+    confirm_deletion: "¿Estás seguro de que deseas eliminar %{name}?"
+    view: "Ver"
+    delete: "Eliminar"
   errors:
     messages:
       taken: "ya está en uso"
@@ -34,6 +45,16 @@ es:
         last_name: "Apellido"
         password: "Contraseña"
         password_confirmation: "Confirmación de contraseña"
+      tenant:
+        id: "ID"
+        name: "Nombre"
+        slug: "Slug"
+        description: "Descripción"
+        header_text: "Texto del encabezado"
+        subheader_text: "Texto del subencabezado"
+        logo_url: "URL del logo"
+        created_at: "Creado el"
+        updated_at: "Actualizado el"
   devise_views:
     registrations:
       edit:
@@ -120,3 +141,10 @@ es:
       edit:
         title: "Editar configuración del tenant"
         description: "Actualiza la configuración del tenant actual."
+      index:
+        title: "Administración de tenants"
+        description: "Gestiona todos los tenants en la plataforma."
+      new:
+        title: "Nuevo tenant"
+        description: "Crea un nuevo tenant en la plataforma."
+        label: "Crear tenant"
