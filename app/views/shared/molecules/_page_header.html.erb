@@ -1,0 +1,27 @@
+<%
+  wrapper_class = local_assigns.fetch(:wrapper_class, nil)
+  inner_class = local_assigns.fetch(:inner_class, nil)
+  content_class = local_assigns.fetch(:content_class, nil)
+  actions_wrapper_class = local_assigns.fetch(:actions_wrapper_class, nil)
+  title_tag = local_assigns.fetch(:title_tag, :h1)
+  title_class = local_assigns.fetch(:title_class, "font-bold text-4xl")
+  description_class = local_assigns.fetch(:description_class, nil)
+  actions = local_assigns[:actions]
+%>
+
+<div class="<%= wrapper_class %>">
+  <div class="<%= inner_class %>">
+    <div class="<%= content_class %>">
+      <%= render "shared/atoms/title", text: title, tag: title_tag, class_name: title_class %>
+      <% if description.present? %>
+        <%= render "shared/atoms/description", text: description, class_name: description_class %>
+      <% end %>
+    </div>
+
+    <% if actions.present? %>
+      <div class="<%= actions_wrapper_class %>">
+        <%= actions %>
+      </div>
+    <% end %>
+  </div>
+</div>

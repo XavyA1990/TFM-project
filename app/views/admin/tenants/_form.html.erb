@@ -1,5 +1,5 @@
 <%= form_with model: tenant, url: url, class: "mt-10" do |form| %>
-  <%= render "devise/shared/error_messages", resource: tenant %>
+  <%= render "shared/molecules/error_summary", resource: tenant %>
 
   <div class="space-y-12">
     <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3 dark:border-white/10">
@@ -10,17 +10,11 @@
 
       <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
         <div class="sm:col-span-4">
-          <%= form.label :name, class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
-          <div class="mt-2">
-            <%= form.text_field :name, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500" %>
-          </div>
+          <%= render "shared/molecules/form_field", form: form, field: :name %>
         </div>
 
         <div class="col-span-full">
-          <%= form.label :description, class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
-          <div class="mt-2">
-            <%= form.text_area :description, rows: 3, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500" %>
-          </div>
+          <%= render "shared/molecules/form_field", form: form, field: :description, type: :text_area, input_html: { rows: 3 } %>
         </div>
       </div>
     </div>
@@ -33,31 +27,22 @@
 
       <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
         <div class="col-span-full">
-          <%= form.label :header_text, class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
-          <div class="mt-2">
-            <%= form.text_field :header_text, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500" %>
-          </div>
+          <%= render "shared/molecules/form_field", form: form, field: :header_text %>
         </div>
 
         <div class="col-span-full">
-          <%= form.label :subheader_text, class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
-          <div class="mt-2">
-            <%= form.text_field :subheader_text, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500" %>
-          </div>
+          <%= render "shared/molecules/form_field", form: form, field: :subheader_text %>
         </div>
 
         <div class="col-span-full">
-          <%= form.label :logo_url, class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
-          <div class="mt-2">
-            <%= form.url_field :logo_url, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500" %>
-          </div>
+          <%= render "shared/molecules/form_field", form: form, field: :logo_url, type: :url_field %>
         </div>
       </div>
     </div>
   </div>
 
   <div class="mt-6 flex items-center justify-end gap-x-6">
-    <%= link_to t("back"), admin_tenants_path, class: "text-sm/6 font-semibold text-gray-900 dark:text-white" %>
-    <%= form.submit submit_label, class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:focus-visible:outline-indigo-500 hover:cursor-pointer" %>
+    <%= render "shared/atoms/text_link", text: t("back"), path: admin_tenants_path, base_class: "", class_name: "text-sm/6 font-semibold text-gray-900 dark:text-white" %>
+    <%= render "shared/atoms/button", text: submit_label, type: :submit %>
   </div>
 <% end %>

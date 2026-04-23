@@ -1,0 +1,6 @@
+<%
+  tag = local_assigns.fetch(:tag, :h1)
+  class_name = local_assigns.fetch(:class_name, "font-bold text-4xl")
+%>
+
+<%= content_tag tag, text, class: class_name %>

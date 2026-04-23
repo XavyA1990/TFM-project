@@ -1,17 +1,17 @@
 <div class="space-y-3 text-sm">
   <%- if controller_name != 'sessions' %>
-    <p><%= link_to t('devise.sessions.new.sign_in'), new_session_path(resource_name), class: "font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300" %></p>
+    <p><%= render "shared/atoms/text_link", text: t('devise.sessions.new.sign_in'), path: new_session_path(resource_name) %></p>
   <% end %>
 
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-    <p><%= link_to t('devise.registrations.new.sign_up'), new_registration_path(resource_name), class: "font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300" %></p>
+    <p><%= render "shared/atoms/text_link", text: t('devise.registrations.new.sign_up'), path: new_registration_path(resource_name) %></p>
   <% end %>
 
   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-    <p><%= link_to t('devise.passwords.new.forgot_password'), new_password_path(resource_name), class: "font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300" %></p>
+    <p><%= render "shared/atoms/text_link", text: t('devise.passwords.new.forgot_password'), path: new_password_path(resource_name) %></p>
   <% end %>
 
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-    <p><%= link_to t('devise.confirmations.new.did_not_receive_instructions'), new_confirmation_path(resource_name), class: "font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300" %></p>
+    <p><%= render "shared/atoms/text_link", text: t('devise.confirmations.new.did_not_receive_instructions'), path: new_confirmation_path(resource_name) %></p>
   <% end %>
 </div>

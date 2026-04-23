@@ -1,0 +1,7 @@
+<%
+  class_name = local_assigns[:class_name]
+  data = local_assigns[:data]
+  base_class = local_assigns.fetch(:base_class, "font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300")
+%>
+
+<%= link_to text, path, class: [base_class, class_name].compact.join(" "), data: data %>
