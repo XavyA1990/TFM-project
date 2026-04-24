@@ -1,0 +1,27 @@
+<% if total_count.to_i > per_page.to_i %>
+  <div class="mx-auto mt-6 flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <p class="text-sm text-gray-400">
+      <%= t("pagination.showing", shown: displayed_count, total: total_count, resource: resource_name) %>
+    </p>
+
+    <div class="flex items-center gap-x-4">
+      <% if previous_path.present? %>
+        <%= render "shared/atoms/text_link",
+          text: t("pagination.previous"),
+          path: previous_path,
+          class_name: "font-medium" %>
+      <% end %>
+
+      <span class="text-sm text-gray-400">
+        <%= t("pagination.page", current: current_page, total: total_pages) %>
+      </span>
+
+      <% if next_path.present? %>
+        <%= render "shared/atoms/text_link",
+          text: t("pagination.next"),
+          path: next_path,
+          class_name: "font-medium" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

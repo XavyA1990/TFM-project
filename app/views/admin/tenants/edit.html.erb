@@ -1,7 +1,7 @@
 <% breadcrumbs(
-  { label: t("admin_tenants.tenants.index.title"), path: admin_tenants_path },
+  { label: t("admin.tenants.index.title"), path: admin_tenants_path },
   { label: @tenant.name, path: admin_tenant_path(@tenant) },
-  { label: t("admin_tenants.tenants.edit.title") }
+  { label: t("admin.tenants.edit.title") }
 ) %>
 
 <%= render "shared/molecules/page_header", title: t(".title"), description: t(".description") %>

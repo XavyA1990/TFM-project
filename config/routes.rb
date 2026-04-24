@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resources :tenants
+      resources :users, only: [:index, :show]
     end
 
     scope "/:tenant_slug" do
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
 
       namespace :admin_tenants do
         resource :tenant, only: [:show, :edit, :update]
+        resources :users, only: [:index, :show]
       end
     end
   end

@@ -19,6 +19,14 @@ es:
   current_password: "Contraseña actual"
   update: "Actualizar"
   back: "Volver"
+  pagination:
+    showing: "Mostrando %{shown} de %{total} %{resource}"
+    previous: "Anterior"
+    next: "Siguiente"
+    page: "Página %{current} de %{total}"
+    resources:
+      users: "usuarios"
+      tenants: "tenants"
   time:
     formats:
       default: "%Y-%m-%d %H:%M:%S"
@@ -45,6 +53,8 @@ es:
         last_name: "Apellido"
         password: "Contraseña"
         password_confirmation: "Confirmación de contraseña"
+        created_at: "Creado el"
+        updated_at: "Actualizado el"
       tenant:
         id: "ID"
         name: "Nombre"
@@ -130,9 +140,20 @@ es:
       new:
         title: "Nuevo tenant"
         description: "Crea un nuevo tenant en la plataforma."
+        label: "Crear tenant"
       edit:
         title: "Editar tenant"
         description: "Actualiza el tenant seleccionado."
+        label: "Actualizar tenant"
+    users:
+      index:
+        full_name: "Nombre completo"
+        tenant_role: "Rol en tenant"
+        title: "Usuarios"
+        description: "Administración global de usuarios para super admins."
+      show:
+        title: "Detalle del usuario"
+        description: "Detalles globales del usuario seleccionado."
   admin_tenants:
     tenants:
       show:
@@ -148,3 +169,10 @@ es:
         title: "Nuevo tenant"
         description: "Crea un nuevo tenant en la plataforma."
         label: "Crear tenant"
+    users:
+      index:
+        title: "Usuarios"
+        description: "Gestiona los usuarios del tenant actual."
+      show:
+        title: "Detalle del usuario"
+        description: "Detalles del usuario seleccionado en el tenant actual."

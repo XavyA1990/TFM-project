@@ -48,6 +48,14 @@ en:
   current_password: "Current password"
   update: "Update"
   back: "Back"
+  pagination:
+    showing: "Showing %{shown} of %{total} %{resource}"
+    previous: "Previous"
+    next: "Next"
+    page: "Page %{current} of %{total}"
+    resources:
+      users: "users"
+      tenants: "tenants"
   actions:
     actions: "Actions"
     confirm_deletion: "Are you sure you want to delete %{name}?"
@@ -149,9 +157,20 @@ en:
       new:
         title: "New tenant"
         description: "Create a new tenant in the platform."
+        label: "Create tenant"
       edit:
         title: "Edit tenant"
         description: "Update the selected tenant."
+        label: "Update tenant"
+    users:
+      index:
+        full_name: "Full name"
+        tenant_role: "Tenant role"
+        title: "Users"
+        description: "Global user administration for super admins."
+      show:
+        title: "User details"
+        description: "Global details for the selected user."
   admin_tenants:
     tenants:
       show:
@@ -167,3 +186,10 @@ en:
         title: "New tenant"
         description: "Create a new tenant in the platform."
         label: "Create tenant"
+    users:
+      index:
+        title: "Users"
+        description: "Manage users for the current tenant."
+      show:
+        title: "User details"
+        description: "Details for the selected user in the current tenant."

@@ -1,5 +1,7 @@
 module Admin
   class TenantsServices
+    PER_PAGE = 15
+
     attr_reader :tenant
 
     def initialize(action, params, repository: TenantsRepository)
@@ -10,7 +12,7 @@ module Admin
     end
 
     def call
-      return get_tenants if @action == :index
+      return get_tenants_for_index if @action == :index
       return get_tenant_for_show_page if @action == :show
       return get_tenant if @action == :get
       return create if @action == :create
@@ -34,8 +36,12 @@ module Admin
       @repository.destroy(@tenant.id)
     end
 
-    def get_tenants
-      tenants = @repository.all
+    def get_tenants_for_index
+      PaginationService.new(
+        relation: @repository.all_ordered,
+        page: @params[:page],
+        per_page: PER_PAGE
+      ).call
     end
 
     def get_tenant

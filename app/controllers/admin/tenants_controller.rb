@@ -20,6 +20,8 @@ class Admin::TenantsController < Admin::BaseController
   end
 
   def index
+    tenants_index_data = Admin::TenantsServices.new(:index, { page: params[:page] }).call
+
     @tenant_table_headers = [
       I18n.t("activerecord.attributes.tenant.name"),
       I18n.t("activerecord.attributes.tenant.slug"),
@@ -27,7 +29,11 @@ class Admin::TenantsController < Admin::BaseController
       I18n.t("activerecord.attributes.tenant.updated_at"),
     ]
     @tenant_table_columns = Tenant.table_columns
-    @tenants = Admin::TenantsServices.new(:index, {}).call
+    @tenants = tenants_index_data[:rows]
+    @current_page = tenants_index_data[:current_page]
+    @per_page = tenants_index_data[:per_page]
+    @total_pages = tenants_index_data[:total_pages]
+    @total_count = tenants_index_data[:total_count]
   end
 
   def update

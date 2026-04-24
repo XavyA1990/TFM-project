@@ -3,6 +3,10 @@ class TenantsRepository
     Tenant.all
   end
 
+  def self.all_ordered
+    Tenant.order(created_at: :desc)
+  end
+
   def self.find(id)
     Tenant.find(id)
   end

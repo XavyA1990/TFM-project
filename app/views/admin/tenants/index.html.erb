@@ -1,12 +1,12 @@
 <%
   header_actions = capture do
-    render "shared/atoms/button_link", text: t("admin_tenants.tenants.new.label"), path: new_admin_tenant_path
+    render "shared/atoms/button_link", text: t("admin.tenants.new.label"), path: new_admin_tenant_path
   end
 %>
 
 <%= render "shared/molecules/page_header",
-  title: t("admin_tenants.tenants.index.title"),
-  description: t("admin_tenants.tenants.index.description"),
+  title: t("admin.tenants.index.title"),
+  description: t("admin.tenants.index.description"),
   wrapper_class: "mx-auto max-w-7xl px-4 sm:px-6 lg:px-8",
   inner_class: "sm:flex sm:items-center",
   content_class: "sm:flex-auto",
@@ -20,3 +20,13 @@
   headers: @tenant_table_headers,
   columns: @tenant_table_columns,
   tenants: @tenants %>
+
+<%= render "shared/molecules/pagination",
+  displayed_count: @tenants.size,
+  total_count: @total_count,
+  per_page: @per_page,
+  current_page: @current_page,
+  total_pages: @total_pages,
+  resource_name: t("pagination.resources.tenants"),
+  previous_path: (@current_page > 1 ? admin_tenants_path(page: @current_page - 1) : nil),
+  next_path: (@current_page < @total_pages ? admin_tenants_path(page: @current_page + 1) : nil) %>
