@@ -162,6 +162,7 @@ en:
         title: "Edit tenant"
         description: "Update the selected tenant."
         label: "Update tenant"
+      destroyed: "Tenant was successfully deleted."
     users:
       index:
         full_name: "Full name"

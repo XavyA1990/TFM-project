@@ -59,6 +59,10 @@ class User < ApplicationRecord
       end
   end
 
+  def self.table_columns
+    %i[full_name email tenant_role created_at updated_at]
+  end
+
   def has_permission_in_tenant?(action, subject_class, tenant)
     permissions_for(tenant).any? do |permission|
       permission.action == action && permission.subject_class == subject_class

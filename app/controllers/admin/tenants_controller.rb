@@ -17,6 +17,8 @@ class Admin::TenantsController < Admin::BaseController
   end
 
   def destroy
+    Admin::TenantsServices.new(:destroy, { slug: params[:id] }).call
+    redirect_to admin_tenants_path, notice: I18n.t("admin.tenants.destroyed")
   end
 
   def index

@@ -11,7 +11,7 @@ class Admin::UsersController < Admin::BaseController
       I18n.t("activerecord.attributes.user.updated_at"),
     ]
 
-    @user_table_columns = %i[full_name email tenant_role created_at updated_at]
+    @user_table_columns = User.table_columns
     @users = users_index_data[:rows]
     @current_page = users_index_data[:current_page]
     @per_page = users_index_data[:per_page]

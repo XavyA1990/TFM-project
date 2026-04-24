@@ -145,6 +145,7 @@ es:
         title: "Editar tenant"
         description: "Actualiza el tenant seleccionado."
         label: "Actualizar tenant"
+      destroyed: "El tenant fue eliminado exitosamente."
     users:
       index:
         full_name: "Nombre completo"
