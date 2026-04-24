@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["select", "button"];
   static values = {
-    assignedRoleIds: Array,
+    assignedRoleTokens: Array,
     addLabel: String,
     removeLabel: String,
   };
@@ -13,9 +13,8 @@ export default class extends Controller {
   }
 
   update() {
-    const selectedRoleId = Number(this.selectTarget.value);
-    const assignedRoleIds = this.assignedRoleIdsValue.map((value) => Number(value));
-    const hasRole = assignedRoleIds.includes(selectedRoleId);
+    const selectedRoleToken = this.selectTarget.value;
+    const hasRole = this.assignedRoleTokensValue.includes(selectedRoleToken);
 
     this.buttonTarget.textContent = hasRole ? this.removeLabelValue : this.addLabelValue;
     this.buttonTarget.className = hasRole

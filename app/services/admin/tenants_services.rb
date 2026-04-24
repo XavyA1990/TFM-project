@@ -16,6 +16,7 @@ module Admin
       return get_tenant_for_show_page if @action == :show
       return get_tenant if @action == :get
       return get_tenant_by_id if @action == :get_by_id
+      return get_tenant_by_signed_id if @action == :get_by_signed_id
       return get_all_tenants_ordered_by_name if @action == :get_all_by_name
       return create if @action == :create
       return update if @action == :update
@@ -52,6 +53,10 @@ module Admin
 
     def get_tenant_by_id
       @repository.find(@params[:id])
+    end
+
+    def get_tenant_by_signed_id
+      @repository.find_signed(@params[:signed_id], purpose: @params[:purpose])
     end
 
     def get_all_tenants_ordered_by_name

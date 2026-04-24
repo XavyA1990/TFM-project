@@ -11,6 +11,9 @@
       <% tenant = panel[:tenant] %>
       <% membership = panel[:membership] %>
       <% assigned_roles = membership&.roles || [] %>
+      <% tenant_token = tenant.signed_id(purpose: :role_assignment) %>
+      <% assigned_role_tokens = assigned_roles.map { |role| role.signed_id(purpose: :role_assignment) } %>
+      <% available_role_options = available_roles.map { |role| [role.name, role.signed_id(purpose: :role_assignment)] } %>
       <article class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
         <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div class="min-w-0">
@@ -41,19 +44,19 @@
             class: "w-full max-w-md",
             data: {
               controller: "role-assignment-toggle",
-              "role-assignment-toggle-assigned-role-ids-value": assigned_roles.map(&:id).to_json,
+              "role-assignment-toggle-assigned-role-tokens-value": assigned_role_tokens.to_json,
               "role-assignment-toggle-add-label-value": t("admin.users.show.add_role"),
               "role-assignment-toggle-remove-label-value": t("admin.users.show.remove_role"),
             } do |form| %>
-            <%= hidden_field_tag :tenant_id, tenant.id %>
+            <%= hidden_field_tag :tenant_token, tenant_token %>
 
             <div class="space-y-3">
               <div>
-                <%= form.label :role_id, t("admin.users.show.role_select_label"), class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
-                <%= form.select :role_id,
-                  options_for_select(available_roles.map { |role| [role.name, role.id] }, available_roles.first&.id),
+                <%= form.label :role_token, t("admin.users.show.role_select_label"), class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
+                <%= form.select :role_token,
+                  options_for_select(available_role_options, available_role_options.first&.last),
                   {},
-                  class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:focus:outline-indigo-500",
+                  class: "block w-full appearance-none rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 [&>option]:bg-white [&>option]:text-gray-900 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:focus:outline-indigo-500 dark:[&>option]:bg-gray-900 dark:[&>option]:text-white",
                   data: {
                     "role-assignment-toggle-target": "select",
                     action: "change->role-assignment-toggle#update"

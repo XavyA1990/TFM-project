@@ -1,5 +1,7 @@
 module Admin
   class RoleAssignmentsServices
+    SIGNED_ID_PURPOSE = :role_assignment
+
     def initialize(
       action,
       params,
@@ -22,8 +24,14 @@ module Admin
 
     def toggle
       user = Admin::UsersServices.new(:get, { slug: @params[:user_slug] }).call
-      tenant = Admin::TenantsServices.new(:get_by_id, { id: @params[:tenant_id] }).call
-      role = Admin::RolesServices.new(:get, { id: @params[:role_id] }).call
+      tenant = Admin::TenantsServices.new(
+        :get_by_signed_id,
+        { signed_id: @params[:tenant_token], purpose: SIGNED_ID_PURPOSE }
+      ).call
+      role = Admin::RolesServices.new(
+        :get_by_signed_id,
+        { signed_id: @params[:role_token], purpose: SIGNED_ID_PURPOSE }
+      ).call
       membership = @users_tenants_repository.find_or_create_by_user_and_tenant(user: user, tenant: tenant)
       assignment = @user_tenant_roles_repository.find_by_users_tenant_and_role(users_tenant: membership, role: role)
 

@@ -15,6 +15,10 @@ class TenantsRepository
     Tenant.find(id)
   end
 
+  def self.find_signed(signed_id, purpose:)
+    Tenant.find_signed!(signed_id, purpose: purpose)
+  end
+
   def self.find_by_slug(slug)
     Tenant.friendly.find(slug)
   end

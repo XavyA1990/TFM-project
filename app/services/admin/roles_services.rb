@@ -8,6 +8,7 @@ module Admin
 
     def call
       return get_role if @action == :get
+      return get_role_by_signed_id if @action == :get_by_signed_id
       return get_role_by_name if @action == :get_by_name
       return get_roles_available_for_assignment if @action == :available_for_assignment
 
@@ -18,6 +19,10 @@ module Admin
 
     def get_role
       @repository.find(@params[:id])
+    end
+
+    def get_role_by_signed_id
+      @repository.find_signed(@params[:signed_id], purpose: @params[:purpose])
     end
 
     def get_role_by_name

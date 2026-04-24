@@ -4,8 +4,8 @@ class Admin::RoleAssignmentsController < Admin::BaseController
       :toggle,
       {
         user_slug: params[:user_id],
-        tenant_id: role_assignment_params[:tenant_id],
-        role_id: role_assignment_params[:role_id]
+        tenant_token: role_assignment_params[:tenant_token],
+        role_token: role_assignment_params[:role_token]
       }
     ).call
 
@@ -17,7 +17,7 @@ class Admin::RoleAssignmentsController < Admin::BaseController
   private
 
   def role_assignment_params
-    params.permit(:tenant_id, :role_id)
+    params.permit(:tenant_token, :role_token)
   end
 
   def notice_message_for(result)
