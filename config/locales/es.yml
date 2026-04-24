@@ -137,6 +137,10 @@ es:
       show:
         title: "Detalle del tenant"
         description: "Detalles globales del tenant seleccionado."
+        users_dashboard_access_role_title: "Equipo administrativo"
+        users_dashboard_access_role_description: "Usuarios con acceso de gestión dentro de este tenant."
+        no_users_dashboard_access_role: "No hay usuarios participantes de la administración del tenant."
+        no_roles_assigned: "Sin roles asignados"
       new:
         title: "Nuevo tenant"
         description: "Crea un nuevo tenant en la plataforma."
@@ -155,6 +159,18 @@ es:
       show:
         title: "Detalle del usuario"
         description: "Detalles globales del usuario seleccionado."
+        tenant_roles_title: "Roles por tenant"
+        tenant_roles_description: "Roles asignados al usuario en cada tenant."
+        tenant_role_manager_title: "Gestionar roles"
+        tenant_role_manager_description: "Selecciona un rol por tenant para agregarlo o quitarlo."
+        role_select_label: "Rol"
+        add_role: "Agregar rol"
+        remove_role: "Eliminar rol"
+        role_added: "Se agregó el rol %{role} en %{tenant}."
+        role_removed: "Se eliminó el rol %{role} de %{tenant}."
+        role_defaulted_to_customer: "Se eliminó el rol %{role} de %{tenant} y se asignó %{fallback_role} para que el usuario no quede sin roles."
+        customer_role_required: "El usuario debe conservar al menos el rol customer en %{tenant}."
+        no_roles_assigned: "Sin roles asignados"
   admin_tenants:
     tenants:
       show:

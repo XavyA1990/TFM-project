@@ -9,7 +9,10 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resources :tenants
-      resources :users, only: [:index, :show]
+      resources :users, only: [:index, :show] do
+        resources :role_assignments, only: [:create], controller: "role_assignments"
+      end
+
     end
 
     scope "/:tenant_slug" do

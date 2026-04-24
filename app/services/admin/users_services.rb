@@ -50,7 +50,7 @@ module Admin
             slug: user.slug,
             full_name: user.full_name,
             email: user.email,
-            tenant_role: user.users_tenants.map { |ut| "#{ut.tenant.name} (#{ut.roles.map(&:name).join(', ')})" }.join("; ").presence || "-",
+            tenant_role: tenant_roles_summary(user) || "-",
             created_at: I18n.l(user.created_at),
             updated_at: I18n.l(user.updated_at)
           }
@@ -63,6 +63,15 @@ module Admin
     end
 
     def get_user_for_show_page
+      [
+        [I18n.t("admin.users.index.full_name"), @user.full_name],
+        [User.human_attribute_name(:username), @user.username],
+        [User.human_attribute_name(:first_name), @user.first_name],
+        [User.human_attribute_name(:last_name), @user.last_name],
+        [User.human_attribute_name(:email), @user.email],
+        [User.human_attribute_name(:created_at), @user.created_at ? I18n.l(@user.created_at) : nil],
+        [User.human_attribute_name(:updated_at), @user.updated_at ? I18n.l(@user.updated_at) : nil]
+      ]
     end
 
     def get_users
@@ -71,6 +80,10 @@ module Admin
 
     def get_user
       @user
+    end
+
+    def tenant_roles_summary(user)
+      user.users_tenants.map { |ut| "#{ut.tenant.name} (#{ut.roles.map(&:name).join(', ')})" }.join("; ").presence
     end
   end
 end

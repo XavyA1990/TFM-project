@@ -1,5 +1,6 @@
 class Admin::UsersController < Admin::BaseController
   before_action :set_user, only: %i[show]
+
   def index
     users_index_data = Admin::UsersServices.new(:index, { page: params[:page] }).call
 
@@ -20,6 +21,14 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def show
+    @user_details = Admin::UsersServices.new(:show, { slug: params[:id] }).call
+    @user_tenant_roles = Admin::MembershipsServices.new(:for_user, { user: @user }).call
+    @available_roles = Admin::RolesServices.new(:available_for_assignment, {}).call
+    tenants = Admin::TenantsServices.new(:get_all_by_name, {}).call
+    @tenant_role_panels = Admin::MembershipsServices.new(
+      :role_management_panels,
+      { memberships: @user_tenant_roles, tenants: tenants }
+    ).call
   end
 
   private

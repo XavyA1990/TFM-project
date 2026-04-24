@@ -15,6 +15,8 @@ module Admin
       return get_tenants_for_index if @action == :index
       return get_tenant_for_show_page if @action == :show
       return get_tenant if @action == :get
+      return get_tenant_by_id if @action == :get_by_id
+      return get_all_tenants_ordered_by_name if @action == :get_all_by_name
       return create if @action == :create
       return update if @action == :update
       return destroy if @action == :destroy
@@ -46,6 +48,14 @@ module Admin
 
     def get_tenant
       @tenant
+    end
+
+    def get_tenant_by_id
+      @repository.find(@params[:id])
+    end
+
+    def get_all_tenants_ordered_by_name
+      @repository.all_ordered_by_name
     end
 
     def get_tenant_for_show_page

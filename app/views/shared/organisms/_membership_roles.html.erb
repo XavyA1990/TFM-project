@@ -1,0 +1,46 @@
+<section class="mt-10">
+  <div class="flex items-end justify-between gap-4 border-b border-gray-200 pb-4 dark:border-white/10">
+    <div>
+      <h2 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-gray-100"><%= title %></h2>
+      <p class="mt-1 text-sm text-gray-600 dark:text-gray-400"><%= description %></p>
+    </div>
+  </div>
+
+  <% if memberships.any? %>
+    <div class="mt-6 grid gap-4">
+      <% memberships.each do |membership| %>
+        <article class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400"><%= subject_label %></p>
+              <h3 class="mt-1 text-base font-semibold text-gray-900 dark:text-gray-100">
+                <%= render "shared/atoms/text_link",
+                  text: subject_name.call(membership),
+                  path: subject_path.call(membership),
+                  class_name: "text-base font-semibold" %>
+              </h3>
+            </div>
+
+            <div class="flex flex-wrap gap-2 sm:justify-end">
+              <% if membership.roles.any? %>
+                <% membership.roles.each do |role| %>
+                  <span class="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-800 ring-1 ring-inset ring-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-400/30">
+                    <%= role.name %>
+                  </span>
+                <% end %>
+              <% else %>
+                <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600 ring-1 ring-inset ring-gray-200 dark:bg-white/10 dark:text-gray-300 dark:ring-white/10">
+                  <%= no_roles_label %>
+                </span>
+              <% end %>
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="mt-6 rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-6 text-sm text-gray-600 dark:border-white/10 dark:bg-white/5 dark:text-gray-300">
+      <%= empty_message %>
+    </div>
+  <% end %>
+</section>

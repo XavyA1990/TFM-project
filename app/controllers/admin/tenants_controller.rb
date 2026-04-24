@@ -4,6 +4,10 @@ class Admin::TenantsController < Admin::BaseController
   def show
     tenant_service = Admin::TenantsServices.new(:show, { slug: params[:id] })
     @tenant_details = tenant_service.call
+    @tenant_non_customer_memberships = Admin::MembershipsServices.new(
+      :for_tenant_without_customer,
+      { tenant: @tenant }
+    ).call
   end
 
   def create

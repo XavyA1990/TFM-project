@@ -7,6 +7,10 @@ class TenantsRepository
     Tenant.order(created_at: :desc)
   end
 
+  def self.all_ordered_by_name
+    Tenant.order(:name)
+  end
+
   def self.find(id)
     Tenant.find(id)
   end

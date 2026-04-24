@@ -5,3 +5,12 @@
 
 <%= render "shared/molecules/page_header", title: t(".title"), description: t(".description") %>
 <%= render "shared/molecules/detail_list", items: @tenant_details %>
+<%= render "shared/organisms/membership_roles",
+  memberships: @tenant_non_customer_memberships,
+  title: t(".users_dashboard_access_role_title"),
+  description: t(".users_dashboard_access_role_description"),
+  empty_message: t(".no_users_dashboard_access_role"),
+  no_roles_label: t(".no_roles_assigned"),
+  subject_label: User.model_name.human,
+  subject_name: ->(membership) { membership.user.full_name },
+  subject_path: ->(membership) { admin_user_path(membership.user) } %>
