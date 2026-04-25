@@ -1,7 +1,13 @@
-<%= render "shared/molecules/form_field",
-  form: f,
-  field: field,
-  type: local_assigns[:type],
-  label: local_assigns[:label],
-  description: local_assigns[:description],
-  input_html: local_assigns[:input_html] %>
+<%
+  render_locals = {
+    form: f,
+    field: field,
+    label: local_assigns[:label],
+    description: local_assigns[:description],
+    input_html: local_assigns[:input_html]
+  }
+
+  render_locals[:type] = local_assigns[:type] if local_assigns[:type].present?
+%>
+
+<%= render "shared/molecules/form_field", **render_locals %>

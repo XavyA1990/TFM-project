@@ -63,7 +63,7 @@
               <%= image_tag current_user.avatar_url.present? ? current_user.avatar_url : "default_avatar.svg", alt: current_user.full_name, class: "size-8 rounded-full object-cover bg-gray-800 outline -outline-offset-1 outline-white/10" %>
             </button>
             <div data-dropdown-target="menu" class="hidden absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
-            <%= render "shared/atoms/text_link", text: t("navbar.profile"), path: "#", base_class: "", class_name: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-700" %>
+            <%= render "shared/atoms/text_link", text: t("navbar.profile"), path: edit_user_registration_path, base_class: "", class_name: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-700" %>
             <% if current_user.has_access_to_dashboard? %>
               <% current_user.get_tenants_dashboard_access_paths.each do |dashboard_path| %>
                 <%= render "shared/atoms/text_link", text: "#{t("navbar.dashboard")} #{dashboard_path[:name]}", path: dashboard_path[:path], base_class: "", class_name: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-700" %>

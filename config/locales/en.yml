@@ -92,6 +92,16 @@ en:
     registrations:
       edit:
         title: "Edit account"
+        profile_section_title: "Profile"
+        profile_section_description: "Update your public information and the basic identity details you use across the platform."
+        account_section_title: "Account"
+        account_section_description: "Your email defines access across the whole platform, not just a single portal."
+        security_section_title: "Security"
+        security_section_description: "Change your password when needed and confirm any update with your current password."
+        email_scope_notice: "If you change this email, the change will apply to every portal where you have access."
+        username_hint: "Your username is locked because it is tied to your public account URL within the platform."
+        avatar_url: "Avatar URL"
+        avatar_url_hint: "Use a public image URL to personalize your account."
         pending_reconfirmation: "Currently waiting confirmation for: %{email}"
         password_hint: "(leave blank if you don't want to change it)"
         current_password_hint: "(we need your current password to confirm your changes)"

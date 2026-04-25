@@ -3,6 +3,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
+  def after_update_path_for(resource)
+    edit_user_registration_path
+  end
+
   def ensure_customer_membership
     return unless current_tenant.present?
     

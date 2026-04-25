@@ -70,6 +70,16 @@ es:
     registrations:
       edit:
         title: "Editar cuenta"
+        profile_section_title: "Perfil"
+        profile_section_description: "Actualiza tu información pública y los datos básicos con los que te identificas dentro de la plataforma."
+        account_section_title: "Cuenta"
+        account_section_description: "Tu correo electrónico define el acceso a toda la plataforma, no solo a un portal específico."
+        security_section_title: "Seguridad"
+        security_section_description: "Cambia tu contraseña cuando lo necesites y confirma cualquier modificación con tu contraseña actual."
+        email_scope_notice: "Si cambias este correo, el cambio aplicará a todos los portales donde tengas acceso."
+        username_hint: "El nombre de usuario se mantiene bloqueado porque está vinculado a la URL pública de tu cuenta dentro de la plataforma."
+        avatar_url: "URL del avatar"
+        avatar_url_hint: "Usa una imagen pública para personalizar tu cuenta."
         pending_reconfirmation: "Actualmente esperando confirmación para: %{email}"
         password_hint: "(déjalo en blanco si no quieres cambiarlo)"
         current_password_hint: "(necesitamos tu contraseña actual para confirmar tus cambios)"

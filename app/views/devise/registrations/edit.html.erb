@@ -2,13 +2,59 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "space-y-6" }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-base font-semibold text-gray-900 dark:text-white"><%= t("devise_views.registrations.edit.profile_section_title") %></h3>
+        <p class="mt-2 text-sm/6 text-gray-500 dark:text-gray-400"><%= t("devise_views.registrations.edit.profile_section_description") %></p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <%= render "devise/shared/form_field",
+          f: f,
+          field: :first_name,
+          label: t("first_name"),
+          input_html: { autofocus: true, autocomplete: "given-name" } %>
+
+        <%= render "devise/shared/form_field",
+          f: f,
+          field: :last_name,
+          label: t("last_name"),
+          input_html: { autocomplete: "family-name" } %>
+      </div>
+
+      <%= render "devise/shared/form_field",
+        f: f,
+        field: :avatar_url,
+        type: :url_field,
+        label: t("devise_views.registrations.edit.avatar_url"),
+        description: t("devise_views.registrations.edit.avatar_url_hint"),
+        input_html: { autocomplete: "url" } %>
+
+      <div>
+        <label class="block text-sm/6 font-medium text-gray-900 dark:text-white"><%= t("username") %></label>
+        <p class="text-sm/6 text-gray-500 dark:text-gray-400"><%= t("devise_views.registrations.edit.username_hint") %></p>
+        <input type="text" value="<%= resource.username %>" disabled class="block w-full rounded-md bg-gray-100 px-3 py-1.5 text-base text-gray-500 outline-1 -outline-offset-1 outline-gray-300 sm:text-sm/6 dark:bg-white/5 dark:text-gray-400 dark:outline-white/10 cursor-not-allowed" />
+      </div>
+    </div>
+
+    <div class="border-t border-gray-200 pt-6 dark:border-white/10">
+      <h3 class="text-base font-semibold text-gray-900 dark:text-white"><%= t("devise_views.registrations.edit.account_section_title") %></h3>
+      <p class="mt-2 text-sm/6 text-gray-500 dark:text-gray-400"><%= t("devise_views.registrations.edit.account_section_description") %></p>
+    </div>
+
     <%= render "devise/shared/form_field", f: f, field: :email, type: :email_field, label: t('email'), input_html: { autofocus: true, autocomplete: "email" } %>
+    <p class="-mt-4 text-sm/6 text-gray-500 dark:text-gray-400"><%= t("devise_views.registrations.edit.email_scope_notice") %></p>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <div class="rounded-md bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:bg-amber-500/10 dark:text-amber-200">
         <%= t('devise_views.registrations.edit.pending_reconfirmation', email: resource.unconfirmed_email) %>
       </div>
     <% end %>
+
+    <div class="border-t border-gray-200 pt-6 dark:border-white/10">
+      <h3 class="text-base font-semibold text-gray-900 dark:text-white"><%= t("devise_views.registrations.edit.security_section_title") %></h3>
+      <p class="mt-2 text-sm/6 text-gray-500 dark:text-gray-400"><%= t("devise_views.registrations.edit.security_section_description") %></p>
+    </div>
 
     <%= render "devise/shared/form_field", f: f, field: :password, type: :password_field, label: t('password'), description: [t('devise_views.registrations.edit.password_hint'), (@minimum_password_length ? t('characters_minimum', count: @minimum_password_length) : nil)].compact.join(" "), input_html: { autocomplete: "new-password" } %>
 
