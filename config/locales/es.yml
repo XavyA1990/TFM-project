@@ -136,7 +136,6 @@ es:
       panel_eyebrow: "Resumen"
       panel_title: "Infraestructura para vender sin intermediarios"
       panel_description: "La plataforma organiza cada proyecto educativo como un portal independiente para que cada creador controle su marca, su comunidad y la comercialización de sus cursos desde un entorno propio."
-      tenants_eyebrow: "Accesos"
       tenants_title: "Nuestros socios"
       tenants_description: "Descubre las marcas educativas que ya operan su propuesta de valor desde un portal propio, con una experiencia diseñada para publicar, posicionar y vender conocimiento sin intermediarios."
       tenants_count:

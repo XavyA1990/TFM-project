@@ -7,6 +7,8 @@ class Users::SessionsController < Devise::SessionsController
     tenant = origin_tenant
     return root_path unless tenant.present?
 
+    Users::EnsureCustomerMembership.call(user: resource, tenant: tenant)
+
     tenant_root_path(tenant_slug: tenant.slug)
   end
 

@@ -1,4 +1,8 @@
 class UsersTenantsRepository
+  def self.find_by_user_and_tenant(user:, tenant:)
+    UsersTenant.find_by(user: user, tenant: tenant)
+  end
+
   def self.find_or_create_by_user_and_tenant(user:, tenant:)
     UsersTenant.find_or_create_by!(user: user, tenant: tenant)
   end
