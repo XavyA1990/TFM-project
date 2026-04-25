@@ -1,0 +1,55 @@
+<%
+  header_actions = capture do
+%>
+  <div class="text-sm text-gray-400">
+    <%= count_label %>
+  </div>
+<%
+  end
+%>
+
+<section id="tenants" class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24">
+  <%= render "shared/molecules/page_header",
+    title: title,
+    description: description,
+    inner_class: "flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between",
+    title_tag: :h2,
+    title_class: "mt-2 text-2xl font-bold text-white sm:text-3xl",
+    description_class: "mt-2 max-w-2xl text-sm leading-7 text-gray-300",
+    actions: header_actions %>
+
+  <% if partners.any? %>
+    <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <% partners.each do |partner| %>
+        <article class="group rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:border-indigo-400/60 hover:bg-white/8">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <p class="text-lg font-semibold text-white"><%= partner.name %></p>
+              <p class="mt-1 text-sm text-gray-400"><%= partner.slug %></p>
+            </div>
+            <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-gray-950/50 text-sm font-bold uppercase text-indigo-300">
+              <%= partner.name.first %>
+            </span>
+          </div>
+
+          <p class="mt-4 min-h-12 text-sm leading-6 text-gray-300">
+            <%= partner.description.presence || empty_description_label %>
+          </p>
+
+          <div class="mt-6 flex items-center justify-between border-t border-white/10 pt-4">
+            <span class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-500"><%= portal_label %></span>
+            <%= render "shared/atoms/text_link",
+              text: visit_label,
+              path: path_builder.call(partner),
+              class_name: "text-sm" %>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="mt-10 rounded-2xl border border-dashed border-white/10 bg-white/5 p-8 text-center">
+      <p class="text-base font-semibold text-white"><%= empty_title %></p>
+      <p class="mt-2 text-sm text-gray-400"><%= empty_description %></p>
+    </div>
+  <% end %>
+</section>

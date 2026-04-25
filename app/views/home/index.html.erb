@@ -1,86 +1,24 @@
-<section class="relative isolate overflow-hidden">
-  <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.22),_transparent_32%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.16),_transparent_28%)]"></div>
+<%= render "shared/organisms/marketing_hero",
+  eyebrow: t(".eyebrow"),
+  title: t(".title"),
+  description: t(".description"),
+  supporting_text: t(".supporting_text"),
+  panel_eyebrow: t(".panel_eyebrow"),
+  panel_title: t(".panel_title"),
+  panel_description: t(".panel_description"),
+  stats_portals_label: t(".stats.tenants"),
+  stats_access_label: t(".stats.access"),
+  stats_access_value: t(".stats.access_value"),
+  portals_count: @tenants.size %>
 
-  <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-    <div class="grid gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(22rem,0.75fr)] lg:items-start">
-      <div class="max-w-3xl">
-        <p class="text-sm font-semibold uppercase tracking-[0.24em] text-indigo-400"><%= t(".eyebrow") %></p>
-        <h1 class="mt-4 text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
-          <%= t(".title") %>
-        </h1>
-        <p class="mt-6 max-w-2xl text-lg leading-8 text-gray-300">
-          <%= t(".description") %>
-        </p>
-        <p class="mt-4 max-w-2xl text-sm leading-7 text-gray-400">
-          <%= t(".supporting_text") %>
-        </p>
-      </div>
-
-      <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/20 backdrop-blur">
-        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-indigo-300"><%= t(".panel_eyebrow") %></p>
-        <div class="mt-6 grid gap-4 sm:grid-cols-2">
-          <div class="rounded-2xl border border-white/10 bg-gray-950/40 p-4">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400"><%= t(".stats.tenants") %></p>
-            <p class="mt-2 text-3xl font-black text-white"><%= @tenants.size %></p>
-          </div>
-          <div class="rounded-2xl border border-white/10 bg-gray-950/40 p-4">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400"><%= t(".stats.access") %></p>
-            <p class="mt-2 text-base font-semibold text-white"><%= t(".stats.access_value") %></p>
-          </div>
-        </div>
-
-        <div class="mt-6 rounded-2xl border border-white/10 bg-gray-950/40 p-4">
-          <p class="text-sm font-semibold text-white"><%= t(".panel_title") %></p>
-          <p class="mt-2 text-sm leading-6 text-gray-300"><%= t(".panel_description") %></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="tenants" class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24">
-  <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-    <div>
-      <h2 class="mt-2 text-2xl font-bold text-white sm:text-3xl"><%= t(".tenants_title") %></h2>
-      <p class="mt-2 max-w-2xl text-sm leading-7 text-gray-300"><%= t(".tenants_description") %></p>
-    </div>
-    <div class="text-sm text-gray-400">
-      <%= t(".tenants_count", count: @tenants.size) %>
-    </div>
-  </div>
-
-  <% if @tenants.any? %>
-    <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-      <% @tenants.each do |tenant| %>
-        <article class="group rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:border-indigo-400/60 hover:bg-white/8">
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <p class="text-lg font-semibold text-white"><%= tenant.name %></p>
-              <p class="mt-1 text-sm text-gray-400"><%= tenant.slug %></p>
-            </div>
-            <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-gray-950/50 text-sm font-bold uppercase text-indigo-300">
-              <%= tenant.name.first %>
-            </span>
-          </div>
-
-          <p class="mt-4 min-h-12 text-sm leading-6 text-gray-300">
-            <%= tenant.description.presence || t(".tenant_description_fallback") %>
-          </p>
-
-          <div class="mt-6 flex items-center justify-between border-t border-white/10 pt-4">
-            <span class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-500"><%= t(".tenant_link_label") %></span>
-            <%= render "shared/atoms/text_link",
-              text: t(".visit_tenant"),
-              path: tenant_root_path(tenant_slug: tenant.slug),
-              class_name: "text-sm" %>
-          </div>
-        </article>
-      <% end %>
-    </div>
-  <% else %>
-    <div class="mt-10 rounded-2xl border border-dashed border-white/10 bg-white/5 p-8 text-center">
-      <p class="text-base font-semibold text-white"><%= t(".empty_title") %></p>
-      <p class="mt-2 text-sm text-gray-400"><%= t(".empty_description") %></p>
-    </div>
-  <% end %>
-</section>
+<%= render "shared/organisms/partners_grid",
+  partners: @tenants,
+  title: t(".tenants_title"),
+  description: t(".tenants_description"),
+  count_label: t(".tenants_count", count: @tenants.size),
+  portal_label: t(".tenant_link_label"),
+  visit_label: t(".visit_tenant"),
+  empty_description_label: t(".tenant_description_fallback"),
+  empty_title: t(".empty_title"),
+  empty_description: t(".empty_description"),
+  path_builder: ->(tenant) { tenant_root_path(tenant_slug: tenant.slug) } %>

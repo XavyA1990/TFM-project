@@ -1,0 +1,21 @@
+<%
+  page_header_options = local_assigns.fetch(:page_header_options, {})
+  membership_section = local_assigns[:membership_section]
+  extra_partial = local_assigns[:extra_partial]
+  extra_locals = local_assigns.fetch(:extra_locals, {})
+%>
+
+<%= render "shared/molecules/page_header", **{
+  title: title,
+  description: description
+}.merge(page_header_options) %>
+
+<%= render "shared/molecules/detail_list", items: details %>
+
+<% if membership_section.present? %>
+  <%= render "shared/organisms/membership_roles", **membership_section %>
+<% end %>
+
+<% if extra_partial.present? %>
+  <%= render extra_partial, **extra_locals %>
+<% end %>

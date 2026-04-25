@@ -11,12 +11,13 @@
 %>
 
 <section class="mt-10">
-  <div class="flex items-end justify-between gap-4 border-b border-gray-200 pb-4 dark:border-white/10">
-    <div>
-      <h2 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-gray-100"><%= role_manager_title %></h2>
-      <p class="mt-1 text-sm text-gray-600 dark:text-gray-400"><%= role_manager_description %></p>
-    </div>
-  </div>
+  <%= render "shared/molecules/page_header",
+    title: role_manager_title,
+    description: role_manager_description,
+    inner_class: "flex items-end justify-between gap-4 border-b border-gray-200 pb-4 dark:border-white/10",
+    title_tag: :h2,
+    title_class: "text-lg font-semibold tracking-tight text-gray-900 dark:text-gray-100",
+    description_class: "mt-1 text-sm text-gray-600 dark:text-gray-400" %>
 
   <div class="mt-6 grid gap-4">
     <% tenant_role_panels.each do |panel| %>

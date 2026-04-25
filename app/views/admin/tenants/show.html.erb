@@ -9,24 +9,27 @@
   end
 %>
 
-<%= render "shared/molecules/page_header",
+<%= render "shared/organisms/resource_show",
   title: t(".title"),
   description: t(".description"),
-  wrapper_class: "px-4 sm:px-6 lg:px-0",
-  inner_class: "sm:flex sm:items-center md:flex-row md:justify-between",
-  content_class: "sm:flex-auto",
-  actions_wrapper_class: "mt-4 sm:mt-0 sm:ml-16 sm:flex-none",
-  title_tag: :h1,
-  title_class: "text-base font-semibold text-gray-900 dark:text-white",
-  description_class: "mt-2 text-sm text-gray-700 dark:text-gray-300",
-  actions: header_actions %>
-<%= render "shared/molecules/detail_list", items: @tenant_details %>
-<%= render "shared/organisms/membership_roles",
-  memberships: @tenant_non_customer_memberships,
-  title: t(".users_dashboard_access_role_title"),
-  description: t(".users_dashboard_access_role_description"),
-  empty_message: t(".no_users_dashboard_access_role"),
-  no_roles_label: t(".no_roles_assigned"),
-  subject_label: User.model_name.human,
-  subject_name: ->(membership) { membership.user.full_name },
-  subject_path: ->(membership) { admin_user_path(membership.user) } %>
+  details: @tenant_details,
+  page_header_options: {
+    wrapper_class: "px-4 sm:px-6 lg:px-0",
+    inner_class: "sm:flex sm:items-center md:flex-row md:justify-between",
+    content_class: "sm:flex-auto",
+    actions_wrapper_class: "mt-4 sm:mt-0 sm:ml-16 sm:flex-none",
+    title_tag: :h1,
+    title_class: "text-base font-semibold text-gray-900 dark:text-white",
+    description_class: "mt-2 text-sm text-gray-700 dark:text-gray-300",
+    actions: header_actions
+  },
+  membership_section: {
+    memberships: @tenant_non_customer_memberships,
+    title: t(".users_dashboard_access_role_title"),
+    description: t(".users_dashboard_access_role_description"),
+    empty_message: t(".no_users_dashboard_access_role"),
+    no_roles_label: t(".no_roles_assigned"),
+    subject_label: User.model_name.human,
+    subject_name: ->(membership) { membership.user.full_name },
+    subject_path: ->(membership) { admin_user_path(membership.user) }
+  } %>

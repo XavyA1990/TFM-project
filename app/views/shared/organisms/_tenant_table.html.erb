@@ -1,86 +1,24 @@
-<div class="mt-8 flow-root">
-  <div class="mx-auto max-w-7xl px-4 sm:hidden">
-    <div class="space-y-4">
-      <% tenants.each do |tenant| %>
-        <article class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-white/10 dark:bg-white/5">
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <h2 class="text-base font-semibold text-gray-900 dark:text-white"><%= tenant[:name] %></h2>
-              <% if tenant[:slug].present? %>
-                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400"><%= tenant[:slug] %></p>
-              <% end %>
-            </div>
-          </div>
+<%
+  tenant_actions_builder = lambda do |tenant|
+    [
+      { text: t("actions.view"), path: admin_tenant_path(tenant) },
+      { text: t("actions.edit"), path: edit_admin_tenant_path(tenant) },
+      {
+        text: t("actions.delete"),
+        path: admin_tenant_path(tenant),
+        data: { turbo_method: :delete, turbo_confirm: t("actions.confirm_deletion", name: tenant[:name]) }
+      }
+    ]
+  end
+%>
 
-          <dl class="mt-4 space-y-3">
-            <% headers.zip(columns).each do |header, column| %>
-              <% next if column.to_sym == :name %>
-              <div>
-                <dt class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400"><%= header %></dt>
-                <dd class="mt-1 text-sm text-gray-700 dark:text-gray-300"><%= tenant[column].presence || "-" %></dd>
-              </div>
-            <% end %>
-          </dl>
-
-          <div class="mt-5 grid grid-cols-3 gap-3 border-t border-gray-200 pt-4 dark:border-white/10">
-            <%= render "shared/atoms/text_link", text: t("actions.view"), path: admin_tenant_path(tenant), class_name: "text-center text-sm font-semibold" %>
-            <%= render "shared/atoms/text_link", text: t("actions.edit"), path: edit_admin_tenant_path(tenant), class_name: "text-center text-sm font-semibold" %>
-            <%= render "shared/atoms/text_link",
-              text: t("actions.delete"),
-              path: admin_tenant_path(tenant),
-              class_name: "text-center text-sm font-semibold",
-              data: { turbo_method: :delete, turbo_confirm: t("actions.confirm_deletion", name: tenant[:name]) } %>
-          </div>
-        </article>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="hidden overflow-hidden sm:block">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <table class="w-full text-left">
-        <thead class="bg-white dark:bg-gray-900">
-          <tr>
-            <% headers.each do |header| %>
-              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white"><%= header %></th>
-            <% end %>
-            <th scope="col" class="py-3.5 pl-3">
-              <span class="sr-only"><%= t("actions.actions") %></span>
-            </th>
-            <th scope="col" class="py-3.5 pl-3">
-              <span class="sr-only"><%= t("actions.actions") %></span>
-            </th>
-            <th scope="col" class="py-3.5 pl-3">
-              <span class="sr-only"><%= t("actions.actions") %></span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <% tenants.each do |tenant| %>
-            <tr>
-              <% columns.each do |column| %>
-                <td class="px-3 py-4 text-sm text-gray-500 dark:text-gray-400"><%= tenant[column] %></td>
-              <% end %>
-              <td class="py-4 pl-3 text-right text-sm font-medium">
-                <%= render "shared/atoms/text_link", text: t("actions.view"), path: admin_tenant_path(tenant), class_name: "font-medium" %>
-                <span class="sr-only">, <%= tenant[:name] %></span>
-              </td>
-              <td class="py-4 pl-3 text-right text-sm font-medium">
-                <%= render "shared/atoms/text_link", text: t("actions.edit"), path: edit_admin_tenant_path(tenant), class_name: "font-medium" %>
-                <span class="sr-only">, <%= tenant[:name] %></span>
-              </td>
-              <td class="py-4 pl-3 text-right text-sm font-medium">
-                <%= render "shared/atoms/text_link",
-                  text: t("actions.delete"),
-                  path: admin_tenant_path(tenant),
-                  class_name: "font-medium",
-                  data: { turbo_method: :delete, turbo_confirm: t("actions.confirm_deletion", name: tenant[:name]) } %>
-                <span class="sr-only">, <%= tenant[:name] %></span>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+<%= render "shared/organisms/resource_table",
+  records: tenants,
+  headers: headers,
+  columns: columns,
+  mobile_title_builder: ->(tenant) { tenant[:name] },
+  mobile_subtitle_builder: ->(tenant) { tenant[:slug] },
+  record_name_builder: ->(tenant) { tenant[:name] },
+  skip_mobile_columns: %i[name],
+  action_column_count: 3,
+  actions_builder: tenant_actions_builder %>

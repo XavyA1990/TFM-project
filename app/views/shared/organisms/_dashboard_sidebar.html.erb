@@ -1,0 +1,35 @@
+<div class="relative flex h-full grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 py-6 text-gray-900 shadow-sm dark:border-white/10 dark:bg-gray-900 dark:text-white dark:before:pointer-events-none dark:before:absolute dark:before:inset-0 dark:before:bg-black/10 lg:h-screen lg:pt-20 lg:shadow-none">
+  <div class="relative flex h-16 shrink-0 items-center gap-x-3">
+    <div class="flex size-10 items-center justify-center rounded-xl bg-indigo-600 text-sm font-bold text-white shadow-sm dark:bg-indigo-500">
+      <%= sidebar[:title].to_s.first&.upcase || "D" %>
+    </div>
+    <div class="min-w-0">
+      <%= render "shared/atoms/text_link",
+        text: sidebar[:title],
+        path: sidebar[:home_path],
+        base_class: "text-gray-900 hover:text-indigo-600 dark:text-white dark:hover:text-indigo-300",
+        class_name: "truncate text-sm font-semibold" %>
+      <p class="text-xs text-gray-500 dark:text-gray-400"><%= t("app.name") %></p>
+    </div>
+  </div>
+
+  <nav class="relative flex flex-1 flex-col">
+    <ul role="list" class="flex flex-1 flex-col gap-y-7">
+      <%= render "shared/molecules/sidebar_nav_group", links: sidebar[:primary_links] %>
+
+      <% if sidebar[:secondary_links].present? %>
+        <%= render "shared/molecules/sidebar_nav_group",
+          title: sidebar[:secondary_title],
+          links: sidebar[:secondary_links],
+          list_class: "-mx-2 mt-2 space-y-1" %>
+      <% end %>
+
+      <li class="-mx-6 mt-auto">
+        <div class="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-gray-900 dark:text-white">
+          <%= image_tag current_user.avatar_url.present? ? current_user.avatar_url : "default_avatar.svg", alt: current_user.full_name, class: "size-8 rounded-full object-cover bg-gray-50 outline -outline-offset-1 outline-black/5 dark:bg-gray-800 dark:outline-white/10" %>
+          <span class="truncate" aria-hidden="true"><%= current_user.full_name %></span>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</div>
