@@ -52,11 +52,12 @@
         </div>
       </div>
       <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        <% if !user_signed_in? %>
+        <% if !user_signed_in? && tenant_context_present? %>
         <div class="shrink-0">
             <%= render "shared/atoms/button_link", text: t("devise.sessions.new.sign_in"), path: new_user_session_path, variant: :secondary %>
           </div>
-        <% else %>
+        <% end %>
+        <% if user_signed_in? %>
           <div data-controller="dropdown" class="relative ml-3">
             <button data-action="click->dropdown#toggle" class="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 ml-3 hover:cursor-pointer">
               <%= image_tag current_user.avatar_url.present? ? current_user.avatar_url : "default_avatar.svg", alt: current_user.full_name, class: "size-8 rounded-full object-cover bg-gray-800 outline -outline-offset-1 outline-white/10" %>

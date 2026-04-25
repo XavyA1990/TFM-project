@@ -1,4 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
+  before_action :ensure_origin_tenant_present!, only: %i[new create]
+
   private
 
   def after_sign_in_path_for(resource)
@@ -13,5 +15,13 @@ class Users::SessionsController < Devise::SessionsController
     return nil unless slug.present?
 
     Tenant.friendly.find(slug)
+  rescue ActiveRecord::RecordNotFound
+    nil
+  end
+
+  def ensure_origin_tenant_present!
+    return if origin_tenant.present?
+
+    redirect_to root_path, alert: t("authorization.login_from_tenant_required")
   end
 end

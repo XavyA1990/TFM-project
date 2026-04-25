@@ -32,6 +32,7 @@ en:
     name: "TFM Project"
   authorization:
     denied: "You are not authorized to access this page."
+    login_from_tenant_required: "You must sign in from a tenant portal."
   pwa:
     name: "TFM Project"
     description: "Multi-tenant administration platform."
@@ -145,8 +146,28 @@ en:
       back_to_super_admin: "Back to global admin"
   home:
     index:
-      title: "Platform home"
-      description: "Landing page for the multi-tenant platform."
+      eyebrow: "Multi-tenant platform"
+      title: "The infrastructure that helps every educational creator turn expertise into an independent business."
+      description: "TFM Project gives academies, experts, and learning brands their own portal to publish courses and commercialize them with identity, control, and autonomy, without handing over their audience relationship to external marketplaces."
+      supporting_text: "Each portal works as an independent educational storefront: a branded experience to present the offer, manage users, and grow a sustainable learning business."
+      panel_eyebrow: "Overview"
+      panel_title: "Infrastructure to sell without intermediaries"
+      panel_description: "The platform organizes every educational project as an independent portal so each creator can control their brand, community, and course commercialization from their own environment."
+      tenants_eyebrow: "Access points"
+      tenants_title: "Our partners"
+      tenants_description: "Discover the educational brands already running their value proposition from a dedicated portal, with an experience built to publish, position, and sell knowledge without intermediaries."
+      tenants_count:
+        one: "1 active portal"
+        other: "%{count} active portals"
+      tenant_description_fallback: "Educational portal available within the platform."
+      tenant_link_label: "Portal"
+      visit_tenant: "Visit portal"
+      empty_title: "There are no published portals yet"
+      empty_description: "As new educational brands go live on the platform, they will appear here with direct access to their portal."
+      stats:
+        tenants: "Portals"
+        access: "Access"
+        access_value: "Independent per brand"
   tenants:
     show:
       title: "Tenant portal"

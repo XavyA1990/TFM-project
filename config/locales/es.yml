@@ -3,6 +3,7 @@ es:
     name: "TFM Project"
   authorization:
     denied: "No tienes permiso para acceder a esta página."
+    login_from_tenant_required: "Debes iniciar sesión desde el portal de un tenant."
   pwa:
     name: "TFM Project"
     description: "Plataforma multi-tenant de administración."
@@ -128,8 +129,28 @@ es:
       back_to_super_admin: "Volver a administración global"
   home:
     index:
-      title: "Inicio de la plataforma"
-      description: "Página principal de la plataforma multi-tenant."
+      eyebrow: "Plataforma multi-tenant"
+      title: "La infraestructura para que cada creador educativo convierta su conocimiento en un negocio propio."
+      description: "TFM Project permite a academias, expertos y marcas formativas lanzar su propio portal, publicar cursos y comercializarlos con identidad, control y autonomía, sin ceder su relación con la audiencia a marketplaces externos."
+      supporting_text: "Cada portal funciona como una vitrina educativa independiente: una experiencia de marca propia para presentar la oferta, gestionar usuarios y hacer crecer una operación formativa sostenible."
+      panel_eyebrow: "Resumen"
+      panel_title: "Infraestructura para vender sin intermediarios"
+      panel_description: "La plataforma organiza cada proyecto educativo como un portal independiente para que cada creador controle su marca, su comunidad y la comercialización de sus cursos desde un entorno propio."
+      tenants_eyebrow: "Accesos"
+      tenants_title: "Nuestros socios"
+      tenants_description: "Descubre las marcas educativas que ya operan su propuesta de valor desde un portal propio, con una experiencia diseñada para publicar, posicionar y vender conocimiento sin intermediarios."
+      tenants_count:
+        one: "1 portal activo"
+        other: "%{count} portales activos"
+      tenant_description_fallback: "Portal educativo disponible dentro de la plataforma."
+      tenant_link_label: "Portal"
+      visit_tenant: "Visitar portal"
+      empty_title: "Todavía no hay portales publicados"
+      empty_description: "Cuando nuevas marcas educativas se activen en la plataforma, aparecerán aquí con acceso directo a su portal."
+      stats:
+        tenants: "Portales"
+        access: "Acceso"
+        access_value: "Independiente por marca"
   tenants:
     show:
       title: "Portal del tenant"
