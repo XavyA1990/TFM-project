@@ -121,6 +121,11 @@ es:
     admin: "Administración"
     profile: "Perfil"
     dashboard: "Tablero de control"
+  shared:
+    dashboard_sidebar:
+      admin_tenants: "Tenants"
+      quick_links: "Accesos rápidos"
+      back_to_super_admin: "Volver a administración global"
   home:
     index:
       title: "Inicio de la plataforma"

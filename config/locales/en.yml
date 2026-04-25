@@ -138,6 +138,11 @@ en:
     admin: "Admin"
     profile: "Profile"
     dashboard: "Dashboard"
+  shared:
+    dashboard_sidebar:
+      admin_tenants: "Tenants"
+      quick_links: "Quick links"
+      back_to_super_admin: "Back to global admin"
   home:
     index:
       title: "Platform home"

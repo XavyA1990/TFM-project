@@ -24,13 +24,28 @@
   </head>
 
   <body>
-    <main class="bg-gray-900 h-full min-h-screen text-white">
+    <main class="bg-gray-900 h-full min-h-screen overflow-x-hidden text-white">
       <%= render "shared/navbar" %>
       <%= render "shared/info" %>
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <%= yield :breadcrumbs %>
-        <%= yield %>
-      </div>
+      <% if dashboard_sidebar_visible? %>
+        <div class="min-h-screen lg:pl-80">
+          <aside class="lg:fixed lg:inset-y-0 lg:left-0 lg:z-10 lg:w-80">
+            <%= render "shared/dashboard_sidebar", sidebar: @dashboard_sidebar %>
+          </aside>
+
+          <div class="min-w-0 px-4 py-6 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-7xl">
+              <%= yield :breadcrumbs %>
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <%= yield :breadcrumbs %>
+          <%= yield %>
+        </div>
+      <% end %>
     </main>
   </body>
 </html>
