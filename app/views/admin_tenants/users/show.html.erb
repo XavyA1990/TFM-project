@@ -1,0 +1,30 @@
+<% breadcrumbs(
+  { label: t("admin_tenants.tenants.show.title"), path: admin_tenants_tenant_path(tenant_slug: current_tenant.slug) },
+  { label: t("admin_tenants.users.index.title"), path: admin_tenants_users_path(tenant_slug: current_tenant.slug) },
+  { label: @user.full_name }
+) %>
+
+<%= render "shared/molecules/page_header", title: t(".title"), description: t(".description") %>
+<%= render "shared/molecules/detail_list", items: @user_details %>
+<%= render "shared/organisms/membership_roles",
+  memberships: @user_tenant_roles,
+  title: t(".tenant_roles_title"),
+  description: t(".tenant_roles_description"),
+  empty_message: t(".no_roles_assigned"),
+  no_roles_label: t(".no_roles_assigned"),
+  subject_label: Tenant.model_name.human,
+  subject_name: ->(membership) { membership.tenant.name },
+  subject_path: ->(membership) { admin_tenants_tenant_path(tenant_slug: membership.tenant.slug) } %>
+<%= render "admin/users/tenant_role_manager",
+  user: @user,
+  tenant_role_panels: @tenant_role_panels,
+  available_roles: @available_roles,
+  tenant_path_builder: ->(tenant) { admin_tenants_tenant_path(tenant_slug: tenant.slug) },
+  role_assignment_path_builder: ->(user, _tenant) { admin_tenants_user_role_assignments_path(tenant_slug: current_tenant.slug, user_id: user.slug) },
+  tenant_token_enabled: false,
+  title: t(".tenant_role_manager_title"),
+  description: t(".tenant_role_manager_description"),
+  role_select_label: t(".role_select_label"),
+  add_role_label: t(".add_role"),
+  remove_role_label: t(".remove_role"),
+  no_roles_assigned_label: t(".no_roles_assigned") %>

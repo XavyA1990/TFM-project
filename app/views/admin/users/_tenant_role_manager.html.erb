@@ -1,8 +1,20 @@
+<%
+  tenant_path_builder = local_assigns.fetch(:tenant_path_builder, ->(tenant) { admin_tenant_path(tenant) })
+  role_assignment_path_builder = local_assigns.fetch(:role_assignment_path_builder, ->(user, _tenant) { admin_user_role_assignments_path(user) })
+  tenant_token_enabled = local_assigns.fetch(:tenant_token_enabled, true)
+  role_manager_title = local_assigns.fetch(:title, t("admin.users.show.tenant_role_manager_title"))
+  role_manager_description = local_assigns.fetch(:description, t("admin.users.show.tenant_role_manager_description"))
+  role_select_label = local_assigns.fetch(:role_select_label, t("admin.users.show.role_select_label"))
+  add_role_label = local_assigns.fetch(:add_role_label, t("admin.users.show.add_role"))
+  remove_role_label = local_assigns.fetch(:remove_role_label, t("admin.users.show.remove_role"))
+  no_roles_assigned_label = local_assigns.fetch(:no_roles_assigned_label, t("admin.users.show.no_roles_assigned"))
+%>
+
 <section class="mt-10">
   <div class="flex items-end justify-between gap-4 border-b border-gray-200 pb-4 dark:border-white/10">
     <div>
-      <h2 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-gray-100"><%= t("admin.users.show.tenant_role_manager_title") %></h2>
-      <p class="mt-1 text-sm text-gray-600 dark:text-gray-400"><%= t("admin.users.show.tenant_role_manager_description") %></p>
+      <h2 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-gray-100"><%= role_manager_title %></h2>
+      <p class="mt-1 text-sm text-gray-600 dark:text-gray-400"><%= role_manager_description %></p>
     </div>
   </div>
 
@@ -21,7 +33,7 @@
             <h3 class="mt-1 text-base font-semibold text-gray-900 dark:text-gray-100">
               <%= render "shared/atoms/text_link",
                 text: tenant.name,
-                path: admin_tenant_path(tenant),
+                path: tenant_path_builder.call(tenant),
                 class_name: "text-base font-semibold" %>
             </h3>
 
@@ -34,25 +46,27 @@
                 <% end %>
               <% else %>
                 <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600 ring-1 ring-inset ring-gray-200 dark:bg-white/10 dark:text-gray-300 dark:ring-white/10">
-                  <%= t("admin.users.show.no_roles_assigned") %>
+                  <%= no_roles_assigned_label %>
                 </span>
               <% end %>
             </div>
           </div>
 
-          <%= form_with url: admin_user_role_assignments_path(user), method: :post,
+          <%= form_with url: role_assignment_path_builder.call(user, tenant), method: :post,
             class: "w-full max-w-md",
             data: {
               controller: "role-assignment-toggle",
               "role-assignment-toggle-assigned-role-tokens-value": assigned_role_tokens.to_json,
-              "role-assignment-toggle-add-label-value": t("admin.users.show.add_role"),
-              "role-assignment-toggle-remove-label-value": t("admin.users.show.remove_role"),
+              "role-assignment-toggle-add-label-value": add_role_label,
+              "role-assignment-toggle-remove-label-value": remove_role_label,
             } do |form| %>
-            <%= hidden_field_tag :tenant_token, tenant_token %>
+            <% if tenant_token_enabled %>
+              <%= hidden_field_tag :tenant_token, tenant_token %>
+            <% end %>
 
             <div class="space-y-3">
               <div>
-                <%= form.label :role_token, t("admin.users.show.role_select_label"), class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
+                <%= form.label :role_token, role_select_label, class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
                 <%= form.select :role_token,
                   options_for_select(available_role_options, available_role_options.first&.last),
                   {},
@@ -69,7 +83,7 @@
                 data-role-assignment-toggle-target="button"
                 data-default-class="w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:cursor-pointer hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
                 data-danger-class="w-full rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:cursor-pointer hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 dark:bg-red-500 dark:hover:bg-red-400 dark:focus-visible:outline-red-500">
-                <%= t("admin.users.show.add_role") %>
+                <%= add_role_label %>
               </button>
             </div>
           <% end %>

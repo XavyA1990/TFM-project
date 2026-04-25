@@ -8,6 +8,7 @@ module Admin
 
     def call
       return get_memberships_for_user if @action == :for_user
+      return get_memberships_for_user_in_tenant if @action == :for_user_in_tenant
       return get_role_management_panels if @action == :role_management_panels
       return get_non_customer_memberships_for_tenant if @action == :for_tenant_without_customer
 
@@ -18,6 +19,14 @@ module Admin
 
     def get_memberships_for_user
       @repository.for_user_with_tenants_and_roles(@params[:user]).sort_by do |membership|
+        membership.tenant.name.to_s.downcase
+      end
+    end
+
+    def get_memberships_for_user_in_tenant
+      @repository.for_user_with_tenants_and_roles(@params[:user]).select do |membership|
+        membership.tenant_id == @params[:tenant].id
+      end.sort_by do |membership|
         membership.tenant.name.to_s.downcase
       end
     end
