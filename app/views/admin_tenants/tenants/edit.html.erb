@@ -1,1 +1,15 @@
+<% breadcrumbs(
+  { label: t("admin_tenants.tenants.show.title"), path: admin_tenants_tenant_path(tenant_slug: @tenant.slug) },
+  { label: t("admin_tenants.tenants.edit.title") }
+) %>
+
 <%= render "shared/molecules/page_header", title: t(".title"), description: t(".description") %>
+
+<%= render "admin/tenants/form",
+  tenant: @tenant,
+  url: admin_tenants_tenant_path(tenant_slug: @tenant.slug),
+  description: t(".description"),
+  submit_label: t("update"),
+  details_title: t("admin_tenants.tenants.show.title"),
+  details_description: t("admin_tenants.tenants.show.description"),
+  back_path: admin_tenants_tenant_path(tenant_slug: @tenant.slug) %>

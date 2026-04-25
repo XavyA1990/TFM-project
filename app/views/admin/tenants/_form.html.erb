@@ -1,3 +1,9 @@
+<%
+  details_title = local_assigns.fetch(:details_title, t("admin.tenants.show.title"))
+  details_description = local_assigns.fetch(:details_description, t("admin.tenants.show.description"))
+  back_path = local_assigns.fetch(:back_path, admin_tenants_path)
+%>
+
 <%= form_with model: tenant, url: url, class: "mt-10" do |form| %>
   <%= render "shared/molecules/error_summary", resource: tenant %>
 
@@ -21,8 +27,8 @@
 
     <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3 dark:border-white/10">
       <div>
-        <h2 class="text-base/7 font-semibold text-gray-900 dark:text-white"><%= t("admin_tenants.tenants.show.title") %></h2>
-        <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400"><%= t("admin_tenants.tenants.show.description") %></p>
+        <h2 class="text-base/7 font-semibold text-gray-900 dark:text-white"><%= details_title %></h2>
+        <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400"><%= details_description %></p>
       </div>
 
       <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
@@ -42,7 +48,7 @@
   </div>
 
   <div class="mt-6 flex items-center justify-end gap-x-6">
-    <%= render "shared/atoms/text_link", text: t("back"), path: admin_tenants_path, base_class: "", class_name: "text-sm/6 font-semibold text-gray-900 dark:text-white" %>
+    <%= render "shared/atoms/text_link", text: t("back"), path: back_path, base_class: "", class_name: "text-sm/6 font-semibold text-gray-900 dark:text-white" %>
     <%= render "shared/atoms/button", text: submit_label, type: :submit %>
   </div>
 <% end %>

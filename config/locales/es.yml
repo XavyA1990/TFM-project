@@ -181,6 +181,10 @@ es:
       show:
         title: "Administración del tenant"
         description: "Gestiona el tenant actual."
+        users_dashboard_access_role_title: "Equipo administrativo"
+        users_dashboard_access_role_description: "Usuarios con acceso de gestión dentro de este tenant."
+        no_users_dashboard_access_role: "No hay usuarios participantes de la administración del tenant."
+        no_roles_assigned: "Sin roles asignados"
       edit:
         title: "Editar configuración del tenant"
         description: "Actualiza la configuración del tenant actual."

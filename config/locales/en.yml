@@ -198,6 +198,10 @@ en:
       show:
         title: "Tenant administration"
         description: "Manage the current tenant."
+        users_dashboard_access_role_title: "Admin team"
+        users_dashboard_access_role_description: "Users with management access in this tenant."
+        no_users_dashboard_access_role: "There are no users participating in tenant administration."
+        no_roles_assigned: "No roles assigned"
       edit:
         title: "Edit tenant settings"
         description: "Update the current tenant configuration."
