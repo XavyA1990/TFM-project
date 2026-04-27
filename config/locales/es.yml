@@ -173,8 +173,14 @@ es:
         access_value: "Independiente por marca"
   tenants:
     show:
+      eyebrow: "Portal educativo"
       title: "Portal del tenant"
       description: "Resumen del tenant actual."
+      fallback_title: "%{tenant}, tu espacio para aprender y crecer"
+      fallback_description: "Explora la propuesta educativa de %{tenant} desde un entorno diseñado para compartir conocimiento con identidad propia."
+      portal_label: "Portal"
+      about_panel_title: "Sobre este portal"
+      about_panel_description: "%{tenant} comparte su propuesta educativa desde un espacio propio, pensado para construir comunidad, transmitir conocimiento y crecer con una identidad clara."
   admin:
     tenants:
       index:

@@ -190,8 +190,14 @@ en:
         access_value: "Independent per brand"
   tenants:
     show:
+      eyebrow: "Educational portal"
       title: "Tenant portal"
       description: "Overview of the current tenant."
+      fallback_title: "%{tenant}, your place to learn and grow"
+      fallback_description: "Explore %{tenant}'s educational offering from an environment designed to share knowledge with its own identity."
+      portal_label: "Portal"
+      about_panel_title: "About this portal"
+      about_panel_description: "%{tenant} shares its educational proposition from an independent space designed to build community, deliver knowledge, and grow with a distinct identity."
   admin:
     tenants:
       index:
