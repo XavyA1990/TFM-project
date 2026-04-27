@@ -41,7 +41,15 @@
         </div>
 
         <div class="col-span-full">
-          <%= render "shared/molecules/form_field", form: form, field: :logo_url, type: :url_field %>
+          <%= render "shared/organisms/asset_uploader",
+            form: form,
+            field: :logo_asset,
+            type: :image,
+            label: Tenant.human_attribute_name(:logo_asset),
+            description: t("shared.asset_uploader.image_only_hint"),
+            accept: "image/png,image/jpeg,image/webp,image/svg+xml",
+            current_asset: tenant.logo_asset,
+            current_url: tenant.logo_url %>
         </div>
       </div>
     </div>

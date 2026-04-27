@@ -9,6 +9,8 @@ class User < ApplicationRecord
          
   has_many :users_tenants, dependent: :destroy
   has_many :tenants, through: :users_tenants
+
+  has_one_attached :avatar_asset
   
   validates :username, presence: true, uniqueness: true
   validates :first_name, presence: true
@@ -18,6 +20,13 @@ class User < ApplicationRecord
 
   def should_generate_new_friendly_id?
     will_save_change_to_username? || super
+  end
+
+  def avatar_source
+    return avatar_asset if avatar_asset.attached?
+    return avatar_url if avatar_url.present?
+
+    "default_avatar.svg"
   end
 
   def full_name

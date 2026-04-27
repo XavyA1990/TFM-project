@@ -70,10 +70,16 @@ module Admin
         [Tenant.human_attribute_name(:description), @tenant.description],
         [Tenant.human_attribute_name(:header_text), @tenant.header_text],
         [Tenant.human_attribute_name(:subheader_text), @tenant.subheader_text],
-        [Tenant.human_attribute_name(:logo_url), @tenant.logo_url],
+        [Tenant.human_attribute_name(:logo_asset), tenant_logo_value],
         [Tenant.human_attribute_name(:created_at), @tenant.created_at ? I18n.l(@tenant.created_at) : nil],
         [Tenant.human_attribute_name(:updated_at), @tenant.updated_at ? I18n.l(@tenant.updated_at) : nil]
       ]
+    end
+
+    def tenant_logo_value
+      return @tenant.logo_asset.filename.to_s if @tenant.logo_asset.attached?
+
+      @tenant.logo_url
     end
   end
 end

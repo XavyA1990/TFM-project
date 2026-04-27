@@ -50,11 +50,11 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [
-      :username, :first_name, :last_name, :avatar_url
+      :username, :first_name, :last_name, :avatar_url, :avatar_asset
     ])
 
     devise_parameter_sanitizer.permit(:account_update, keys: [
-      :first_name, :last_name, :avatar_url
+      :first_name, :last_name, :avatar_url, :avatar_asset
     ])
   end
 end

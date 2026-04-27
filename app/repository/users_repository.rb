@@ -39,6 +39,10 @@ class UsersRepository
     user.update(params)
   end
 
+  def self.update_with_password(user, params)
+    user.update_with_password(params)
+  end
+
   def self.destroy(user)
     user.destroy
   end

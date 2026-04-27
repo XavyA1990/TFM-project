@@ -52,6 +52,7 @@ es:
         username: "Nombre de usuario"
         first_name: "Nombre"
         last_name: "Apellido"
+        avatar_asset: "Avatar"
         password: "Contraseña"
         password_confirmation: "Confirmación de contraseña"
         created_at: "Creado el"
@@ -63,6 +64,7 @@ es:
         description: "Descripción"
         header_text: "Texto del encabezado"
         subheader_text: "Texto del subencabezado"
+        logo_asset: "Logo"
         logo_url: "URL del logo"
         created_at: "Creado el"
         updated_at: "Actualizado el"
@@ -78,6 +80,8 @@ es:
         security_section_description: "Cambia tu contraseña cuando lo necesites y confirma cualquier modificación con tu contraseña actual."
         email_scope_notice: "Si cambias este correo, el cambio aplicará a todos los portales donde tengas acceso."
         username_hint: "El nombre de usuario se mantiene bloqueado porque está vinculado a la URL pública de tu cuenta dentro de la plataforma."
+        avatar_asset: "Avatar"
+        avatar_asset_hint: "Arrastra una imagen o haz clic para cargar un nuevo avatar. Si no subes uno, se seguirá usando el avatar actual o la URL existente."
         avatar_url: "URL del avatar"
         avatar_url_hint: "Usa una imagen pública para personalizar tu cuenta."
         pending_reconfirmation: "Actualmente esperando confirmación para: %{email}"
@@ -133,6 +137,13 @@ es:
     profile: "Perfil"
     dashboard: "Tablero de control"
   shared:
+    asset_uploader:
+      drop_title: "Arrastra tu archivo aquí"
+      drop_description: "O haz clic para seleccionarlo desde tu equipo."
+      replace_hint: "Puedes reemplazar el archivo actual cuando quieras."
+      file_selected: "Archivo listo"
+      current_file: "Archivo actual"
+      image_only_hint: "Admite PNG, JPG, GIF, WEBP y SVG."
     dashboard_sidebar:
       admin_tenants: "Tenants"
       quick_links: "Accesos rápidos"

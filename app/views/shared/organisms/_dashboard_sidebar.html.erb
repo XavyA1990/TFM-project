@@ -26,7 +26,7 @@
 
       <li class="-mx-6 mt-auto">
         <div class="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-gray-900 dark:text-white">
-          <%= image_tag current_user.avatar_url.present? ? current_user.avatar_url : "default_avatar.svg", alt: current_user.full_name, class: "size-8 rounded-full object-cover bg-gray-50 outline -outline-offset-1 outline-black/5 dark:bg-gray-800 dark:outline-white/10" %>
+          <%= image_tag current_user.avatar_source, alt: current_user.full_name, class: "size-8 rounded-full object-cover bg-gray-50 outline -outline-offset-1 outline-black/5 dark:bg-gray-800 dark:outline-white/10" %>
           <span class="truncate" aria-hidden="true"><%= current_user.full_name %></span>
         </div>
       </li>

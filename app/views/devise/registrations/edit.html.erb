@@ -22,13 +22,15 @@
           input_html: { autocomplete: "family-name" } %>
       </div>
 
-      <%= render "devise/shared/form_field",
-        f: f,
-        field: :avatar_url,
-        type: :url_field,
-        label: t("devise_views.registrations.edit.avatar_url"),
-        description: t("devise_views.registrations.edit.avatar_url_hint"),
-        input_html: { autocomplete: "url" } %>
+      <%= render "shared/organisms/asset_uploader",
+        form: f,
+        field: :avatar_asset,
+        type: :image,
+        label: t("devise_views.registrations.edit.avatar_asset"),
+        description: t("devise_views.registrations.edit.avatar_asset_hint"),
+        accept: "image/png,image/jpeg",
+        current_asset: resource.avatar_asset,
+        current_url: resource.avatar_url %>
 
       <div>
         <label class="block text-sm/6 font-medium text-gray-900 dark:text-white"><%= t("username") %></label>

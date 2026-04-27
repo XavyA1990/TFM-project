@@ -11,12 +11,27 @@ class Admin::TenantsController < Admin::BaseController
   end
 
   def create
-    @tenant = Admin::TenantsServices.new(:create, tenant_params).call
+    @tenant = Tenant.new(tenant_attributes)
+    prepared_logo = prepare_logo_asset(@tenant)
 
-    if @tenant.persisted?
-      redirect_to admin_tenant_path(@tenant)
-    else
+    if @tenant.errors.any?
       render :new, status: :unprocessable_entity
+      return
+    end
+
+    Tenant.transaction do
+      @tenant = Admin::TenantsServices.new(:create, tenant_attributes).call
+      raise ActiveRecord::Rollback unless @tenant.persisted?
+
+      attach_logo_asset(@tenant, prepared_logo)
+
+      raise ActiveRecord::Rollback if @tenant.errors.any?
+    end
+
+    if @tenant.errors.any? || !@tenant.persisted?
+      render :new, status: :unprocessable_entity
+    else
+      redirect_to admin_tenant_path(@tenant)
     end
   end
 
@@ -43,7 +58,21 @@ class Admin::TenantsController < Admin::BaseController
   end
 
   def update
-    @tenant = Admin::TenantsServices.new(:update, tenant_params.merge(slug: params[:id])).call
+    prepared_logo = prepare_logo_asset(@tenant)
+
+    if @tenant.errors.any?
+      render :edit, status: :unprocessable_entity
+      return
+    end
+
+    Tenant.transaction do
+      @tenant = Admin::TenantsServices.new(:update, tenant_attributes.merge(slug: params[:id])).call
+      raise ActiveRecord::Rollback if @tenant.errors.any?
+
+      attach_logo_asset(@tenant, prepared_logo)
+
+      raise ActiveRecord::Rollback if @tenant.errors.any?
+    end
 
     if @tenant.errors.any?
       render :edit, status: :unprocessable_entity
@@ -65,7 +94,30 @@ class Admin::TenantsController < Admin::BaseController
     @tenant = Admin::TenantsServices.new(:get, { slug: params[:id] }).call
   end
 
+  def prepare_logo_asset(tenant)
+    logo_blob_id = params.dig(:tenant, :logo_asset)
+    return nil if logo_blob_id.blank?
+
+    Tenants::AssetsServices.new(
+      :prepare_logo,
+      { tenant: tenant, signed_blob_id: logo_blob_id }
+    ).call
+  end
+
+  def attach_logo_asset(tenant, prepared_logo)
+    return if prepared_logo.blank?
+
+    Tenants::AssetsServices.new(
+      :attach_logo,
+      { tenant: tenant, prepared_asset: prepared_logo }
+    ).call
+  end
+
+  def tenant_attributes
+    tenant_params.except(:logo_asset)
+  end
+
   def tenant_params
-    params.require(:tenant).permit(:name, :description, :header_text, :subheader_text, :logo_url)
+    params.require(:tenant).permit(:name, :description, :header_text, :subheader_text, :logo_url, :logo_asset)
   end
 end

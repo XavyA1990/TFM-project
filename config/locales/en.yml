@@ -76,6 +76,7 @@ en:
         username: "Username"
         first_name: "First name"
         last_name: "Last name"
+        avatar_asset: "Avatar"
         password: "Password"
         password_confirmation: "Password confirmation"
       tenant:
@@ -85,6 +86,7 @@ en:
         description: "Description"
         header_text: "Header text"
         subheader_text: "Subheader text"
+        logo_asset: "Logo"
         logo_url: "Logo URL"
         created_at: "Created at"
         updated_at: "Updated at"
@@ -100,6 +102,8 @@ en:
         security_section_description: "Change your password when needed and confirm any update with your current password."
         email_scope_notice: "If you change this email, the change will apply to every portal where you have access."
         username_hint: "Your username is locked because it is tied to your public account URL within the platform."
+        avatar_asset: "Avatar"
+        avatar_asset_hint: "Drag an image here or click to upload a new avatar. If you do not upload one, the current avatar or existing URL will continue to be used."
         avatar_url: "Avatar URL"
         avatar_url_hint: "Use a public image URL to personalize your account."
         pending_reconfirmation: "Currently waiting confirmation for: %{email}"
@@ -150,6 +154,13 @@ en:
     profile: "Profile"
     dashboard: "Dashboard"
   shared:
+    asset_uploader:
+      drop_title: "Drag your file here"
+      drop_description: "Or click to choose it from your device."
+      replace_hint: "You can replace the current file whenever you want."
+      file_selected: "File ready"
+      current_file: "Current file"
+      image_only_hint: "Supports PNG, JPG, GIF, WEBP, and SVG."
     dashboard_sidebar:
       admin_tenants: "Tenants"
       quick_links: "Quick links"

@@ -1,0 +1,119 @@
+<%
+  label_text = local_assigns.fetch(:label, field.to_s.humanize)
+  description = local_assigns[:description]
+  asset_type = local_assigns.fetch(:type, :image).to_sym
+  accept = local_assigns[:accept]
+  direct_upload = local_assigns.fetch(:direct_upload, true)
+  current_asset = local_assigns[:current_asset]
+  current_url = local_assigns[:current_url].presence
+  is_current_asset_attached = current_asset&.attached?
+  current_content_type = is_current_asset_attached ? current_asset.content_type.to_s : nil
+
+  current_preview_kind = nil
+  current_preview_url = nil
+  current_filename = nil
+  current_meta = nil
+
+  if is_current_asset_attached
+    current_filename = current_asset.filename.to_s
+    current_meta = current_content_type
+  end
+
+  current_preview_kind =
+    if is_current_asset_attached
+      case asset_type
+      when :image
+        current_content_type.start_with?("image/") ? :image : :file
+      when :video
+        current_content_type.start_with?("video/") ? :video : :file
+      when :pdf
+        current_content_type == "application/pdf" ? :pdf : :file
+      else
+        :file
+      end
+    end
+
+  if [:image, :video].include?(current_preview_kind)
+    current_preview_url = url_for(current_asset)
+  end
+
+  if current_url.present? && current_preview_kind.nil?
+    current_preview_kind = asset_type == :image ? :image : :file
+    current_preview_url = current_url if current_preview_kind == :image
+    current_filename = current_url
+    current_meta = t("shared.asset_uploader.current_file")
+  end
+
+  preview_visible = current_preview_kind.present?
+  file_badge_text = {
+    pdf: "PDF",
+    file: "FILE",
+  }.fetch(current_preview_kind, "PREVIEW")
+%>
+
+<div
+  data-controller="asset-uploader"
+  data-asset-uploader-type-value="<%= asset_type %>"
+>
+  <%= form.label field, label_text, class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
+  <% if description.present? %>
+    <p class="text-sm/6 text-gray-500 dark:text-gray-400"><%= description %></p>
+  <% end %>
+
+  <%= form.file_field field,
+    direct_upload: direct_upload,
+    accept: accept,
+    class: "sr-only",
+    data: {
+      asset_uploader_target: "input",
+      action: "change->asset-uploader#change"
+    } %>
+
+  <button
+    type="button"
+    data-asset-uploader-target="dropzone"
+    data-action="click->asset-uploader#open dragenter->asset-uploader#dragEnter dragover->asset-uploader#dragOver dragleave->asset-uploader#dragLeave drop->asset-uploader#drop"
+    class="mt-2 flex w-full flex-col items-center justify-center rounded-xl border border-dashed border-gray-300 bg-white/60 px-6 py-8 text-center transition hover:border-indigo-400 hover:bg-indigo-50/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:border-white/10 dark:bg-white/5 dark:hover:border-indigo-400 dark:hover:bg-indigo-500/10 hover:cursor-pointer"
+  >
+    <div class="flex size-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="size-6">
+        <path d="M12 16.5V6.75m0 0-3.75 3.75M12 6.75l3.75 3.75M3.75 15v2.25A2.25 2.25 0 0 0 6 19.5h12a2.25 2.25 0 0 0 2.25-2.25V15" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+    <p class="mt-4 text-sm font-semibold text-gray-900 dark:text-white"><%= t("shared.asset_uploader.drop_title") %></p>
+    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400"><%= t("shared.asset_uploader.drop_description") %></p>
+    <p class="mt-3 text-xs font-medium uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-300"><%= t("shared.asset_uploader.replace_hint") %></p>
+  </button>
+
+  <div
+    data-asset-uploader-target="preview"
+    class="<%= preview_visible ? "" : "hidden " %>mt-4 rounded-xl border border-gray-200 bg-white/80 p-4 dark:border-white/10 dark:bg-white/5"
+  >
+    <div class="flex items-start gap-4">
+      <img
+        data-asset-uploader-target="image"
+        src="<%= current_preview_kind == :image ? current_preview_url : "" %>"
+        alt="<%= label_text %>"
+        class="<%= current_preview_kind == :image ? "" : "hidden " %>size-20 rounded-lg object-cover ring-1 ring-black/5 dark:ring-white/10"
+      />
+
+      <video
+        data-asset-uploader-target="video"
+        src="<%= current_preview_kind == :video ? current_preview_url : "" %>"
+        controls
+        class="<%= current_preview_kind == :video ? "" : "hidden " %>h-20 w-32 rounded-lg bg-black/40 object-cover ring-1 ring-black/5 dark:ring-white/10"
+      ></video>
+
+      <div
+        data-asset-uploader-target="fileCard"
+        class="<%= [:pdf, :file].include?(current_preview_kind) ? "" : "hidden " %>flex size-20 items-center justify-center rounded-lg bg-gray-100 text-[0.625rem] font-semibold tracking-[0.2em] text-gray-500 ring-1 ring-black/5 dark:bg-white/10 dark:text-gray-300 dark:ring-white/10"
+      ><%= file_badge_text %></div>
+
+      <div class="min-w-0 flex-1">
+        <p class="text-sm font-medium text-gray-900 dark:text-white"><%= t("shared.asset_uploader.file_selected") %></p>
+        <p data-asset-uploader-target="filename" class="mt-1 break-all text-sm text-gray-600 dark:text-gray-300"><%= current_filename %></p>
+        <p data-asset-uploader-target="meta" class="mt-1 text-xs text-gray-500 dark:text-gray-400"><%= current_meta %></p>
+      </div>
+    </div>
+  </div>
+</div>
