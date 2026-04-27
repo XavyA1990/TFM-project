@@ -143,7 +143,7 @@ es:
       replace_hint: "Puedes reemplazar el archivo actual cuando quieras."
       file_selected: "Archivo listo"
       current_file: "Archivo actual"
-      image_only_hint: "Admite PNG, JPG, GIF, WEBP y SVG."
+      image_only_hint: "Admite PNG, JPG y WEBP"
     dashboard_sidebar:
       admin_tenants: "Tenants"
       quick_links: "Accesos rápidos"

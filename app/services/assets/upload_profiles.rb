@@ -2,7 +2,7 @@ module Assets
   class UploadProfiles
     PROFILES = {
       avatar_image: {
-        allowed_types: %w[image/png image/jpeg],
+        allowed_types: %w[image/png image/jpeg image/webp],
         max_size: 5.megabytes,
         attachment_name: :avatar_asset
       },
