@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   allow_browser versions: :modern
   around_action :switch_locale
-  helper_method :dashboard_sidebar_visible?, :tenant_context_present?
+  helper_method :dashboard_sidebar_visible?, :tenant_context_present?, :current_tenant_for_ability
 
   rescue_from CanCan::AccessDenied do
     redirect_to root_path, alert: t("authorization.denied")

@@ -1,7 +1,11 @@
 <div class="relative flex h-full grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 py-6 text-gray-900 shadow-sm dark:border-white/10 dark:bg-gray-900 dark:text-white dark:before:pointer-events-none dark:before:absolute dark:before:inset-0 dark:before:bg-black/10 lg:h-screen lg:pt-20 lg:shadow-none">
   <div class="relative flex h-16 shrink-0 items-center gap-x-3">
-    <div class="flex size-10 items-center justify-center rounded-xl bg-indigo-600 text-sm font-bold text-white shadow-sm dark:bg-indigo-500">
-      <%= sidebar[:title].to_s.first&.upcase || "D" %>
+    <div class="flex size-10 items-center justify-center overflow-hidden rounded-xl bg-indigo-600 text-sm font-bold text-white shadow-sm dark:bg-indigo-500">
+      <% if sidebar[:logo_source].present? %>
+        <%= image_tag sidebar[:logo_source], alt: sidebar[:title], class: "size-full object-cover" %>
+      <% else %>
+        <%= sidebar[:title].to_s.first&.upcase || "D" %>
+      <% end %>
     </div>
     <div class="min-w-0">
       <%= render "shared/atoms/text_link",

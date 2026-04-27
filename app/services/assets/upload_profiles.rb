@@ -7,7 +7,7 @@ module Assets
         attachment_name: :avatar_asset
       },
       tenant_logo: {
-        allowed_types: %w[image/png image/jpeg image/webp image/svg+xml],
+        allowed_types: %w[image/png image/jpeg image/webp],
         max_size: 5.megabytes,
         attachment_name: :logo_asset
       }

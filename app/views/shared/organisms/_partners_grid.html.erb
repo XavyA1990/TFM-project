@@ -27,8 +27,12 @@
               <p class="text-lg font-semibold text-white"><%= partner.name %></p>
               <p class="mt-1 text-sm text-gray-400"><%= partner.slug %></p>
             </div>
-            <span class="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-gray-950/50 text-sm font-bold uppercase text-indigo-300">
-              <%= partner.name.first %>
+            <span class="inline-flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-gray-950/50 text-sm font-bold uppercase text-indigo-300">
+              <% if partner.logo_source.present? %>
+                <%= image_tag partner.logo_source, alt: partner.name, class: "size-full object-cover" %>
+              <% else %>
+                <%= partner.name.first %>
+              <% end %>
             </span>
           </div>
 

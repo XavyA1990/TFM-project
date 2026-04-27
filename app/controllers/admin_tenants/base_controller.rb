@@ -37,6 +37,7 @@ class AdminTenants::BaseController < TenantsBaseController
     @dashboard_sidebar = {
       title: current_tenant.name,
       home_path: admin_tenants_tenant_path(tenant_slug: current_tenant.slug),
+      logo_source: current_tenant.logo_source,
       primary_links: [
         {
           label: t("admin_tenants.tenants.show.title"),

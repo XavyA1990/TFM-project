@@ -43,7 +43,15 @@
       </div>
       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex shrink-0 items-center">
-
+          <% if current_tenant_for_ability.present? %>
+            <%= link_to tenant_root_path(tenant_slug: current_tenant_for_ability.slug), class: "flex items-center gap-x-3 rounded-lg px-2 py-1 text-white transition hover:bg-white/5" do %>
+              <% if current_tenant_for_ability.logo_source.present? %>
+                <%= image_tag current_tenant_for_ability.logo_source, alt: current_tenant_for_ability.name, class: "h-9 w-auto max-w-32 object-contain" %>
+              <% else %>
+                <span class="text-sm font-semibold"><%= current_tenant_for_ability.name %></span>
+              <% end %>
+            <% end %>
+          <% end %>
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">

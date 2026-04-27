@@ -15,12 +15,14 @@ class Admin::BaseController < ApplicationController
         label: tenant.name,
         path: admin_tenants_tenant_path(tenant_slug: tenant.slug),
         active: params[:tenant_slug] == tenant.slug,
+        icon_image: tenant.logo_source,
       }
     end
 
     @dashboard_sidebar = {
       title: t("navbar.admin"),
       home_path: admin_tenants_path,
+      logo_source: nil,
       primary_links: [
         {
           label: t("admin.tenants.index.title"),
