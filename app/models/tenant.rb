@@ -4,6 +4,7 @@ class Tenant < ApplicationRecord
 
   has_many :users_tenants, dependent: :destroy
   has_many :users, through: :users_tenants
+  has_many :courses, dependent: :destroy
 
   has_one_attached :logo_asset
 

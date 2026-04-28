@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_26_184151) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_28_031130) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -42,6 +42,36 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_184151) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "course_modules", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "course_id", null: false
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.integer "position", default: 0, null: false
+    t.string "slug", null: false
+    t.string "status", default: "draft", null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id", "position"], name: "index_course_modules_on_course_id_and_position"
+    t.index ["course_id", "slug"], name: "index_course_modules_on_course_id_and_slug", unique: true
+    t.index ["course_id", "status"], name: "index_course_modules_on_course_id_and_status"
+    t.index ["course_id"], name: "index_course_modules_on_course_id"
+  end
+
+  create_table "courses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "cover_image_url"
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "short_description"
+    t.string "slug", null: false
+    t.string "status", default: "draft", null: false
+    t.uuid "tenant_id", null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tenant_id", "slug"], name: "index_courses_on_tenant_id_and_slug", unique: true
+    t.index ["tenant_id", "status"], name: "index_courses_on_tenant_id_and_status"
+    t.index ["tenant_id"], name: "index_courses_on_tenant_id"
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.datetime "created_at"
     t.string "scope"
@@ -51,6 +81,24 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_184151) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "lessons", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "body"
+    t.string "content_url"
+    t.uuid "course_module_id", null: false
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "lesson_type", null: false
+    t.integer "position", default: 0, null: false
+    t.string "slug", null: false
+    t.string "status", default: "draft", null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_module_id", "position"], name: "index_lessons_on_course_module_id_and_position"
+    t.index ["course_module_id", "slug"], name: "index_lessons_on_course_module_id_and_slug", unique: true
+    t.index ["course_module_id", "status"], name: "index_lessons_on_course_module_id_and_status"
+    t.index ["course_module_id"], name: "index_lessons_on_course_module_id"
   end
 
   create_table "permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -143,6 +191,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_184151) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "course_modules", "courses"
+  add_foreign_key "courses", "tenants"
+  add_foreign_key "lessons", "course_modules"
   add_foreign_key "role_permissions", "permissions"
   add_foreign_key "role_permissions", "roles"
   add_foreign_key "user_tenant_roles", "roles"
