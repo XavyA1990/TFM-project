@@ -1,14 +1,24 @@
 <%
   tenant_actions_builder = lambda do |tenant|
-    [
-      { text: t("actions.view"), path: admin_tenant_path(tenant) },
-      { text: t("actions.edit"), path: edit_admin_tenant_path(tenant) },
-      {
+    actions = []
+
+    if can?(:read, tenant)
+      actions << { text: t("actions.view"), path: admin_tenant_path(tenant) }
+    end
+
+    if can?(:update, tenant)
+      actions << { text: t("actions.edit"), path: edit_admin_tenant_path(tenant) }
+    end
+
+    if can?(:destroy, tenant)
+      actions << {
         text: t("actions.delete"),
         path: admin_tenant_path(tenant),
         data: { turbo_method: :delete, turbo_confirm: t("actions.confirm_deletion", name: tenant[:name]) }
       }
-    ]
+    end
+
+    actions
   end
 %>
 

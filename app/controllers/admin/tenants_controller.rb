@@ -1,5 +1,10 @@
 class Admin::TenantsController < Admin::BaseController
   before_action :set_tenant, only: %i[show edit update destroy]
+  before_action :authorize_tenants_index!, only: %i[index]
+  before_action :authorize_tenant_create!, only: %i[new create]
+  before_action :authorize_tenant_read!, only: %i[show]
+  before_action :authorize_tenant_update!, only: %i[edit update]
+  before_action :authorize_tenant_destroy!, only: %i[destroy]
 
   def show
     tenant_service = Admin::TenantsServices.new(:show, { slug: params[:id] })
@@ -119,5 +124,25 @@ class Admin::TenantsController < Admin::BaseController
 
   def tenant_params
     params.require(:tenant).permit(:name, :description, :header_text, :subheader_text, :logo_url, :logo_asset)
+  end
+
+  def authorize_tenants_index!
+    authorize! :read, Tenant
+  end
+
+  def authorize_tenant_create!
+    authorize! :create, Tenant
+  end
+
+  def authorize_tenant_read!
+    authorize! :read, @tenant
+  end
+
+  def authorize_tenant_update!
+    authorize! :update, @tenant
+  end
+
+  def authorize_tenant_destroy!
+    authorize! :destroy, @tenant
   end
 end

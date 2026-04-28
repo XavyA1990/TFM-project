@@ -1,9 +1,12 @@
 <%
-  header_actions = capture do
-    render "shared/atoms/button_link",
-      text: t("admin_tenants.tenants.edit.title"),
-      path: edit_admin_tenants_tenant_path(tenant_slug: @tenant.slug)
-  end
+  header_actions =
+    if can?(:update, @tenant)
+      capture do
+        render "shared/atoms/button_link",
+          text: t("admin_tenants.tenants.edit.title"),
+          path: edit_admin_tenants_tenant_path(tenant_slug: @tenant.slug)
+      end
+    end
 %>
 
 <%= render "shared/organisms/resource_show",

@@ -1,5 +1,7 @@
 class AdminTenants::UsersController < AdminTenants::BaseController
   before_action :set_user, only: %i[show]
+  before_action :authorize_users_index!, only: %i[index]
+  before_action :authorize_user_show!, only: %i[show]
 
   def index
     users_index_data = AdminTenants::UsersServices.new(:index, { page: params[:page], tenant: current_tenant }).call
@@ -33,5 +35,13 @@ class AdminTenants::UsersController < AdminTenants::BaseController
 
   def set_user
     @user = AdminTenants::UsersServices.new(:get, { slug: params[:id], tenant: current_tenant }).call
+  end
+
+  def authorize_users_index!
+    authorize! :read, User
+  end
+
+  def authorize_user_show!
+    authorize! :read, @user
   end
 end

@@ -1,4 +1,6 @@
 class Admin::RoleAssignmentsController < Admin::BaseController
+  before_action :authorize_role_assignment!
+
   def create
     result = Admin::RoleAssignmentsServices.new(
       :toggle,
@@ -36,5 +38,9 @@ class Admin::RoleAssignmentsController < Admin::BaseController
     else
       t("admin.users.show.role_added", role: result[:role].name, tenant: result[:tenant].name)
     end
+  end
+
+  def authorize_role_assignment!
+    authorize! :assign, Role
   end
 end

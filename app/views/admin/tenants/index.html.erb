@@ -1,7 +1,10 @@
 <%
-  header_actions = capture do
-    render "shared/atoms/button_link", text: t("admin.tenants.new.label"), path: new_admin_tenant_path
-  end
+  header_actions =
+    if can?(:create, Tenant)
+      capture do
+        render "shared/atoms/button_link", text: t("admin.tenants.new.label"), path: new_admin_tenant_path
+      end
+    end
 %>
 
 <%= render "shared/molecules/page_header",

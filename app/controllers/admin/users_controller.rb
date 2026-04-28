@@ -1,5 +1,7 @@
 class Admin::UsersController < Admin::BaseController
   before_action :set_user, only: %i[show]
+  before_action :authorize_users_index!, only: %i[index]
+  before_action :authorize_user_show!, only: %i[show]
 
   def index
     users_index_data = Admin::UsersServices.new(:index, { page: params[:page] }).call
@@ -35,5 +37,13 @@ class Admin::UsersController < Admin::BaseController
 
   def set_user
     @user = Admin::UsersServices.new(:get, { slug: params[:id] }).call
+  end
+
+  def authorize_users_index!
+    authorize! :read, User
+  end
+
+  def authorize_user_show!
+    authorize! :read, @user
   end
 end

@@ -106,4 +106,41 @@ RSpec.describe User, type: :model do
       expect(persisted_user.permissions_for(tenant)).to eq([])
     end
   end
+
+  describe "#can_access_dashboard_for?" do
+    it "returns true when the user has any non-customer role in the tenant" do
+      persisted_user = create(:user)
+      tenant = create(:tenant)
+      membership = create(:users_tenant, user: persisted_user, tenant: tenant)
+      create(:user_tenant_role, users_tenant: membership, role: create(:role, name: "customer"), scope_type: :selected_courses)
+      create(:user_tenant_role, users_tenant: membership, role: create(:role, name: "supervisor"), scope_type: :tenant)
+
+      expect(persisted_user.can_access_dashboard_for?(tenant)).to be(true)
+    end
+
+    it "returns false when the user only has the customer role in the tenant" do
+      persisted_user = create(:user)
+      tenant = create(:tenant)
+      membership = create(:users_tenant, user: persisted_user, tenant: tenant)
+      create(:user_tenant_role, users_tenant: membership, role: create(:role, name: "customer"), scope_type: :selected_courses)
+
+      expect(persisted_user.can_access_dashboard_for?(tenant)).to be(false)
+    end
+  end
+
+  describe "#dashboard_accessible_tenants" do
+    it "includes only tenants where the user has at least one non-customer role" do
+      persisted_user = create(:user)
+      customer_only_tenant = create(:tenant, name: "Customer Tenant")
+      admin_tenant = create(:tenant, name: "Admin Tenant")
+
+      customer_membership = create(:users_tenant, user: persisted_user, tenant: customer_only_tenant)
+      admin_membership = create(:users_tenant, user: persisted_user, tenant: admin_tenant)
+
+      create(:user_tenant_role, users_tenant: customer_membership, role: create(:role, name: "customer"), scope_type: :selected_courses)
+      create(:user_tenant_role, users_tenant: admin_membership, role: create(:role, name: "platform_admin"), scope_type: :tenant)
+
+      expect(persisted_user.dashboard_accessible_tenants).to contain_exactly(admin_tenant)
+    end
+  end
 end

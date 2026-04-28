@@ -1,7 +1,7 @@
 <%
   user_path_builder = local_assigns.fetch(:user_path_builder, ->(user) { admin_user_path(user[:slug]) })
   user_actions_builder = lambda do |user|
-    [{ text: t("actions.view"), path: user_path_builder.call(user) }]
+    can?(:read, User) ? [{ text: t("actions.view"), path: user_path_builder.call(user) }] : []
   end
 %>
 

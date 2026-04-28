@@ -1,5 +1,7 @@
 class AdminTenants::TenantsController < AdminTenants::BaseController
   before_action :set_tenant
+  before_action :authorize_tenant_read!, only: %i[show]
+  before_action :authorize_tenant_update!, only: %i[edit update]
 
   def show
     @tenant_details = AdminTenants::TenantsServices.new(:show, { tenant: @tenant }).call
@@ -71,5 +73,13 @@ class AdminTenants::TenantsController < AdminTenants::BaseController
 
   def tenant_params
     params.require(:tenant).permit(:name, :description, :header_text, :subheader_text, :logo_url, :logo_asset)
+  end
+
+  def authorize_tenant_read!
+    authorize! :read, @tenant
+  end
+
+  def authorize_tenant_update!
+    authorize! :update, @tenant
   end
 end

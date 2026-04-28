@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  CUSTOMER_ROLE_NAME = "customer".freeze
+
   extend FriendlyId
   friendly_id :username, use: :slugged
   # Include default devise modules. Others available are:
@@ -53,19 +55,33 @@ class User < ApplicationRecord
   end
 
   def has_access_to_dashboard?
-    users_tenants.joins(:roles).where(roles: { name: %w[platform_admin course_admin supervisor] }).exists?
+    dashboard_accessible_tenants.exists?
+  end
+
+  def can_access_dashboard_for?(tenant)
+    membership = membership_for(tenant)
+    return false unless membership.present?
+
+    membership.roles.any? { |role| role.name != CUSTOMER_ROLE_NAME }
+  end
+
+  def dashboard_accessible_tenants
+    return Tenant.none unless persisted?
+
+    tenants.joins(users_tenants: :roles)
+      .where(users_tenants: { user_id: id })
+      .where.not(roles: { name: CUSTOMER_ROLE_NAME })
+      .distinct
+      .order(:name)
   end
 
   def get_tenants_dashboard_access_paths
-    tenants.joins(:users_tenants => :roles)
-      .where(roles: { name: %w[platform_admin course_admin supervisor] })
-      .distinct
-      .map do |tenant|
-        {
-          name: tenant.name,
-          path: Rails.application.routes.url_helpers.admin_tenants_tenant_path({tenant_slug: tenant.slug})
-        }
-      end
+    dashboard_accessible_tenants.map do |tenant|
+      {
+        name: tenant.name,
+        path: Rails.application.routes.url_helpers.admin_tenants_tenant_path({ tenant_slug: tenant.slug })
+      }
+    end
   end
 
   def self.table_columns
