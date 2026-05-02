@@ -1,0 +1,23 @@
+<% breadcrumbs(
+  { label: t("admin_tenants.tenants.show.title"), path: admin_tenants_tenant_path(tenant_slug: current_tenant.slug) },
+  { label: t("admin_tenants.courses.index.title"), path: admin_tenants_courses_path(tenant_slug: current_tenant.slug) },
+  { label: @course.title }
+) %>
+
+<%= render "shared/organisms/resource_show",
+  title: t(".title"),
+  description: t(".description"),
+  details: @course_details,
+  page_header_options: {
+    wrapper_class: "mx-auto max-w-7xl px-4 sm:px-6 lg:px-8",
+    inner_class: "sm:flex sm:items-center",
+    content_class: "sm:flex-auto",
+    actions_wrapper_class: "mt-4 sm:mt-0 sm:ml-16 sm:flex-none",
+    title_tag: :h1,
+    title_class: "text-base font-semibold text-gray-900 dark:text-white",
+    description_class: "mt-2 text-sm text-gray-700 dark:text-gray-300"
+  },
+  extra_partial: "admin_tenants/courses/course_modules",
+  extra_locals: {
+    course_modules: @course_modules
+  } %>

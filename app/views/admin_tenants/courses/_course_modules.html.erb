@@ -1,0 +1,88 @@
+<section class="mt-10">
+  <%= render "shared/molecules/page_header",
+    title: t("admin_tenants.courses.show.modules_title"),
+    description: t("admin_tenants.courses.show.modules_description"),
+    inner_class: "flex items-end justify-between gap-4 border-b border-gray-200 pb-4 dark:border-white/10",
+    title_tag: :h2,
+    title_class: "text-lg font-semibold tracking-tight text-gray-900 dark:text-gray-100",
+    description_class: "mt-1 text-sm text-gray-600 dark:text-gray-400" %>
+
+  <% if course_modules.any? %>
+    <div class="mt-6 grid gap-6">
+      <% course_modules.each do |course_module| %>
+        <article class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
+                <%= t("admin_tenants.courses.show.module_position", position: course_module[:position]) %>
+              </p>
+              <h3 class="mt-1 text-base font-semibold text-gray-900 dark:text-gray-100"><%= course_module[:title] %></h3>
+            </div>
+
+            <span class="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-800 ring-1 ring-inset ring-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-400/30">
+              <%= course_module[:status] %>
+            </span>
+          </div>
+
+          <%= render "shared/molecules/detail_list", items: [
+            [CourseModule.human_attribute_name(:description), course_module[:description]],
+            [CourseModule.human_attribute_name(:created_at), course_module[:created_at]],
+            [CourseModule.human_attribute_name(:updated_at), course_module[:updated_at]]
+          ] %>
+
+          <section class="mt-8">
+            <%= render "shared/molecules/page_header",
+              title: t("admin_tenants.courses.show.lessons_title"),
+              description: t("admin_tenants.courses.show.lessons_description"),
+              inner_class: "flex items-end justify-between gap-4 border-b border-gray-200 pb-4 dark:border-white/10",
+              title_tag: :h3,
+              title_class: "text-base font-semibold text-gray-900 dark:text-gray-100",
+              description_class: "mt-1 text-sm text-gray-600 dark:text-gray-400" %>
+
+            <% if course_module[:lessons].any? %>
+              <div class="mt-4 grid gap-4">
+                <% course_module[:lessons].each do |lesson| %>
+                  <article class="rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-white/10 dark:bg-white/5">
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                      <div>
+                        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
+                          <%= t("admin_tenants.courses.show.lesson_position", position: lesson[:position]) %>
+                        </p>
+                        <h4 class="mt-1 text-sm font-semibold text-gray-900 dark:text-gray-100"><%= lesson[:title] %></h4>
+                      </div>
+
+                      <div class="flex flex-wrap gap-2">
+                        <span class="inline-flex items-center rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold text-sky-800 ring-1 ring-inset ring-sky-200 dark:bg-sky-500/15 dark:text-sky-300 dark:ring-sky-400/30">
+                          <%= lesson[:lesson_type] %>
+                        </span>
+                        <span class="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800 ring-1 ring-inset ring-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-400/30">
+                          <%= lesson[:status] %>
+                        </span>
+                      </div>
+                    </div>
+
+                    <%= render "shared/molecules/detail_list", items: [
+                      [Lesson.human_attribute_name(:description), lesson[:description]],
+                      [Lesson.human_attribute_name(:body), lesson[:body]],
+                      [Lesson.human_attribute_name(:content_url), lesson[:content_reference]],
+                      [Lesson.human_attribute_name(:created_at), lesson[:created_at]],
+                      [Lesson.human_attribute_name(:updated_at), lesson[:updated_at]]
+                    ] %>
+                  </article>
+                <% end %>
+              </div>
+            <% else %>
+              <div class="mt-4 rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-6 text-sm text-gray-600 dark:border-white/10 dark:bg-white/5 dark:text-gray-300">
+                <%= t("admin_tenants.courses.show.empty_lessons") %>
+              </div>
+            <% end %>
+          </section>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="mt-6 rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-6 text-sm text-gray-600 dark:border-white/10 dark:bg-white/5 dark:text-gray-300">
+      <%= t("admin_tenants.courses.show.empty_modules") %>
+    </div>
+  <% end %>
+</section>

@@ -93,7 +93,19 @@ en:
         updated_at: "Updated at"
       course:
         title: "Title"
+        short_description: "Short description"
+        description: "Description"
         status: "Status"
+        created_at: "Created at"
+        updated_at: "Updated at"
+      course_module:
+        description: "Description"
+        created_at: "Created at"
+        updated_at: "Updated at"
+      lesson:
+        description: "Description"
+        body: "Text content"
+        content_url: "Content reference"
         created_at: "Created at"
         updated_at: "Updated at"
   devise_views:
@@ -251,6 +263,20 @@ en:
       index:
         title: "Courses"
         description: "Manage courses for the current tenant."
+      show:
+        title: "Course details"
+        description: "Details of the selected course in the current tenant."
+        module_count: "Module count"
+        lesson_count: "Lesson count"
+        modules_title: "Modules"
+        modules_description: "Modules and lessons that belong to this course."
+        module_position: "Module %{position}"
+        lessons_title: "Lessons"
+        lessons_description: "Lessons configured inside this module."
+        lesson_position: "Lesson %{position}"
+        empty_modules: "This course does not have modules yet."
+        empty_lessons: "This module does not have lessons yet."
+        text_content_available: "Text content available"
     tenants:
       show:
         title: "Tenant administration"

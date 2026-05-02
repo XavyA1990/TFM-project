@@ -71,7 +71,19 @@ es:
         updated_at: "Actualizado el"
       course:
         title: "Título"
+        short_description: "Descripción corta"
+        description: "Descripción"
         status: "Estado"
+        created_at: "Creado el"
+        updated_at: "Actualizado el"
+      course_module:
+        description: "Descripción"
+        created_at: "Creado el"
+        updated_at: "Actualizado el"
+      lesson:
+        description: "Descripción"
+        body: "Contenido de texto"
+        content_url: "Referencia de contenido"
         created_at: "Creado el"
         updated_at: "Actualizado el"
   devise_views:
@@ -234,6 +246,20 @@ es:
       index:
         title: "Cursos"
         description: "Gestiona los cursos del tenant actual."
+      show:
+        title: "Detalle del curso"
+        description: "Detalles del curso seleccionado en el tenant actual."
+        module_count: "Cantidad de módulos"
+        lesson_count: "Cantidad de lecciones"
+        modules_title: "Módulos"
+        modules_description: "Módulos y lecciones que pertenecen a este curso."
+        module_position: "Módulo %{position}"
+        lessons_title: "Lecciones"
+        lessons_description: "Lecciones configuradas dentro de este módulo."
+        lesson_position: "Lección %{position}"
+        empty_modules: "Este curso todavía no tiene módulos."
+        empty_lessons: "Este módulo todavía no tiene lecciones."
+        text_content_available: "Contenido de texto disponible"
     tenants:
       show:
         title: "Administración del tenant"

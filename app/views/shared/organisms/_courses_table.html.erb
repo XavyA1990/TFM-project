@@ -1,5 +1,6 @@
 <%
   disabled_action_class = "pointer-events-none cursor-not-allowed opacity-50"
+  course_path_builder = local_assigns.fetch(:course_path_builder, ->(course) { admin_tenants_course_path(tenant_slug: current_tenant.slug, id: course[:slug]) })
 
   course_actions_builder = lambda do |course|
     actions = []
@@ -7,9 +8,7 @@
     if can?(:read, Course)
       actions << {
         text: t("actions.view"),
-        path: "#",
-        class_name: disabled_action_class,
-        data: { turbo: false }
+        path: course_path_builder.call(course)
       }
     end
 
