@@ -170,6 +170,32 @@ es:
     admin: "Administración"
     profile: "Perfil"
     dashboard: "Tablero de control"
+    courses: "Cursos"
+  courses:
+    index:
+      title: "Cursos Publicados"
+      description: "Explora el catálogo publicado disponible en %{tenant}."
+      search:
+        label: "Buscar cursos"
+        description: "Busca por título del curso o descripción dentro de este tenant."
+        placeholder: "Buscar cursos publicados"
+        submit: "Buscar"
+        reset: "Restablecer"
+      filters:
+        title: "Filtros"
+        description: "Elige cómo se deben ordenar los cursos publicados."
+        sort_label: "Ordenar por"
+        apply: "Aplicar filtros"
+      results:
+        title: "Resultados del catálogo"
+        description: "%{count} cursos publicados encontrados"
+      empty_title: "No hay cursos que coincidan con tu búsqueda"
+      empty_description: "Prueba ajustando el texto buscado o limpiando alguno de los filtros."
+      sort_options:
+        newest: "Más recientes primero"
+        oldest: "Más antiguos primero"
+        title_asc: "Título A-Z"
+        title_desc: "Título Z-A"
   shared:
     asset_uploader:
       drop_title: "Arrastra tu archivo aquí"

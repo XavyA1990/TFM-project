@@ -2,6 +2,20 @@
   data-controller="disclosure"
   class="relative z-30 bg-gray-800 dark:bg-gray-800 dark:after:pointer-events-none dark:after:absolute dark:after:inset-x-0 dark:after:bottom-0 dark:after:h-px dark:after:bg-white/10"
 >
+  <%
+    nav_links =
+      if current_tenant_for_ability.present?
+        [
+          {
+            text: t("navbar.courses"),
+            path: tenant_courses_path(tenant_slug: current_tenant_for_ability.slug),
+            active: controller_path == "courses"
+          }
+        ]
+      else
+        []
+      end
+  %>
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-16 items-center justify-between">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -55,6 +69,12 @@
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
+            <% nav_links.each do |link| %>
+              <%= link_to link[:text], link[:path], class: [
+                "rounded-md px-3 py-2 text-sm font-medium transition",
+                (link[:active] ? "bg-white/10 text-white" : "text-gray-300 hover:bg-white/5 hover:text-white")
+              ].join(" ") %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -93,6 +113,12 @@
     class="hidden sm:hidden"
   >
     <div class="space-y-1 px-2 pt-2 pb-3">
+      <% nav_links.each do |link| %>
+        <%= link_to link[:text], link[:path], class: [
+          "block rounded-md px-3 py-2 text-base font-medium transition",
+          (link[:active] ? "bg-white/10 text-white" : "text-gray-300 hover:bg-white/5 hover:text-white")
+        ].join(" ") %>
+      <% end %>
     </div>
   </div>
 </nav>

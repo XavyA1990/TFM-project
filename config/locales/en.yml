@@ -187,6 +187,32 @@ en:
     admin: "Admin"
     profile: "Profile"
     dashboard: "Dashboard"
+    courses: "Courses"
+  courses:
+    index:
+      title: "Published Courses"
+      description: "Explore the published catalog available in %{tenant}."
+      search:
+        label: "Search courses"
+        description: "Search by course title or description within this tenant."
+        placeholder: "Search published courses"
+        submit: "Search"
+        reset: "Reset"
+      filters:
+        title: "Filters"
+        description: "Choose how the published courses should be ordered."
+        sort_label: "Sort by"
+        apply: "Apply filters"
+      results:
+        title: "Catalog Results"
+        description: "%{count} published courses found"
+      empty_title: "No courses matched your search"
+      empty_description: "Try adjusting your search terms or clearing one of the filters."
+      sort_options:
+        newest: "Newest first"
+        oldest: "Oldest first"
+        title_asc: "Title A-Z"
+        title_desc: "Title Z-A"
   shared:
     asset_uploader:
       drop_title: "Drag your file here"

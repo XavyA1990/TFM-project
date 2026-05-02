@@ -1,6 +1,9 @@
 <%
   course = local_assigns.fetch(:course)
   carousel = local_assigns.fetch(:carousel, false)
+  tenant_name = local_assigns[:tenant_name]
+  path = local_assigns[:path]
+  cta_text = local_assigns[:cta_text]
   article_class = [
     "overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-2xl shadow-black/20 backdrop-blur",
     ("min-w-[85%] snap-start sm:min-w-[28rem] lg:min-w-[32rem]" if carousel)
@@ -22,7 +25,19 @@
   </div>
 
   <div class="p-6">
+    <% if tenant_name.present? %>
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sky-300"><%= tenant_name %></p>
+    <% end %>
     <h3 class="text-xl font-bold text-white"><%= course[:title] %></h3>
     <p class="mt-3 text-sm leading-6 text-gray-300"><%= description %></p>
+    <% if path.present? && cta_text.present? %>
+      <div class="mt-5">
+        <%= render "shared/atoms/text_link",
+          text: cta_text,
+          path: path,
+          class_name: "text-sm font-semibold",
+          base_class: "text-sky-300 hover:text-sky-200" %>
+      </div>
+    <% end %>
   </div>
 </article>
