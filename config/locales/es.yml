@@ -79,7 +79,11 @@ es:
         created_at: "Creado el"
         updated_at: "Actualizado el"
       course_module:
+        title: "Título"
         description: "Descripción"
+        status: "Estado"
+        position: "Posición"
+        module_cover_image_asset: "Portada"
         created_at: "Creado el"
         updated_at: "Actualizado el"
       lesson:
@@ -244,6 +248,18 @@ es:
         customer_role_required: "El usuario debe conservar al menos el rol customer en %{tenant}."
         no_roles_assigned: "Sin roles asignados"
   admin_tenants:
+    course_modules:
+      destroyed: "El módulo fue eliminado exitosamente."
+      form:
+        asset_title: "Contenido del módulo"
+        asset_description: "Carga una imagen de portada para este módulo."
+      new:
+        title: "Nuevo módulo"
+        description: "Agrega un módulo al curso seleccionado."
+        label: "Agregar módulo"
+      edit:
+        title: "Editar módulo"
+        description: "Actualiza el módulo seleccionado."
     courses:
       destroyed: "El curso fue eliminado exitosamente."
       new:

@@ -2,23 +2,33 @@
   header_actions = capture do
     action_buttons = []
 
+    if can?(:create, @course)
+      action_buttons << render(
+        "shared/atoms/button_link",
+        text: t("admin_tenants.course_modules.new.label"),
+        path: new_admin_tenants_course_course_module_path(tenant_slug: current_tenant.slug, course_id: @course.slug)
+      )
+    end
+
     if can?(:update, @course)
       action_buttons << render(
         "shared/atoms/button_link",
         text: t("admin_tenants.courses.edit.title"),
-        path: edit_admin_tenants_course_path(tenant_slug: current_tenant.slug, id: @course.slug)
+        path: edit_admin_tenants_course_path(tenant_slug: current_tenant.slug, id: @course.slug),
+        variant: :secondary
       )
     end
 
     if can?(:destroy, @course)
       action_buttons << render(
-        "shared/atoms/button_link",
+        "shared/atoms/text_link",
         text: t("actions.delete"),
         path: admin_tenants_course_path(tenant_slug: current_tenant.slug, id: @course.slug),
         data: {
           turbo_method: :delete,
           turbo_confirm: t("actions.confirm_deletion", name: @course.title)
-        }
+        },
+        class_name: "text-sm font-semibold text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300"
       )
     end
 
@@ -52,5 +62,6 @@
   },
   extra_partial: "admin_tenants/courses/course_modules",
   extra_locals: {
+    course: @course,
     course_modules: @course_modules
   } %>

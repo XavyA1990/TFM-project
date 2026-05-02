@@ -1,0 +1,16 @@
+<% breadcrumbs(
+  { label: t("admin_tenants.tenants.show.title"), path: admin_tenants_tenant_path(tenant_slug: current_tenant.slug) },
+  { label: t("admin_tenants.courses.index.title"), path: admin_tenants_courses_path(tenant_slug: current_tenant.slug) },
+  { label: @course.title, path: admin_tenants_course_path(tenant_slug: current_tenant.slug, id: @course.slug) },
+  { label: @course_module.title },
+  { label: t("admin_tenants.course_modules.edit.title") }
+) %>
+
+<%= render "shared/molecules/page_header", title: t(".title"), description: t(".description") %>
+
+<%= render "form",
+  course_module: @course_module,
+  url: admin_tenants_course_course_module_path(tenant_slug: current_tenant.slug, course_id: @course.slug, id: @course_module.slug),
+  description: t(".description"),
+  submit_label: t("update"),
+  back_path: admin_tenants_course_path(tenant_slug: current_tenant.slug, id: @course.slug) %>

@@ -20,7 +20,9 @@ Rails.application.routes.draw do
 
       namespace :admin_tenants do
         resource :tenant, only: [:show, :edit, :update]
-        resources :courses
+        resources :courses do
+          resources :course_modules, except: [:index, :show]
+        end
         resources :users, only: [:index, :show] do
           resources :role_assignments, only: [:create], controller: "role_assignments"
         end

@@ -11,52 +11,81 @@
     <div class="mt-6 grid gap-6">
       <% course_modules.each do |course_module| %>
         <article class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5" data-controller="disclosure">
-          <button
-            type="button"
-            data-action="click->disclosure#toggle"
-            data-disclosure-target="button"
-            aria-expanded="false"
-            class="flex w-full items-start justify-between gap-4 text-left hover:cursor-pointer"
-          >
-            <div class="min-w-0 flex-1">
-              <div>
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <button
+              type="button"
+              data-action="click->disclosure#toggle"
+              data-disclosure-target="button"
+              aria-expanded="false"
+              class="flex min-w-0 flex-1 items-start justify-between gap-4 text-left hover:cursor-pointer"
+            >
+              <div class="min-w-0 flex-1">
                 <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
                   <%= t("admin_tenants.courses.show.module_position", position: course_module[:position] + 1) %>
                 </p>
                 <h3 class="mt-1 text-base font-semibold text-gray-900 dark:text-gray-100"><%= course_module[:title] %></h3>
               </div>
-            </div>
 
-            <div class="flex shrink-0 items-center gap-3">
+              <div class="ml-3 shrink-0">
+                <svg
+                  data-disclosure-target="openIcon"
+                  class="size-5 text-gray-400 dark:text-gray-500"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                </svg>
+
+                <svg
+                  data-disclosure-target="closeIcon"
+                  class="hidden size-5 text-gray-400 dark:text-gray-500"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.83l-3.71 3.94a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd" />
+                </svg>
+              </div>
+            </button>
+
+            <div class="flex shrink-0 flex-wrap items-center gap-3 sm:pl-4">
               <span class="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-800 ring-1 ring-inset ring-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-400/30">
                 <%= course_module[:status] %>
               </span>
 
-              <svg
-                data-disclosure-target="openIcon"
-                class="size-5 text-gray-400 dark:text-gray-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-              </svg>
+              <% if can?(:update, course) %>
+                <%= render "shared/atoms/text_link",
+                  text: t("actions.edit"),
+                  path: edit_admin_tenants_course_course_module_path(
+                    tenant_slug: current_tenant.slug,
+                    course_id: course.slug,
+                    id: course_module[:slug]
+                  ),
+                  class_name: "text-sm font-semibold" %>
+              <% end %>
 
-              <svg
-                data-disclosure-target="closeIcon"
-                class="hidden size-5 text-gray-400 dark:text-gray-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.83l-3.71 3.94a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd" />
-              </svg>
+              <% if can?(:destroy, course) %>
+                <%= render "shared/atoms/text_link",
+                  text: t("actions.delete"),
+                  path: admin_tenants_course_course_module_path(
+                    tenant_slug: current_tenant.slug,
+                    course_id: course.slug,
+                    id: course_module[:slug]
+                  ),
+                  class_name: "text-sm font-semibold text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300",
+                  data: {
+                    turbo_method: :delete,
+                    turbo_confirm: t("actions.confirm_deletion", name: course_module[:title])
+                  } %>
+              <% end %>
             </div>
-          </button>
+          </div>
 
           <div data-disclosure-target="panel" class="hidden pt-4">
             <%= render "shared/molecules/detail_list", items: [
               [CourseModule.human_attribute_name(:description), course_module[:description]],
+              [CourseModule.human_attribute_name(:module_cover_image_asset), course_module[:module_cover_image]],
               [CourseModule.human_attribute_name(:created_at), course_module[:created_at]],
               [CourseModule.human_attribute_name(:updated_at), course_module[:updated_at]]
             ] %>
@@ -100,14 +129,14 @@
                         [Lesson.human_attribute_name(:updated_at), lesson[:updated_at]]
                       ] %>
                     </article>
-                <% end %>
-              </div>
-            <% else %>
-              <div class="mt-4 rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-6 text-sm text-gray-600 dark:border-white/10 dark:bg-white/5 dark:text-gray-300">
-                <%= t("admin_tenants.courses.show.empty_lessons") %>
-              </div>
-            <% end %>
-          </section>
+                  <% end %>
+                </div>
+              <% else %>
+                <div class="mt-4 rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-6 text-sm text-gray-600 dark:border-white/10 dark:bg-white/5 dark:text-gray-300">
+                  <%= t("admin_tenants.courses.show.empty_lessons") %>
+                </div>
+              <% end %>
+            </section>
           </div>
         </article>
       <% end %>

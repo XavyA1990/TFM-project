@@ -63,10 +63,12 @@ module AdminTenants
         ],
         course_modules: sorted_modules.map do |course_module|
           {
+            slug: course_module.slug,
             title: course_module.title,
             description: course_module.description,
             status: course_module.status.humanize,
             position: course_module.position,
+            module_cover_image: course_module.module_cover_image_asset.attached? ? course_module.module_cover_image_asset.filename.to_s : nil,
             created_at: course_module.created_at ? I18n.l(course_module.created_at) : nil,
             updated_at: course_module.updated_at ? I18n.l(course_module.updated_at) : nil,
             lessons: sorted_lessons(course_module).map do |lesson|

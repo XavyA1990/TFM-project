@@ -101,7 +101,11 @@ en:
         created_at: "Created at"
         updated_at: "Updated at"
       course_module:
+        title: "Title"
         description: "Description"
+        status: "Status"
+        position: "Position"
+        module_cover_image_asset: "Cover image"
         created_at: "Created at"
         updated_at: "Updated at"
       lesson:
@@ -261,6 +265,18 @@ en:
         customer_role_required: "The user must keep at least the customer role in %{tenant}."
         no_roles_assigned: "No roles assigned"
   admin_tenants:
+    course_modules:
+      destroyed: "Module was successfully deleted."
+      form:
+        asset_title: "Module content"
+        asset_description: "Upload a cover image for this module."
+      new:
+        title: "New module"
+        description: "Add a module to the selected course."
+        label: "Add module"
+      edit:
+        title: "Edit module"
+        description: "Update the selected module."
     courses:
       destroyed: "Course was successfully deleted."
       new:
