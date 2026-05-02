@@ -26,6 +26,7 @@ es:
     next: "Siguiente"
     page: "Página %{current} de %{total}"
     resources:
+      courses: "cursos"
       users: "usuarios"
       tenants: "tenants"
   time:
@@ -66,6 +67,11 @@ es:
         subheader_text: "Texto del subencabezado"
         logo_asset: "Logo"
         logo_url: "URL del logo"
+        created_at: "Creado el"
+        updated_at: "Actualizado el"
+      course:
+        title: "Título"
+        status: "Estado"
         created_at: "Creado el"
         updated_at: "Actualizado el"
   devise_views:
@@ -224,6 +230,10 @@ es:
         customer_role_required: "El usuario debe conservar al menos el rol customer en %{tenant}."
         no_roles_assigned: "Sin roles asignados"
   admin_tenants:
+    courses:
+      index:
+        title: "Cursos"
+        description: "Gestiona los cursos del tenant actual."
     tenants:
       show:
         title: "Administración del tenant"

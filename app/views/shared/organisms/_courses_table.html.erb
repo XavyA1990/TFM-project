@@ -1,0 +1,47 @@
+<%
+  disabled_action_class = "pointer-events-none cursor-not-allowed opacity-50"
+
+  course_actions_builder = lambda do |course|
+    actions = []
+
+    if can?(:read, Course)
+      actions << {
+        text: t("actions.view"),
+        path: "#",
+        class_name: disabled_action_class,
+        data: { turbo: false }
+      }
+    end
+
+    if can?(:update, Course)
+      actions << {
+        text: t("actions.edit"),
+        path: "#",
+        class_name: disabled_action_class,
+        data: { turbo: false }
+      }
+    end
+
+    if can?(:destroy, Course)
+      actions << {
+        text: t("actions.delete"),
+        path: "#",
+        class_name: disabled_action_class,
+        data: { turbo: false }
+      }
+    end
+
+    actions
+  end
+%>
+
+<%= render "shared/organisms/resource_table",
+  records: courses,
+  headers: headers,
+  columns: columns,
+  mobile_title_builder: ->(course) { course[:title] },
+  mobile_subtitle_builder: ->(course) { course[:status] },
+  record_name_builder: ->(course) { course[:title] },
+  skip_mobile_columns: %i[title status],
+  action_column_count: 3,
+  actions_builder: course_actions_builder %>

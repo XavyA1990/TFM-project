@@ -22,6 +22,10 @@ class Course < ApplicationRecord
     nil
   end
 
+  def self.table_columns
+    %i[title status created_at updated_at]
+  end
+
   private
 
   def should_generate_new_friendly_id?

@@ -55,6 +55,7 @@ en:
     next: "Next"
     page: "Page %{current} of %{total}"
     resources:
+      courses: "courses"
       users: "users"
       tenants: "tenants"
   actions:
@@ -88,6 +89,11 @@ en:
         subheader_text: "Subheader text"
         logo_asset: "Logo"
         logo_url: "Logo URL"
+        created_at: "Created at"
+        updated_at: "Updated at"
+      course:
+        title: "Title"
+        status: "Status"
         created_at: "Created at"
         updated_at: "Updated at"
   devise_views:
@@ -241,6 +247,10 @@ en:
         customer_role_required: "The user must keep at least the customer role in %{tenant}."
         no_roles_assigned: "No roles assigned"
   admin_tenants:
+    courses:
+      index:
+        title: "Courses"
+        description: "Manage courses for the current tenant."
     tenants:
       show:
         title: "Tenant administration"

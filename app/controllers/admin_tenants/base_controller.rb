@@ -46,6 +46,14 @@ class AdminTenants::BaseController < TenantsBaseController
       }
     end
 
+    if current_ability.can?(:read, Course)
+      primary_links << {
+        label: t("admin_tenants.courses.index.title"),
+        path: admin_tenants_courses_path(tenant_slug: current_tenant.slug),
+        active: controller_path == "admin_tenants/courses",
+      }
+    end
+
     if current_ability.can?(:update, current_tenant)
       primary_links << {
         label: t("admin_tenants.tenants.edit.title"),
