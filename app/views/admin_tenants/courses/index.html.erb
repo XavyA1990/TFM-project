@@ -1,3 +1,14 @@
+<%
+  header_actions =
+    if can?(:create, Course)
+      capture do
+        render "shared/atoms/button_link",
+          text: t("admin_tenants.courses.new.label"),
+          path: new_admin_tenants_course_path(tenant_slug: current_tenant.slug)
+      end
+    end
+%>
+
 <% breadcrumbs(
   { label: t("admin_tenants.tenants.show.title"), path: admin_tenants_tenant_path(tenant_slug: current_tenant.slug) },
   { label: t("admin_tenants.courses.index.title") }
@@ -12,7 +23,8 @@
   actions_wrapper_class: "mt-4 sm:mt-0 sm:ml-16 sm:flex-none",
   title_tag: :h1,
   title_class: "text-base font-semibold text-gray-900 dark:text-white",
-  description_class: "mt-2 text-sm text-gray-700 dark:text-gray-300" %>
+  description_class: "mt-2 text-sm text-gray-700 dark:text-gray-300",
+  actions: header_actions %>
 
 <%= render "shared/organisms/courses_table",
   headers: @course_table_headers,

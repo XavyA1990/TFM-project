@@ -74,6 +74,8 @@ es:
         short_description: "Descripción corta"
         description: "Descripción"
         status: "Estado"
+        cover_image_url: "URL de la portada"
+        course_cover_image_asset: "Portada"
         created_at: "Creado el"
         updated_at: "Actualizado el"
       course_module:
@@ -243,6 +245,18 @@ es:
         no_roles_assigned: "Sin roles asignados"
   admin_tenants:
     courses:
+      destroyed: "El curso fue eliminado exitosamente."
+      new:
+        title: "Nuevo curso"
+        description: "Crea un curso para el tenant actual."
+        label: "Crear curso"
+        content_title: "Contenido del curso"
+        content_description: "Configura la portada del curso o una URL de respaldo."
+      edit:
+        title: "Editar curso"
+        description: "Actualiza el curso seleccionado en el tenant actual."
+        content_title: "Contenido del curso"
+        content_description: "Actualiza la portada del curso o su URL de respaldo."
       index:
         title: "Cursos"
         description: "Gestiona los cursos del tenant actual."

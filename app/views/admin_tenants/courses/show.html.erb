@@ -1,3 +1,35 @@
+<%
+  header_actions = capture do
+    action_buttons = []
+
+    if can?(:update, @course)
+      action_buttons << render(
+        "shared/atoms/button_link",
+        text: t("admin_tenants.courses.edit.title"),
+        path: edit_admin_tenants_course_path(tenant_slug: current_tenant.slug, id: @course.slug)
+      )
+    end
+
+    if can?(:destroy, @course)
+      action_buttons << render(
+        "shared/atoms/button_link",
+        text: t("actions.delete"),
+        path: admin_tenants_course_path(tenant_slug: current_tenant.slug, id: @course.slug),
+        data: {
+          turbo_method: :delete,
+          turbo_confirm: t("actions.confirm_deletion", name: @course.title)
+        }
+      )
+    end
+
+    concat(
+      content_tag(:div, class: "flex flex-wrap items-center gap-3") do
+        safe_join(action_buttons)
+      end
+    )
+  end
+%>
+
 <% breadcrumbs(
   { label: t("admin_tenants.tenants.show.title"), path: admin_tenants_tenant_path(tenant_slug: current_tenant.slug) },
   { label: t("admin_tenants.courses.index.title"), path: admin_tenants_courses_path(tenant_slug: current_tenant.slug) },
@@ -15,7 +47,8 @@
     actions_wrapper_class: "mt-4 sm:mt-0 sm:ml-16 sm:flex-none",
     title_tag: :h1,
     title_class: "text-base font-semibold text-gray-900 dark:text-white",
-    description_class: "mt-2 text-sm text-gray-700 dark:text-gray-300"
+    description_class: "mt-2 text-sm text-gray-700 dark:text-gray-300",
+    actions: header_actions
   },
   extra_partial: "admin_tenants/courses/course_modules",
   extra_locals: {

@@ -1,0 +1,18 @@
+<%
+  label_text = local_assigns.fetch(:label, field.to_s.humanize)
+  description = local_assigns[:description]
+  select_options = (local_assigns[:options] || {}).dup
+  input_html = (local_assigns[:input_html] || {}).dup
+  choices = local_assigns.fetch(:choices)
+  base_select_class = "block w-full appearance-none rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 [&>option]:bg-white [&>option]:text-gray-900 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:focus:outline-indigo-500 dark:[&>option]:bg-gray-900 dark:[&>option]:text-white"
+
+  input_html[:class] = [base_select_class, input_html[:class]].compact.join(" ")
+%>
+
+<div>
+  <%= form.label field, label_text, class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
+  <% if description.present? %>
+    <p class="text-sm/6 text-gray-500 dark:text-gray-400"><%= description %></p>
+  <% end %>
+  <%= form.select field, choices, select_options, input_html %>
+</div>

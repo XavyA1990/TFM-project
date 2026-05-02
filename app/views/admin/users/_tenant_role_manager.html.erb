@@ -68,14 +68,16 @@
 
               <div class="space-y-3">
                 <div>
-                  <%= form.label :role_token, role_select_label, class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
-                  <%= form.select :role_token,
-                    options_for_select(available_role_options, available_role_options.first&.last),
-                    {},
-                    class: "block w-full appearance-none rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 [&>option]:bg-white [&>option]:text-gray-900 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:focus:outline-indigo-500 dark:[&>option]:bg-gray-900 dark:[&>option]:text-white",
-                    data: {
-                      "role-assignment-toggle-target": "select",
-                      action: "change->role-assignment-toggle#update"
+                  <%= render "shared/molecules/select_field",
+                    form: form,
+                    field: :role_token,
+                    label: role_select_label,
+                    choices: options_for_select(available_role_options, available_role_options.first&.last),
+                    input_html: {
+                      data: {
+                        "role-assignment-toggle-target": "select",
+                        action: "change->role-assignment-toggle#update"
+                      }
                     } %>
                 </div>
 

@@ -7,13 +7,17 @@ module AdminTenants
       @params = params
       @repository = repository
       @tenant = params[:tenant]
-      @course = repository.find_by_slug_in_tenant(params[:slug], @tenant) if params[:slug].present?
+      @course = params[:course] || (repository.find_by_slug_in_tenant(params[:slug], @tenant) if params[:slug].present?)
     end
 
     def call
       return get_courses_for_index if @action == :index
       return get_course_for_show_page if @action == :show
       return get_course if @action == :get
+      return build_course if @action == :build
+      return create if @action == :create
+      return update if @action == :update
+      return destroy if @action == :destroy
 
       raise ArgumentError, "Invalid action"
     end
@@ -51,6 +55,7 @@ module AdminTenants
           [Course.human_attribute_name(:short_description), @course.short_description],
           [Course.human_attribute_name(:description), @course.description],
           [Course.human_attribute_name(:status), @course.status.humanize],
+          [Course.human_attribute_name(:course_cover_image_asset), course_cover_image_value],
           [I18n.t("admin_tenants.courses.show.module_count"), sorted_modules.size],
           [I18n.t("admin_tenants.courses.show.lesson_count"), sorted_modules.sum { |course_module| course_module.lessons.size }],
           [Course.human_attribute_name(:created_at), @course.created_at ? I18n.l(@course.created_at) : nil],
@@ -86,12 +91,34 @@ module AdminTenants
       @course
     end
 
+    def build_course
+      Course.new(tenant: @tenant, status: :draft)
+    end
+
+    def create
+      @repository.create(@params[:attributes].merge(tenant: @tenant))
+    end
+
+    def update
+      @repository.update(@course, @params[:attributes])
+    end
+
+    def destroy
+      @repository.destroy(@course)
+    end
+
     def sorted_modules
       @course.course_modules.sort_by(&:position)
     end
 
     def sorted_lessons(course_module)
       course_module.lessons.sort_by(&:position)
+    end
+
+    def course_cover_image_value
+      return @course.course_cover_image_asset.filename.to_s if @course.course_cover_image_asset.attached?
+
+      @course.cover_image_url
     end
   end
 end

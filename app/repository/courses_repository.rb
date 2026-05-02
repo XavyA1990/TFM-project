@@ -9,4 +9,17 @@ class CoursesRepository
       .friendly
       .find(slug)
   end
+
+  def self.create(params)
+    Course.create(params)
+  end
+
+  def self.update(course, params)
+    course.update(params)
+    course
+  end
+
+  def self.destroy(course)
+    course.destroy
+  end
 end

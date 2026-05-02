@@ -96,6 +96,8 @@ en:
         short_description: "Short description"
         description: "Description"
         status: "Status"
+        cover_image_url: "Cover image URL"
+        course_cover_image_asset: "Cover image"
         created_at: "Created at"
         updated_at: "Updated at"
       course_module:
@@ -260,6 +262,18 @@ en:
         no_roles_assigned: "No roles assigned"
   admin_tenants:
     courses:
+      destroyed: "Course was successfully deleted."
+      new:
+        title: "New course"
+        description: "Create a course for the current tenant."
+        label: "Create course"
+        content_title: "Course content"
+        content_description: "Configure the course cover image or a fallback URL."
+      edit:
+        title: "Edit course"
+        description: "Update the selected course in the current tenant."
+        content_title: "Course content"
+        content_description: "Update the course cover image or its fallback URL."
       index:
         title: "Courses"
         description: "Manage courses for the current tenant."
