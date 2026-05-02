@@ -85,7 +85,7 @@ ROLE_PERMISSION_MAP = {
     read_tenant update_tenant
     read_user create_user update_user
     read_role assign_role
-    read_permission
+    read_permission manage_course
     read_course read_report
   ],
   course_admin: %w[
@@ -110,6 +110,198 @@ TENANT_DEFINITIONS = [
   { name: "Globex Institute", slug: "globex-institute" },
   { name: "Initech Campus", slug: "initech-campus" },
   { name: "Umbrella Training", slug: "umbrella-training" }
+].freeze
+
+COURSE_DEFINITIONS = [
+  {
+    title: "Onboarding Fundamentals",
+    slug: "onboarding-fundamentals",
+    short_description: "Essential onboarding path for new participants.",
+    description: "A practical introduction to the platform, the learning flow, and the expectations for the first training cycle.",
+    status: "published",
+    modules: [
+      {
+        title: "Getting Started",
+        slug: "getting-started",
+        description: "Core orientation materials for first-time learners.",
+        position: 0,
+        status: "published",
+        lessons: [
+          {
+            title: "Welcome and Orientation",
+            slug: "welcome-and-orientation",
+            description: "Overview of the program and learning goals.",
+            lesson_type: "text",
+            status: "published",
+            position: 0,
+            body: "Welcome to the program. In this lesson we review the structure of the tenant portal, the expected progress, and the outcomes you should reach during the first week."
+          },
+          {
+            title: "Platform Walkthrough",
+            slug: "platform-walkthrough",
+            description: "Guided tour of the learning platform.",
+            lesson_type: "video",
+            status: "published",
+            position: 1,
+            content_url: "https://example.com/videos/platform-walkthrough"
+          },
+          {
+            title: "Quick Start Checklist",
+            slug: "quick-start-checklist",
+            description: "Reference checklist for the first login.",
+            lesson_type: "pdf",
+            status: "published",
+            position: 2,
+            content_url: "https://example.com/docs/quick-start-checklist.pdf"
+          }
+        ]
+      },
+      {
+        title: "Learning Guidelines",
+        slug: "learning-guidelines",
+        description: "Standards and best practices for successful course completion.",
+        position: 1,
+        status: "published",
+        lessons: [
+          {
+            title: "Participation Standards",
+            slug: "participation-standards",
+            description: "How learners are expected to engage with the course.",
+            lesson_type: "text",
+            status: "published",
+            position: 0,
+            body: "Complete every module in sequence, keep your profile up to date, and use the provided materials before asking for support."
+          },
+          {
+            title: "Progress Tracking",
+            slug: "progress-tracking",
+            description: "How to monitor and report your progress.",
+            lesson_type: "image",
+            status: "published",
+            position: 1,
+            content_url: "https://example.com/images/progress-tracking-dashboard.png"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "Team Communication Essentials",
+    slug: "team-communication-essentials",
+    short_description: "Build a consistent communication baseline across teams.",
+    description: "This course covers communication norms, escalation paths, and collaboration patterns used across operational teams.",
+    status: "published",
+    modules: [
+      {
+        title: "Communication Foundations",
+        slug: "communication-foundations",
+        description: "Common language and expectations for internal communication.",
+        position: 0,
+        status: "published",
+        lessons: [
+          {
+            title: "Choosing the Right Channel",
+            slug: "choosing-the-right-channel",
+            description: "When to use chat, email, or formal documentation.",
+            lesson_type: "text",
+            status: "published",
+            position: 0,
+            body: "Effective communication starts with choosing the correct channel. Use persistent documentation for decisions, chat for quick coordination, and email for formal follow-up."
+          },
+          {
+            title: "Escalation Matrix",
+            slug: "escalation-matrix",
+            description: "Escalation path for incidents and blockers.",
+            lesson_type: "pdf",
+            status: "published",
+            position: 1,
+            content_url: "https://example.com/docs/escalation-matrix.pdf"
+          }
+        ]
+      },
+      {
+        title: "Collaborative Execution",
+        slug: "collaborative-execution",
+        description: "Methods for coordination and handoff between teams.",
+        position: 1,
+        status: "draft",
+        lessons: [
+          {
+            title: "Meeting Cadence",
+            slug: "meeting-cadence",
+            description: "Recommended cadence for operational syncs.",
+            lesson_type: "text",
+            status: "draft",
+            position: 0,
+            body: "Weekly planning, mid-week check-ins, and end-of-cycle retrospectives provide enough structure without creating unnecessary overhead."
+          },
+          {
+            title: "Documentation Handoffs",
+            slug: "documentation-handoffs",
+            description: "How to leave clean handoffs for the next team.",
+            lesson_type: "video",
+            status: "draft",
+            position: 1,
+            content_url: "https://example.com/videos/documentation-handoffs"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: "Operational Excellence Basics",
+    slug: "operational-excellence-basics",
+    short_description: "Introduce core operational quality and reporting practices.",
+    description: "A baseline course focused on repeatable execution, issue prevention, and continuous improvement habits.",
+    status: "draft",
+    modules: [
+      {
+        title: "Quality Routines",
+        slug: "quality-routines",
+        description: "Daily and weekly routines that improve operational quality.",
+        position: 0,
+        status: "draft",
+        lessons: [
+          {
+            title: "Daily Review Workflow",
+            slug: "daily-review-workflow",
+            description: "Checklist for a standard daily review.",
+            lesson_type: "text",
+            status: "draft",
+            position: 0,
+            body: "Start by reviewing pending work, unresolved blockers, and key metrics. End the review by documenting risks and the next concrete action."
+          },
+          {
+            title: "Issue Categorization",
+            slug: "issue-categorization",
+            description: "Classify issues by impact and urgency.",
+            lesson_type: "image",
+            status: "draft",
+            position: 1,
+            content_url: "https://example.com/images/issue-categorization-matrix.png"
+          }
+        ]
+      },
+      {
+        title: "Reporting Basics",
+        slug: "reporting-basics",
+        description: "Fundamentals of concise and useful reporting.",
+        position: 1,
+        status: "draft",
+        lessons: [
+          {
+            title: "Weekly Status Summary",
+            slug: "weekly-status-summary",
+            description: "Structure a weekly status report.",
+            lesson_type: "text",
+            status: "draft",
+            position: 0,
+            body: "A strong weekly update reports outcomes, current risks, next actions, and any decisions that need review."
+          }
+        ]
+      }
+    ]
+  }
 ].freeze
 
 def create_role!(name, description)
@@ -152,6 +344,39 @@ def assign_permission!(role:, permission:)
   RolePermission.find_or_create_by!(role: role, permission: permission)
 end
 
+def create_course!(tenant:, attrs:)
+  course = Course.find_or_initialize_by(tenant: tenant, slug: attrs[:slug])
+  course.title = attrs[:title]
+  course.short_description = attrs[:short_description]
+  course.description = attrs[:description]
+  course.status = attrs[:status]
+  course.save! if course.new_record? || course.changed?
+  course
+end
+
+def create_course_module!(course:, attrs:)
+  course_module = CourseModule.find_or_initialize_by(course: course, slug: attrs[:slug])
+  course_module.title = attrs[:title]
+  course_module.description = attrs[:description]
+  course_module.position = attrs[:position]
+  course_module.status = attrs[:status]
+  course_module.save! if course_module.new_record? || course_module.changed?
+  course_module
+end
+
+def create_lesson!(course_module:, attrs:)
+  lesson = Lesson.find_or_initialize_by(course_module: course_module, slug: attrs[:slug])
+  lesson.title = attrs[:title]
+  lesson.description = attrs[:description]
+  lesson.body = attrs[:body]
+  lesson.content_url = attrs[:content_url]
+  lesson.lesson_type = attrs[:lesson_type]
+  lesson.position = attrs[:position]
+  lesson.status = attrs[:status]
+  lesson.save! if lesson.new_record? || lesson.changed?
+  lesson
+end
+
 roles = ROLE_DEFINITIONS.to_h do |name, description|
   [name, create_role!(name, description)]
 end
@@ -189,6 +414,20 @@ super_admin = create_user!(
 
 tenants.each do |tenant|
   assign_role!(user: super_admin, tenant: tenant, role: roles[:super_admin], scope_type: :tenant)
+end
+
+tenants.each do |tenant|
+  COURSE_DEFINITIONS.each do |course_attrs|
+    course = create_course!(tenant: tenant, attrs: course_attrs)
+
+    course_attrs[:modules].each do |module_attrs|
+      course_module = create_course_module!(course: course, attrs: module_attrs)
+
+      module_attrs[:lessons].each do |lesson_attrs|
+        create_lesson!(course_module: course_module, attrs: lesson_attrs)
+      end
+    end
+  end
 end
 
 tenants.each_with_index do |tenant, index|
@@ -235,4 +474,6 @@ puts "Seeded #{Permission.count} permissions"
 puts "Seeded #{RolePermission.count} role permissions"
 puts "Seeded #{Tenant.count} tenants"
 puts "Seeded #{User.count} users"
-puts "Default password for seeded users: #{PASSWORD}"
+puts "Seeded #{Course.count} courses"
+puts "Seeded #{CourseModule.count} course modules"
+puts "Seeded #{Lesson.count} lessons"

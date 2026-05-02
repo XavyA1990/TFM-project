@@ -7,9 +7,9 @@ class Lesson < ApplicationRecord
 
   has_one_attached :lesson_content_asset
 
-  enum status: { draft: "draft", published: "published", archived: "archived" }
+  enum :status, { draft: "draft", published: "published", archived: "archived" }
 
-  enum lesson_type: { text: "text", video: "video", pdf: "pdf", image: "image" }
+  enum :lesson_type, { text: "text", video: "video", pdf: "pdf", image: "image" }
 
   validates :title, presence: true
   validates :slug, presence: true, uniqueness: { scope: :course_module_id }
@@ -17,16 +17,16 @@ class Lesson < ApplicationRecord
   validates :lesson_type, presence: true
   validates :status, presence: true
 
-  private
-
-  def should_generate_new_friendly_id?
-    title_changed? || super
-  end
-
   def content_source
     return lesson_content_asset if lesson_content_asset.attached?
     return content_url if content_url.present?
 
     nil
+  end
+
+  private
+
+  def should_generate_new_friendly_id?
+    title_changed? || super
   end
 end

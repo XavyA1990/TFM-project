@@ -9,7 +9,7 @@ class CourseModule < ApplicationRecord
 
   has_one_attached :module_cover_image_asset
 
-  enum status: { draft: "draft", published: "published", archived: "archived" }
+  enum :status, { draft: "draft", published: "published", archived: "archived" }
 
   validates :title, presence: true
   validates :slug, presence: true, uniqueness: { scope: :course_id }
