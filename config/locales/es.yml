@@ -41,11 +41,15 @@ es:
     view: "Ver"
     delete: "Eliminar"
   errors:
+    attributes:
+      current_password:
+        invalid: "no es válida"
     messages:
       taken: "ya está en uso"
       blank: "no puede estar en blanco"
       confirmation: "no coincide con la confirmación"
       too_short: "es demasiado corto (mínimo %{count} caracteres)"
+      invalid: "no es válido"
   activerecord:
     attributes:
       user:
@@ -55,6 +59,7 @@ es:
         last_name: "Apellido"
         avatar_asset: "Avatar"
         password: "Contraseña"
+        current_password: "Contraseña actual"
         password_confirmation: "Confirmación de contraseña"
         created_at: "Creado el"
         updated_at: "Actualizado el"

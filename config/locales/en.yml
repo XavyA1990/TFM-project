@@ -65,11 +65,15 @@ en:
     view: "View"
     delete: "Delete"
   errors:
+    attributes:
+      current_password:
+        invalid: "is invalid"
     messages:
       taken: "has already been taken"
       blank: "can't be blank"
       confirmation: "doesn't match the confirmation"
       too_short: "is too short (minimum %{count} characters)"
+      invalid: "is invalid"
   activerecord:
     attributes:
       user:
@@ -79,6 +83,7 @@ en:
         last_name: "Last name"
         avatar_asset: "Avatar"
         password: "Password"
+        current_password: "Current password"
         password_confirmation: "Password confirmation"
       tenant:
         id: "ID"
