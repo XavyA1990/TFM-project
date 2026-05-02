@@ -212,6 +212,11 @@ es:
       about_panel_title: "Sobre este portal"
       about_panel_description: "%{tenant} comparte su propuesta educativa desde un espacio propio, pensado para construir comunidad, transmitir conocimiento y crecer con una identidad clara."
   admin:
+    courses:
+      index:
+        title: "Cursos"
+        description: "Administración global de cursos de todos los tenants."
+        tenant: "Tenant"
     tenants:
       index:
         title: "Tenants"

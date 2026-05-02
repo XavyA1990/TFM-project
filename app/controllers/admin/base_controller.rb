@@ -39,6 +39,14 @@ class Admin::BaseController < ApplicationController
       }
     end
 
+    if current_ability.can?(:read, Course)
+      primary_links << {
+        label: t("admin.courses.index.title"),
+        path: admin_courses_path,
+        active: controller_path == "admin/courses",
+      }
+    end
+
     @dashboard_sidebar = {
       title: t("navbar.admin"),
       home_path: admin_tenants_path,

@@ -1,0 +1,28 @@
+<%= render "shared/molecules/page_header",
+  title: t("admin.courses.index.title"),
+  description: t("admin.courses.index.description"),
+  wrapper_class: "mx-auto max-w-7xl px-4 sm:px-6 lg:px-8",
+  inner_class: "sm:flex sm:items-center",
+  content_class: "sm:flex-auto",
+  actions_wrapper_class: "mt-4 sm:mt-0 sm:ml-16 sm:flex-none",
+  title_tag: :h1,
+  title_class: "text-base font-semibold text-gray-900 dark:text-white",
+  description_class: "mt-2 text-sm text-gray-700 dark:text-gray-300" %>
+
+<%= render "shared/organisms/courses_table",
+  headers: @course_table_headers,
+  columns: @course_table_columns,
+  courses: @courses,
+  course_path_builder: ->(course) { admin_tenants_course_path(tenant_slug: course[:tenant_slug], id: course[:slug]) },
+  edit_course_path_builder: ->(course) { edit_admin_tenants_course_path(tenant_slug: course[:tenant_slug], id: course[:slug]) },
+  delete_course_path_builder: ->(course) { admin_tenants_course_path(tenant_slug: course[:tenant_slug], id: course[:slug]) } %>
+
+<%= render "shared/molecules/pagination",
+  displayed_count: @courses.size,
+  total_count: @total_count,
+  per_page: @per_page,
+  current_page: @current_page,
+  total_pages: @total_pages,
+  resource_name: t("pagination.resources.courses"),
+  previous_path: (@current_page > 1 ? admin_courses_path(page: @current_page - 1) : nil),
+  next_path: (@current_page < @total_pages ? admin_courses_path(page: @current_page + 1) : nil) %>
