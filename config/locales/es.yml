@@ -87,9 +87,14 @@ es:
         created_at: "Creado el"
         updated_at: "Actualizado el"
       lesson:
+        title: "Título"
         description: "Descripción"
         body: "Contenido de texto"
         content_url: "Referencia de contenido"
+        lesson_type: "Tipo de contenido"
+        status: "Estado"
+        position: "Posición"
+        lesson_content_asset: "Archivo de contenido"
         created_at: "Creado el"
         updated_at: "Actualizado el"
   devise_views:
@@ -168,6 +173,7 @@ es:
       file_selected: "Archivo listo"
       current_file: "Archivo actual"
       image_only_hint: "Admite PNG, JPG y WEBP"
+      mixed_media_hint: "Admite PNG, JPG, WEBP, MP4 y PDF"
     dashboard_sidebar:
       admin_tenants: "Tenants"
       quick_links: "Accesos rápidos"
@@ -248,6 +254,18 @@ es:
         customer_role_required: "El usuario debe conservar al menos el rol customer en %{tenant}."
         no_roles_assigned: "Sin roles asignados"
   admin_tenants:
+    lessons:
+      destroyed: "La lección fue eliminada exitosamente."
+      form:
+        asset_title: "Contenido de la lección"
+        asset_description: "Carga una imagen, un video o un PDF para esta lección."
+      new:
+        title: "Nueva lección"
+        description: "Agrega una lección al módulo seleccionado."
+        label: "Agregar lección"
+      edit:
+        title: "Editar lección"
+        description: "Actualiza la lección seleccionada."
     course_modules:
       destroyed: "El módulo fue eliminado exitosamente."
       form:

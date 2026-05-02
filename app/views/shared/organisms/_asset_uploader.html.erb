@@ -28,6 +28,16 @@
         current_content_type.start_with?("video/") ? :video : :file
       when :pdf
         current_content_type == "application/pdf" ? :pdf : :file
+      when :mixed
+        if current_content_type.start_with?("image/")
+          :image
+        elsif current_content_type.start_with?("video/")
+          :video
+        elsif current_content_type == "application/pdf"
+          :pdf
+        else
+          :file
+        end
       else
         :file
       end

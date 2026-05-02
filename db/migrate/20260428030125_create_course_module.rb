@@ -6,7 +6,7 @@ class CreateCourseModule < ActiveRecord::Migration[8.1]
       t.string :title, null: false
       t.string :slug, null: false
       t.text :description
-      t.integer :position, null: false, default: 0
+      t.integer :position, null: false, default: 1
       t.string :status, null: false, default: "draft"
 
       t.timestamps

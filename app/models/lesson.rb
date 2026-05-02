@@ -13,7 +13,7 @@ class Lesson < ApplicationRecord
 
   validates :title, presence: true
   validates :slug, presence: true, uniqueness: { scope: :course_module_id }
-  validates :position, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :position, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   validates :lesson_type, presence: true
   validates :status, presence: true
 

@@ -73,13 +73,14 @@ module AdminTenants
             updated_at: course_module.updated_at ? I18n.l(course_module.updated_at) : nil,
             lessons: sorted_lessons(course_module).map do |lesson|
               {
+                slug: lesson.slug,
                 title: lesson.title,
                 description: lesson.description,
                 body: lesson.body,
                 lesson_type: lesson.lesson_type.humanize,
                 status: lesson.status.humanize,
                 position: lesson.position,
-                content_reference: lesson.body.present? ? I18n.t("admin_tenants.courses.show.text_content_available") : lesson.content_url,
+                content_reference: lesson_content_value(lesson),
                 created_at: lesson.created_at ? I18n.l(lesson.created_at) : nil,
                 updated_at: lesson.updated_at ? I18n.l(lesson.updated_at) : nil
               }
@@ -121,6 +122,13 @@ module AdminTenants
       return @course.course_cover_image_asset.filename.to_s if @course.course_cover_image_asset.attached?
 
       @course.cover_image_url
+    end
+
+    def lesson_content_value(lesson)
+      return lesson.lesson_content_asset.filename.to_s if lesson.lesson_content_asset.attached?
+      return I18n.t("admin_tenants.courses.show.text_content_available") if lesson.body.present?
+
+      lesson.content_url
     end
   end
 end

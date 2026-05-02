@@ -124,7 +124,7 @@ COURSE_DEFINITIONS = [
         title: "Getting Started",
         slug: "getting-started",
         description: "Core orientation materials for first-time learners.",
-        position: 0,
+        position: 1,
         status: "published",
         lessons: [
           {
@@ -133,7 +133,7 @@ COURSE_DEFINITIONS = [
             description: "Overview of the program and learning goals.",
             lesson_type: "text",
             status: "published",
-            position: 0,
+            position: 1,
             body: "Welcome to the program. In this lesson we review the structure of the tenant portal, the expected progress, and the outcomes you should reach during the first week."
           },
           {
@@ -169,7 +169,7 @@ COURSE_DEFINITIONS = [
             description: "How learners are expected to engage with the course.",
             lesson_type: "text",
             status: "published",
-            position: 0,
+            position: 1,
             body: "Complete every module in sequence, keep your profile up to date, and use the provided materials before asking for support."
           },
           {
@@ -196,7 +196,7 @@ COURSE_DEFINITIONS = [
         title: "Communication Foundations",
         slug: "communication-foundations",
         description: "Common language and expectations for internal communication.",
-        position: 0,
+        position: 1,
         status: "published",
         lessons: [
           {
@@ -205,7 +205,7 @@ COURSE_DEFINITIONS = [
             description: "When to use chat, email, or formal documentation.",
             lesson_type: "text",
             status: "published",
-            position: 0,
+            position: 1,
             body: "Effective communication starts with choosing the correct channel. Use persistent documentation for decisions, chat for quick coordination, and email for formal follow-up."
           },
           {
@@ -232,7 +232,7 @@ COURSE_DEFINITIONS = [
             description: "Recommended cadence for operational syncs.",
             lesson_type: "text",
             status: "draft",
-            position: 0,
+            position: 1,
             body: "Weekly planning, mid-week check-ins, and end-of-cycle retrospectives provide enough structure without creating unnecessary overhead."
           },
           {
@@ -259,7 +259,7 @@ COURSE_DEFINITIONS = [
         title: "Quality Routines",
         slug: "quality-routines",
         description: "Daily and weekly routines that improve operational quality.",
-        position: 0,
+        position: 1,
         status: "draft",
         lessons: [
           {
@@ -268,7 +268,7 @@ COURSE_DEFINITIONS = [
             description: "Checklist for a standard daily review.",
             lesson_type: "text",
             status: "draft",
-            position: 0,
+            position: 1,
             body: "Start by reviewing pending work, unresolved blockers, and key metrics. End the review by documenting risks and the next concrete action."
           },
           {
@@ -295,7 +295,7 @@ COURSE_DEFINITIONS = [
             description: "Structure a weekly status report.",
             lesson_type: "text",
             status: "draft",
-            position: 0,
+            position: 1,
             body: "A strong weekly update reports outcomes, current risks, next actions, and any decisions that need review."
           }
         ]

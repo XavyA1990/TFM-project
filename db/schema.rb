@@ -46,7 +46,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_28_031130) do
     t.uuid "course_id", null: false
     t.datetime "created_at", null: false
     t.text "description"
-    t.integer "position", default: 0, null: false
+    t.integer "position", default: 1, null: false
     t.string "slug", null: false
     t.string "status", default: "draft", null: false
     t.string "title", null: false
@@ -90,7 +90,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_28_031130) do
     t.datetime "created_at", null: false
     t.text "description"
     t.string "lesson_type", null: false
-    t.integer "position", default: 0, null: false
+    t.integer "position", default: 1, null: false
     t.string "slug", null: false
     t.string "status", default: "draft", null: false
     t.string "title", null: false

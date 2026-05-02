@@ -21,7 +21,7 @@
             >
               <div class="min-w-0 flex-1">
                 <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
-                  <%= t("admin_tenants.courses.show.module_position", position: course_module[:position] + 1) %>
+                  <%= t("admin_tenants.courses.show.module_position", position: course_module[:position]) %>
                 </p>
                 <h3 class="mt-1 text-base font-semibold text-gray-900 dark:text-gray-100"><%= course_module[:title] %></h3>
               </div>
@@ -91,13 +91,30 @@
             ] %>
 
             <section class="mt-8">
+              <%
+                lesson_actions =
+                  if can?(:create, course)
+                    capture do
+                      render "shared/atoms/button_link",
+                        text: t("admin_tenants.lessons.new.label"),
+                        path: new_admin_tenants_course_course_module_lesson_path(
+                          tenant_slug: current_tenant.slug,
+                          course_id: course.slug,
+                          course_module_id: course_module[:slug]
+                        )
+                    end
+                  end
+              %>
+
               <%= render "shared/molecules/page_header",
                 title: t("admin_tenants.courses.show.lessons_title"),
                 description: t("admin_tenants.courses.show.lessons_description"),
                 inner_class: "flex items-end justify-between gap-4 border-b border-gray-200 pb-4 dark:border-white/10",
+                actions_wrapper_class: "mt-4 sm:mt-0 sm:ml-16 sm:flex-none",
                 title_tag: :h3,
                 title_class: "text-base font-semibold text-gray-900 dark:text-gray-100",
-                description_class: "mt-1 text-sm text-gray-600 dark:text-gray-400" %>
+                description_class: "mt-1 text-sm text-gray-600 dark:text-gray-400",
+                actions: lesson_actions %>
 
               <% if course_module[:lessons].any? %>
                 <div class="mt-4 grid gap-4">
@@ -106,18 +123,46 @@
                       <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                         <div>
                           <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
-                            <%= t("admin_tenants.courses.show.lesson_position", position: lesson[:position] + 1) %>
+                            <%= t("admin_tenants.courses.show.lesson_position", position: lesson[:position]) %>
                           </p>
                           <h4 class="mt-1 text-sm font-semibold text-gray-900 dark:text-gray-100"><%= lesson[:title] %></h4>
                         </div>
 
-                        <div class="flex flex-wrap gap-2">
+                        <div class="flex flex-wrap items-center gap-2">
                           <span class="inline-flex items-center rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold text-sky-800 ring-1 ring-inset ring-sky-200 dark:bg-sky-500/15 dark:text-sky-300 dark:ring-sky-400/30">
                             <%= lesson[:lesson_type] %>
                           </span>
                           <span class="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800 ring-1 ring-inset ring-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-400/30">
                             <%= lesson[:status] %>
                           </span>
+
+                          <% if can?(:update, course) %>
+                            <%= render "shared/atoms/text_link",
+                              text: t("actions.edit"),
+                              path: edit_admin_tenants_course_course_module_lesson_path(
+                                tenant_slug: current_tenant.slug,
+                                course_id: course.slug,
+                                course_module_id: course_module[:slug],
+                                id: lesson[:slug]
+                              ),
+                              class_name: "text-sm font-semibold" %>
+                          <% end %>
+
+                          <% if can?(:destroy, course) %>
+                            <%= render "shared/atoms/text_link",
+                              text: t("actions.delete"),
+                              path: admin_tenants_course_course_module_lesson_path(
+                                tenant_slug: current_tenant.slug,
+                                course_id: course.slug,
+                                course_module_id: course_module[:slug],
+                                id: lesson[:slug]
+                              ),
+                              class_name: "text-sm font-semibold text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300",
+                              data: {
+                                turbo_method: :delete,
+                                turbo_confirm: t("actions.confirm_deletion", name: lesson[:title])
+                              } %>
+                          <% end %>
                         </div>
                       </div>
 

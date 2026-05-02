@@ -109,9 +109,14 @@ en:
         created_at: "Created at"
         updated_at: "Updated at"
       lesson:
+        title: "Title"
         description: "Description"
         body: "Text content"
         content_url: "Content reference"
+        lesson_type: "Content type"
+        status: "Status"
+        position: "Position"
+        lesson_content_asset: "Content file"
         created_at: "Created at"
         updated_at: "Updated at"
   devise_views:
@@ -185,6 +190,7 @@ en:
       file_selected: "File ready"
       current_file: "Current file"
       image_only_hint: "Supports PNG, JPG, GIF, WEBP, and SVG."
+      mixed_media_hint: "Supports PNG, JPG, WEBP, MP4, and PDF."
     dashboard_sidebar:
       admin_tenants: "Tenants"
       quick_links: "Quick links"
@@ -265,6 +271,18 @@ en:
         customer_role_required: "The user must keep at least the customer role in %{tenant}."
         no_roles_assigned: "No roles assigned"
   admin_tenants:
+    lessons:
+      destroyed: "Lesson was successfully deleted."
+      form:
+        asset_title: "Lesson content"
+        asset_description: "Upload an image, a video, or a PDF for this lesson."
+      new:
+        title: "New lesson"
+        description: "Add a lesson to the selected module."
+        label: "Add lesson"
+      edit:
+        title: "Edit lesson"
+        description: "Update the selected lesson."
     course_modules:
       destroyed: "Module was successfully deleted."
       form:
