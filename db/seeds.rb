@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
+require "faker"
+
 PASSWORD = "Password123!".freeze
+SEED_VALUE = ENV["SEED_VALUE"] ? ENV["SEED_VALUE"].to_i : 12345
+TENANT_COUNT = 5
+COURSE_COUNT = 6
+MODULES_PER_COURSE = 2
+LESSONS_PER_MODULE = 3
+PUBLISHED_COURSE_COUNT = 5
+LESSON_TYPES = %w[text video pdf image].freeze
+
+Faker::Config.random = Random.new(SEED_VALUE)
+Faker::UniqueGenerator.clear
+srand(SEED_VALUE)
 
 ROLE_DEFINITIONS = {
   super_admin: "Full access across the platform",
@@ -104,205 +117,59 @@ ROLE_PERMISSION_MAP = {
   ]
 }.freeze
 
-TENANT_DEFINITIONS = [
-  { name: "Acme Learning", slug: "acme-learning" },
-  { name: "Northwind Academy", slug: "northwind-academy" },
-  { name: "Globex Institute", slug: "globex-institute" },
-  { name: "Initech Campus", slug: "initech-campus" },
-  { name: "Umbrella Training", slug: "umbrella-training" }
-].freeze
+def tenant_definitions
+  @tenant_definitions ||= Array.new(TENANT_COUNT) do
+    { name: Faker::Company.unique.name }
+  end
+end
 
-COURSE_DEFINITIONS = [
-  {
-    title: "Onboarding Fundamentals",
-    slug: "onboarding-fundamentals",
-    short_description: "Essential onboarding path for new participants.",
-    description: "A practical introduction to the platform, the learning flow, and the expectations for the first training cycle.",
-    status: "published",
-    modules: [
-      {
-        title: "Getting Started",
-        slug: "getting-started",
-        description: "Core orientation materials for first-time learners.",
-        position: 1,
-        status: "published",
-        lessons: [
-          {
-            title: "Welcome and Orientation",
-            slug: "welcome-and-orientation",
-            description: "Overview of the program and learning goals.",
-            lesson_type: "text",
-            status: "published",
-            position: 1,
-            body: "Welcome to the program. In this lesson we review the structure of the tenant portal, the expected progress, and the outcomes you should reach during the first week."
-          },
-          {
-            title: "Platform Walkthrough",
-            slug: "platform-walkthrough",
-            description: "Guided tour of the learning platform.",
-            lesson_type: "video",
-            status: "published",
-            position: 1,
-            content_url: "https://example.com/videos/platform-walkthrough"
-          },
-          {
-            title: "Quick Start Checklist",
-            slug: "quick-start-checklist",
-            description: "Reference checklist for the first login.",
-            lesson_type: "pdf",
-            status: "published",
-            position: 2,
-            content_url: "https://example.com/docs/quick-start-checklist.pdf"
-          }
-        ]
-      },
-      {
-        title: "Learning Guidelines",
-        slug: "learning-guidelines",
-        description: "Standards and best practices for successful course completion.",
-        position: 1,
-        status: "published",
-        lessons: [
-          {
-            title: "Participation Standards",
-            slug: "participation-standards",
-            description: "How learners are expected to engage with the course.",
-            lesson_type: "text",
-            status: "published",
-            position: 1,
-            body: "Complete every module in sequence, keep your profile up to date, and use the provided materials before asking for support."
-          },
-          {
-            title: "Progress Tracking",
-            slug: "progress-tracking",
-            description: "How to monitor and report your progress.",
-            lesson_type: "image",
-            status: "published",
-            position: 1,
-            content_url: "https://example.com/images/progress-tracking-dashboard.png"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    title: "Team Communication Essentials",
-    slug: "team-communication-essentials",
-    short_description: "Build a consistent communication baseline across teams.",
-    description: "This course covers communication norms, escalation paths, and collaboration patterns used across operational teams.",
-    status: "published",
-    modules: [
-      {
-        title: "Communication Foundations",
-        slug: "communication-foundations",
-        description: "Common language and expectations for internal communication.",
-        position: 1,
-        status: "published",
-        lessons: [
-          {
-            title: "Choosing the Right Channel",
-            slug: "choosing-the-right-channel",
-            description: "When to use chat, email, or formal documentation.",
-            lesson_type: "text",
-            status: "published",
-            position: 1,
-            body: "Effective communication starts with choosing the correct channel. Use persistent documentation for decisions, chat for quick coordination, and email for formal follow-up."
-          },
-          {
-            title: "Escalation Matrix",
-            slug: "escalation-matrix",
-            description: "Escalation path for incidents and blockers.",
-            lesson_type: "pdf",
-            status: "published",
-            position: 1,
-            content_url: "https://example.com/docs/escalation-matrix.pdf"
-          }
-        ]
-      },
-      {
-        title: "Collaborative Execution",
-        slug: "collaborative-execution",
-        description: "Methods for coordination and handoff between teams.",
-        position: 1,
-        status: "draft",
-        lessons: [
-          {
-            title: "Meeting Cadence",
-            slug: "meeting-cadence",
-            description: "Recommended cadence for operational syncs.",
-            lesson_type: "text",
-            status: "draft",
-            position: 1,
-            body: "Weekly planning, mid-week check-ins, and end-of-cycle retrospectives provide enough structure without creating unnecessary overhead."
-          },
-          {
-            title: "Documentation Handoffs",
-            slug: "documentation-handoffs",
-            description: "How to leave clean handoffs for the next team.",
-            lesson_type: "video",
-            status: "draft",
-            position: 1,
-            content_url: "https://example.com/videos/documentation-handoffs"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    title: "Operational Excellence Basics",
-    slug: "operational-excellence-basics",
-    short_description: "Introduce core operational quality and reporting practices.",
-    description: "A baseline course focused on repeatable execution, issue prevention, and continuous improvement habits.",
-    status: "draft",
-    modules: [
-      {
-        title: "Quality Routines",
-        slug: "quality-routines",
-        description: "Daily and weekly routines that improve operational quality.",
-        position: 1,
-        status: "draft",
-        lessons: [
-          {
-            title: "Daily Review Workflow",
-            slug: "daily-review-workflow",
-            description: "Checklist for a standard daily review.",
-            lesson_type: "text",
-            status: "draft",
-            position: 1,
-            body: "Start by reviewing pending work, unresolved blockers, and key metrics. End the review by documenting risks and the next concrete action."
-          },
-          {
-            title: "Issue Categorization",
-            slug: "issue-categorization",
-            description: "Classify issues by impact and urgency.",
-            lesson_type: "image",
-            status: "draft",
-            position: 1,
-            content_url: "https://example.com/images/issue-categorization-matrix.png"
-          }
-        ]
-      },
-      {
-        title: "Reporting Basics",
-        slug: "reporting-basics",
-        description: "Fundamentals of concise and useful reporting.",
-        position: 1,
-        status: "draft",
-        lessons: [
-          {
-            title: "Weekly Status Summary",
-            slug: "weekly-status-summary",
-            description: "Structure a weekly status report.",
-            lesson_type: "text",
-            status: "draft",
-            position: 1,
-            body: "A strong weekly update reports outcomes, current risks, next actions, and any decisions that need review."
-          }
-        ]
-      }
-    ]
-  }
-].freeze
+def course_definitions
+  @course_definitions ||= Array.new(COURSE_COUNT) do |course_index|
+    course_status = course_index < PUBLISHED_COURSE_COUNT ? "published" : "draft"
+
+    {
+      title: faker_title(word_count: 3),
+      short_description: Faker::Lorem.sentence(word_count: 8),
+      description: Faker::Lorem.paragraph(sentence_count: 3),
+      status: course_status,
+      modules: module_definitions(course_status: course_status)
+    }
+  end
+end
+
+def module_definitions(course_status:)
+  Array.new(MODULES_PER_COURSE) do |module_index|
+    {
+      title: faker_title(word_count: 2),
+      description: Faker::Lorem.paragraph(sentence_count: 2),
+      position: module_index + 1,
+      status: course_status,
+      lessons: lesson_definitions(course_status: course_status)
+    }
+  end
+end
+
+def lesson_definitions(course_status:)
+  Array.new(LESSONS_PER_MODULE) do |lesson_index|
+    lesson_type = LESSON_TYPES[lesson_index % LESSON_TYPES.length]
+    title = faker_title(word_count: 3)
+    text_body = Faker::Lorem.paragraphs(number: 2).join("\n\n")
+
+    {
+      title: title,
+      description: Faker::Lorem.sentence(word_count: 10),
+      lesson_type: lesson_type,
+      status: course_status,
+      position: lesson_index + 1,
+      body: text_body,
+      content_url: nil
+    }
+  end
+end
+
+def faker_title(word_count:)
+  Faker::Lorem.unique.sentence(word_count: word_count).delete(".")
+end
 
 def create_role!(name, description)
   role = Role.find_or_initialize_by(name: name.to_s)
@@ -344,8 +211,15 @@ def assign_permission!(role:, permission:)
   RolePermission.find_or_create_by!(role: role, permission: permission)
 end
 
+def create_tenant!(attrs:)
+  tenant = Tenant.find_by(name: attrs[:name]) || Tenant.new
+  tenant.name = attrs[:name]
+  tenant.save! if tenant.new_record? || tenant.changed?
+  tenant
+end
+
 def create_course!(tenant:, attrs:)
-  course = Course.find_or_initialize_by(tenant: tenant, slug: attrs[:slug])
+  course = Course.find_or_initialize_by(tenant: tenant, title: attrs[:title])
   course.title = attrs[:title]
   course.short_description = attrs[:short_description]
   course.description = attrs[:description]
@@ -355,7 +229,7 @@ def create_course!(tenant:, attrs:)
 end
 
 def create_course_module!(course:, attrs:)
-  course_module = CourseModule.find_or_initialize_by(course: course, slug: attrs[:slug])
+  course_module = CourseModule.find_or_initialize_by(course: course, title: attrs[:title])
   course_module.title = attrs[:title]
   course_module.description = attrs[:description]
   course_module.position = attrs[:position]
@@ -365,7 +239,7 @@ def create_course_module!(course:, attrs:)
 end
 
 def create_lesson!(course_module:, attrs:)
-  lesson = Lesson.find_or_initialize_by(course_module: course_module, slug: attrs[:slug])
+  lesson = Lesson.find_or_initialize_by(course_module: course_module, title: attrs[:title])
   lesson.title = attrs[:title]
   lesson.description = attrs[:description]
   lesson.body = attrs[:body]
@@ -397,11 +271,8 @@ ROLE_PERMISSION_MAP.each do |role_name, permission_names|
   end
 end
 
-tenants = TENANT_DEFINITIONS.map do |tenant_attrs|
-  tenant = Tenant.find_or_initialize_by(slug: tenant_attrs[:slug])
-  tenant.name = tenant_attrs[:name]
-  tenant.save! if tenant.new_record? || tenant.changed?
-  tenant
+tenants = tenant_definitions.each_with_index.map do |tenant_attrs, index|
+  create_tenant!(attrs: tenant_attrs)
 end
 
 super_admin = create_user!(
@@ -417,7 +288,8 @@ tenants.each do |tenant|
 end
 
 tenants.each do |tenant|
-  COURSE_DEFINITIONS.each do |course_attrs|
+
+  course_definitions.each do |course_attrs|
     course = create_course!(tenant: tenant, attrs: course_attrs)
 
     course_attrs[:modules].each do |module_attrs|
@@ -430,38 +302,39 @@ tenants.each do |tenant|
   end
 end
 
-tenants.each_with_index do |tenant, index|
-  tenant_key = index + 1
+tenants.each do |tenant|
+  tenant_key = tenant.slug
+  tenant_key_username = tenant.slug.tr("-", "_")
 
   platform_admin = create_user!(
-    email: "platform.admin#{tenant_key}@example.com",
-    username: "platform_admin_#{tenant_key}",
+    email: "platform.admin.#{tenant_key}@example.com",
+    username: "platform_admin_#{tenant_key_username}",
     first_name: "Platform",
-    last_name: "Admin#{tenant_key}"
+    last_name: "Admin #{tenant_key}"
   )
   assign_role!(user: platform_admin, tenant: tenant, role: roles[:platform_admin], scope_type: :tenant)
 
   course_admin = create_user!(
-    email: "course.admin#{tenant_key}@example.com",
-    username: "course_admin_#{tenant_key}",
+    email: "course.admin.#{tenant_key}@example.com",
+    username: "course_admin_#{tenant_key_username}",
     first_name: "Course",
-    last_name: "Admin#{tenant_key}"
+    last_name: "Admin #{tenant_key}"
   )
   assign_role!(user: course_admin, tenant: tenant, role: roles[:course_admin], scope_type: :tenant)
 
   supervisor = create_user!(
-    email: "supervisor#{tenant_key}@example.com",
-    username: "supervisor_#{tenant_key}",
+    email: "supervisor.#{tenant_key}@example.com",
+    username: "supervisor_#{tenant_key_username}",
     first_name: "Supervisor",
-    last_name: tenant_key.to_s
+    last_name: tenant_key
   )
   assign_role!(user: supervisor, tenant: tenant, role: roles[:supervisor], scope_type: :tenant)
 
   2.times do |customer_index|
     customer_number = customer_index + 1
     customer = create_user!(
-      email: "customer#{tenant_key}_#{customer_number}@example.com",
-      username: "customer_#{tenant_key}_#{customer_number}",
+      email: "customer.#{tenant_key}.#{customer_number}@example.com",
+      username: "customer_#{tenant_key_username}_#{customer_number}",
       first_name: "Customer",
       last_name: "#{tenant_key}_#{customer_number}"
     )
