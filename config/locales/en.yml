@@ -228,6 +228,14 @@ en:
       portal_label: "Portal"
       about_panel_title: "About this portal"
       about_panel_description: "%{tenant} shares its educational proposition from an independent space designed to build community, deliver knowledge, and grow with a distinct identity."
+      courses:
+        title: "Latest Published Courses"
+        description: "A curated view of the most recent published content available in this portal."
+        description_fallback: "Published course available in this portal."
+        empty_title: "No published courses yet"
+        empty_description: "As this portal publishes courses, they will appear here."
+        previous: "Previous courses"
+        next: "Next courses"
   admin:
     courses:
       index:

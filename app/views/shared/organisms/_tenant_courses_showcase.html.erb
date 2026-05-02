@@ -1,0 +1,63 @@
+<%
+  courses = local_assigns.fetch(:courses, [])
+  use_carousel = courses.size >= 3
+%>
+
+<section class="relative isolate overflow-hidden py-16 sm:py-20">
+  <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,_rgba(14,165,233,0.16),_transparent_26%),radial-gradient(circle_at_bottom_left,_rgba(251,191,36,0.10),_transparent_26%)]"></div>
+
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <%= render "shared/molecules/page_header",
+      title: t("tenants.show.courses.title"),
+      description: t("tenants.show.courses.description"),
+      wrapper_class: "px-0",
+      title_tag: :h2,
+      title_class: "text-2xl font-black tracking-tight text-white sm:text-3xl",
+      description_class: "mt-3 max-w-2xl text-sm leading-6 text-gray-300" %>
+
+    <% if courses.any? %>
+      <% if use_carousel %>
+        <div data-controller="carousel" class="mt-10">
+          <div class="mb-5 flex items-center justify-end gap-3">
+            <button
+              type="button"
+              data-action="click->carousel#previous"
+              class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-white/10"
+              aria-label="<%= t('tenants.show.courses.previous') %>"
+            >
+              <span aria-hidden="true">&larr;</span>
+            </button>
+            <button
+              type="button"
+              data-action="click->carousel#next"
+              class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-white/10"
+              aria-label="<%= t('tenants.show.courses.next') %>"
+            >
+              <span aria-hidden="true">&rarr;</span>
+            </button>
+          </div>
+
+          <div
+            data-carousel-target="viewport"
+            class="-mx-4 flex snap-x snap-mandatory gap-6 overflow-x-auto px-4 pb-4 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 [&::-webkit-scrollbar]:hidden"
+          >
+            <% courses.each do |course| %>
+              <%= render "shared/organisms/tenant_course_card", course: course, carousel: true %>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="mt-10 grid gap-6 md:grid-cols-2">
+          <% courses.each do |course| %>
+            <%= render "shared/organisms/tenant_course_card", course: course %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="mt-10 rounded-3xl border border-dashed border-white/10 bg-white/5 p-8 text-center">
+        <p class="text-base font-semibold text-white"><%= t("tenants.show.courses.empty_title") %></p>
+        <p class="mt-2 text-sm leading-6 text-gray-300"><%= t("tenants.show.courses.empty_description") %></p>
+      </div>
+    <% end %>
+  </div>
+</section>
