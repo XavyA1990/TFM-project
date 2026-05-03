@@ -1,0 +1,41 @@
+<div class="mx-auto max-w-7xl px-4 sm:hidden">
+  <div class="space-y-4">
+    <% records.each do |record| %>
+      <% actions = actions_builder.call(record) %>
+      <article class="app-surface app-surface--admin-card p-4">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h2 class="app-text app-text--admin-strong text-base font-semibold"><%= mobile_title_builder.call(record) %></h2>
+            <% if mobile_subtitle_builder.present? && mobile_subtitle_builder.call(record).present? %>
+              <p class="app-text app-text--admin-subtle mt-1 break-all text-sm"><%= mobile_subtitle_builder.call(record) %></p>
+            <% end %>
+          </div>
+        </div>
+
+        <dl class="mt-4 space-y-3">
+          <% headers.zip(columns).each do |header, column| %>
+            <% next if skip_mobile_columns.include?(column.to_sym) %>
+            <div>
+              <dt class="app-text app-text--admin-subtle text-xs font-semibold uppercase tracking-wide"><%= header %></dt>
+              <dd class="app-text app-text--admin-body mt-1 text-sm"><%= value_builder.call(record, column).presence || "-" %></dd>
+            </div>
+          <% end %>
+        </dl>
+
+        <% if actions.any? %>
+          <div class="app-divider app-divider--admin mt-5 flex flex-wrap gap-3 border-t pt-4">
+            <% actions.each do |action| %>
+              <div class="min-w-0 flex-1 text-center">
+                <%= render "shared/atoms/text_link",
+                  text: action[:text],
+                  path: action[:path],
+                  class_name: action[:class_name] || "text-sm font-semibold",
+                  data: action[:data] %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </article>
+    <% end %>
+  </div>
+</div>

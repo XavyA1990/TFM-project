@@ -6,75 +6,66 @@
   <%= render "shared/molecules/error_summary", resource: lesson %>
 
   <div class="space-y-12">
-    <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3 dark:border-white/10">
-      <div>
-        <h2 class="text-base/7 font-semibold text-gray-900 dark:text-white"><%= Lesson.human_attribute_name(:title) %></h2>
-        <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400"><%= description %></p>
+    <%= render layout: "shared/molecules/form_section",
+      locals: {
+        title: Lesson.human_attribute_name(:title),
+        description: description
+      } do %>
+      <div class="sm:col-span-4">
+        <%= render "shared/molecules/form_field", form: form, field: :title %>
       </div>
 
-      <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
-        <div class="sm:col-span-4">
-          <%= render "shared/molecules/form_field", form: form, field: :title %>
-        </div>
-
-        <div class="sm:col-span-2">
-          <%= render "shared/molecules/form_field", form: form, field: :position, type: :number_field, input_html: { min: 0 } %>
-        </div>
-
-        <div class="sm:col-span-3">
-          <%= render "shared/molecules/select_field",
-            form: form,
-            field: :lesson_type,
-            label: Lesson.human_attribute_name(:lesson_type),
-            choices: Lesson.lesson_types.keys.map { |type| [type.humanize, type] } %>
-        </div>
-
-        <div class="sm:col-span-3">
-          <%= render "shared/molecules/select_field",
-            form: form,
-            field: :status,
-            label: Lesson.human_attribute_name(:status),
-            choices: Lesson.statuses.keys.map { |status| [status.humanize, status] } %>
-        </div>
-
-        <div class="col-span-full">
-          <%= render "shared/molecules/form_field", form: form, field: :description, type: :text_area, input_html: { rows: 3 } %>
-        </div>
-
-        <div class="col-span-full">
-          <%= render "shared/molecules/form_field", form: form, field: :body, type: :text_area, input_html: { rows: 5 } %>
-        </div>
-
-        <div class="col-span-full">
-          <%= render "shared/molecules/form_field", form: form, field: :content_url %>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3 dark:border-white/10">
-      <div>
-        <h2 class="text-base/7 font-semibold text-gray-900 dark:text-white"><%= t("admin_tenants.lessons.form.asset_title") %></h2>
-        <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400"><%= t("admin_tenants.lessons.form.asset_description") %></p>
+      <div class="sm:col-span-2">
+        <%= render "shared/molecules/form_field", form: form, field: :position, type: :number_field, input_html: { min: 0 } %>
       </div>
 
-      <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
-        <div class="col-span-full">
-          <%= render "shared/organisms/asset_uploader",
-            form: form,
-            field: :lesson_content_asset,
-            type: :mixed,
-            label: Lesson.human_attribute_name(:lesson_content_asset),
-            description: t("shared.asset_uploader.mixed_media_hint"),
-            accept: "image/png,image/jpeg,image/webp,video/mp4,application/pdf",
-            current_asset: lesson.lesson_content_asset,
-            current_url: lesson.content_url %>
-        </div>
+      <div class="sm:col-span-3">
+        <%= render "shared/molecules/select_field",
+          form: form,
+          field: :lesson_type,
+          label: Lesson.human_attribute_name(:lesson_type),
+          choices: Lesson.lesson_types.keys.map { |type| [type.humanize, type] } %>
       </div>
-    </div>
+
+      <div class="sm:col-span-3">
+        <%= render "shared/molecules/select_field",
+          form: form,
+          field: :status,
+          label: Lesson.human_attribute_name(:status),
+          choices: Lesson.statuses.keys.map { |status| [status.humanize, status] } %>
+      </div>
+
+      <div class="col-span-full">
+        <%= render "shared/molecules/form_field", form: form, field: :description, type: :text_area, input_html: { rows: 3 } %>
+      </div>
+
+      <div class="col-span-full">
+        <%= render "shared/molecules/form_field", form: form, field: :body, type: :text_area, input_html: { rows: 5 } %>
+      </div>
+
+      <div class="col-span-full">
+        <%= render "shared/molecules/form_field", form: form, field: :content_url %>
+      </div>
+    <% end %>
+
+    <%= render layout: "shared/molecules/form_section",
+      locals: {
+        title: t("admin_tenants.lessons.form.asset_title"),
+        description: t("admin_tenants.lessons.form.asset_description")
+      } do %>
+      <div class="col-span-full">
+        <%= render "shared/organisms/asset_uploader",
+          form: form,
+          field: :lesson_content_asset,
+          type: :mixed,
+          label: Lesson.human_attribute_name(:lesson_content_asset),
+          description: t("shared.asset_uploader.mixed_media_hint"),
+          accept: "image/png,image/jpeg,image/webp,video/mp4,application/pdf",
+          current_asset: lesson.lesson_content_asset,
+          current_url: lesson.content_url %>
+      </div>
+    <% end %>
   </div>
 
-  <div class="mt-6 flex items-center justify-end gap-x-6">
-    <%= render "shared/atoms/text_link", text: t("back"), path: back_path, base_class: "", class_name: "text-sm/6 font-semibold text-gray-900 dark:text-white" %>
-    <%= render "shared/atoms/button", text: submit_label, type: :submit %>
-  </div>
+  <%= render "shared/molecules/form_actions", back_path: back_path, submit_label: submit_label %>
 <% end %>

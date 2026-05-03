@@ -65,10 +65,11 @@
             <% end %>
           </div>
         <% else %>
-          <div class="app-surface app-surface--empty mt-6 p-10 text-center">
-            <p class="app-text app-text--strong text-base font-semibold"><%= t("courses.index.empty_title") %></p>
-            <p class="app-text app-text--body mt-2 text-sm leading-6"><%= t("courses.index.empty_description") %></p>
-          </div>
+          <%= render "shared/molecules/empty_state",
+            title: t("courses.index.empty_title"),
+            description: t("courses.index.empty_description"),
+            variant: :portal,
+            class_name: "mt-6 p-10" %>
         <% end %>
 
         <div class="mt-8">

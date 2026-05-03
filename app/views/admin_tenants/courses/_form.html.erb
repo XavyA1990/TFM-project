@@ -8,63 +8,54 @@
   <%= render "shared/molecules/error_summary", resource: course %>
 
   <div class="space-y-12">
-    <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3 dark:border-white/10">
-      <div>
-        <h2 class="text-base/7 font-semibold text-gray-900 dark:text-white"><%= Course.human_attribute_name(:title) %></h2>
-        <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400"><%= description %></p>
+    <%= render layout: "shared/molecules/form_section",
+      locals: {
+        title: Course.human_attribute_name(:title),
+        description: description
+      } do %>
+      <div class="sm:col-span-4">
+        <%= render "shared/molecules/form_field", form: form, field: :title %>
       </div>
 
-      <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
-        <div class="sm:col-span-4">
-          <%= render "shared/molecules/form_field", form: form, field: :title %>
-        </div>
-
-        <div class="sm:col-span-2">
-          <%= render "shared/molecules/select_field",
-            form: form,
-            field: :status,
-            label: Course.human_attribute_name(:status),
-            choices: Course.statuses.keys.map { |status| [status.humanize, status] } %>
-        </div>
-
-        <div class="col-span-full">
-          <%= render "shared/molecules/form_field", form: form, field: :short_description %>
-        </div>
-
-        <div class="col-span-full">
-          <%= render "shared/molecules/form_field", form: form, field: :description, type: :text_area, input_html: { rows: 4 } %>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3 dark:border-white/10">
-      <div>
-        <h2 class="text-base/7 font-semibold text-gray-900 dark:text-white"><%= details_title %></h2>
-        <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-400"><%= details_description %></p>
+      <div class="sm:col-span-2">
+        <%= render "shared/molecules/select_field",
+          form: form,
+          field: :status,
+          label: Course.human_attribute_name(:status),
+          choices: Course.statuses.keys.map { |status| [status.humanize, status] } %>
       </div>
 
-      <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
-        <div class="col-span-full">
-          <%= render "shared/molecules/form_field", form: form, field: :cover_image_url %>
-        </div>
-
-        <div class="col-span-full">
-          <%= render "shared/organisms/asset_uploader",
-            form: form,
-            field: :course_cover_image_asset,
-            type: :image,
-            label: Course.human_attribute_name(:course_cover_image_asset),
-            description: t("shared.asset_uploader.image_only_hint"),
-            accept: "image/png,image/jpeg,image/webp",
-            current_asset: course.course_cover_image_asset,
-            current_url: course.cover_image_url %>
-        </div>
+      <div class="col-span-full">
+        <%= render "shared/molecules/form_field", form: form, field: :short_description %>
       </div>
-    </div>
+
+      <div class="col-span-full">
+        <%= render "shared/molecules/form_field", form: form, field: :description, type: :text_area, input_html: { rows: 4 } %>
+      </div>
+    <% end %>
+
+    <%= render layout: "shared/molecules/form_section",
+      locals: {
+        title: details_title,
+        description: details_description
+      } do %>
+      <div class="col-span-full">
+        <%= render "shared/molecules/form_field", form: form, field: :cover_image_url %>
+      </div>
+
+      <div class="col-span-full">
+        <%= render "shared/organisms/asset_uploader",
+          form: form,
+          field: :course_cover_image_asset,
+          type: :image,
+          label: Course.human_attribute_name(:course_cover_image_asset),
+          description: t("shared.asset_uploader.image_only_hint"),
+          accept: "image/png,image/jpeg,image/webp",
+          current_asset: course.course_cover_image_asset,
+          current_url: course.cover_image_url %>
+      </div>
+    <% end %>
   </div>
 
-  <div class="mt-6 flex items-center justify-end gap-x-6">
-    <%= render "shared/atoms/text_link", text: t("back"), path: back_path, base_class: "", class_name: "text-sm/6 font-semibold text-gray-900 dark:text-white" %>
-    <%= render "shared/atoms/button", text: submit_label, type: :submit %>
-  </div>
+  <%= render "shared/molecules/form_actions", back_path: back_path, submit_label: submit_label %>
 <% end %>

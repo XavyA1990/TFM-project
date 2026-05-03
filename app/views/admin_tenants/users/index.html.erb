@@ -18,6 +18,8 @@
   headers: @user_table_headers,
   columns: @user_table_columns,
   users: @users,
+  empty_title: t(".empty_title"),
+  empty_description: t(".empty_description"),
   user_path_builder: ->(user) { admin_tenants_user_path(tenant_slug: current_tenant.slug, id: user[:slug]) } %>
 
 <%= render "shared/molecules/pagination",

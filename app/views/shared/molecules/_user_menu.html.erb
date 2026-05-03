@@ -1,0 +1,36 @@
+<div data-controller="dropdown" class="relative ml-3">
+  <button
+    data-action="click->dropdown#toggle"
+    class="relative ml-3 flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 hover:cursor-pointer"
+  >
+    <%= image_tag current_user.avatar_source, alt: current_user.full_name, class: "size-8 rounded-full object-cover bg-gray-800 outline -outline-offset-1 outline-white/10" %>
+  </button>
+
+  <div
+    data-dropdown-target="menu"
+    class="absolute right-0 z-10 mt-2 hidden w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+  >
+    <%= render "shared/molecules/dropdown_menu_link",
+      text: t("navbar.profile"),
+      path: edit_user_registration_path %>
+
+    <% if dashboard_nav_links.any? %>
+      <% dashboard_nav_links.each do |dashboard_path| %>
+        <%= render "shared/molecules/dropdown_menu_link",
+          text: "#{t("navbar.dashboard")} #{dashboard_path[:name]}",
+          path: dashboard_path[:path] %>
+      <% end %>
+    <% end %>
+
+    <% if can? :access, :super_admin_panel %>
+      <%= render "shared/molecules/dropdown_menu_link",
+        text: t("navbar.admin"),
+        path: admin_tenants_path %>
+    <% end %>
+
+    <%= render "shared/molecules/dropdown_menu_link",
+      text: t("devise.registrations.new.log_out"),
+      path: destroy_user_session_path,
+      data: { turbo_method: :delete } %>
+  </div>
+</div>

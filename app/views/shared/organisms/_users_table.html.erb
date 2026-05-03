@@ -9,6 +9,8 @@
   records: users,
   headers: headers,
   columns: columns,
+  empty_title: local_assigns.fetch(:empty_title, t("shared.empty_state.table_empty_title")),
+  empty_description: local_assigns.fetch(:empty_description, t("shared.empty_state.table_empty_description")),
   mobile_title_builder: ->(user) { user[:full_name] },
   mobile_subtitle_builder: ->(user) { user[:email] },
   record_name_builder: ->(user) { user[:full_name] },

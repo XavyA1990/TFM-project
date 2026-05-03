@@ -1,0 +1,52 @@
+<%
+  variant = local_assigns.fetch(:variant, :default).to_sym
+  class_name = local_assigns[:class_name]
+  title_class_name = local_assigns[:title_class_name]
+  description_class_name = local_assigns[:description_class_name]
+  message_class_name = local_assigns[:message_class_name]
+
+  wrapper_class =
+    case variant
+    when :portal
+      "app-surface app-surface--empty p-8 text-center"
+    when :portal_strong
+      "app-surface app-surface--empty-strong p-4"
+    else
+      "app-surface app-surface--admin-empty p-6"
+    end
+
+  title_class =
+    case variant
+    when :portal, :portal_strong
+      "app-text app-text--strong text-base font-semibold"
+    else
+      "app-text app-text--admin-strong text-base font-semibold"
+    end
+
+  description_class =
+    case variant
+    when :portal, :portal_strong
+      "app-text app-text--body mt-2 text-sm leading-6"
+    else
+      "app-text app-text--admin-muted mt-2 text-sm"
+    end
+
+  message_class =
+    case variant
+    when :portal, :portal_strong
+      "app-text app-text--body text-sm"
+    else
+      "app-text app-text--admin-muted text-sm"
+    end
+%>
+
+<div class="<%= [wrapper_class, class_name].compact.join(" ") %>">
+  <% if local_assigns[:message].present? %>
+    <p class="<%= [message_class, message_class_name].compact.join(" ") %>"><%= message %></p>
+  <% else %>
+    <p class="<%= [title_class, title_class_name].compact.join(" ") %>"><%= title %></p>
+    <% if local_assigns[:description].present? %>
+      <p class="<%= [description_class, description_class_name].compact.join(" ") %>"><%= description %></p>
+    <% end %>
+  <% end %>
+</div>

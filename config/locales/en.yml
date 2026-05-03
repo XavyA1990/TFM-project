@@ -232,6 +232,9 @@ en:
         empty_description: "Published modules will appear here as soon as they are available in this portal."
         empty_lessons: "This module has no published lessons yet."
   shared:
+    empty_state:
+      table_empty_title: "No records available"
+      table_empty_description: "Records will appear here as soon as they become available."
     asset_uploader:
       drop_title: "Drag your file here"
       drop_description: "Or click to choose it from your device."
@@ -292,10 +295,14 @@ en:
         title: "Courses"
         description: "Global course administration across all tenants."
         tenant: "Tenant"
+        empty_title: "There are no courses yet"
+        empty_description: "Courses created in the platform will appear here."
     tenants:
       index:
         title: "Tenants"
         description: "Global tenant administration for super admins."
+        empty_title: "There are no tenants yet"
+        empty_description: "Tenants created in the platform will appear here."
       show:
         title: "Tenant details"
         description: "Global details for the selected tenant."
@@ -318,6 +325,8 @@ en:
         tenant_role: "Tenant role"
         title: "Users"
         description: "Global user administration for super admins."
+        empty_title: "There are no users yet"
+        empty_description: "Users who register in the platform will appear here."
       show:
         title: "User details"
         description: "Global details for the selected user."
@@ -333,6 +342,8 @@ en:
         role_defaulted_to_customer: "Role %{role} was removed from %{tenant} and %{fallback_role} was assigned so the user does not remain without roles."
         customer_role_required: "The user must keep at least the customer role in %{tenant}."
         no_roles_assigned: "No roles assigned"
+        tenant_role_manager_empty_title: "There are no tenants to manage"
+        tenant_role_manager_empty_description: "Role management by tenant will appear here once tenant assignments are available."
   admin_tenants:
     lessons:
       destroyed: "Lesson was successfully deleted."
@@ -374,6 +385,8 @@ en:
       index:
         title: "Courses"
         description: "Manage courses for the current tenant."
+        empty_title: "There are no courses yet"
+        empty_description: "Courses created for this tenant will appear here."
       show:
         title: "Course details"
         description: "Details of the selected course in the current tenant."
@@ -410,6 +423,8 @@ en:
       index:
         title: "Users"
         description: "Manage users for the current tenant."
+        empty_title: "There are no users yet"
+        empty_description: "Users with access to this tenant will appear here."
       show:
         title: "User details"
         description: "Details for the selected user in the current tenant."
@@ -425,3 +440,5 @@ en:
         role_defaulted_to_customer: "Role %{role} was removed from %{tenant} and %{fallback_role} was assigned so the user does not remain without roles."
         customer_role_required: "The user must keep at least the customer role in %{tenant}."
         no_roles_assigned: "No roles assigned"
+        tenant_role_manager_empty_title: "There are no tenants to manage"
+        tenant_role_manager_empty_description: "Role management by tenant will appear here once tenant assignments are available."

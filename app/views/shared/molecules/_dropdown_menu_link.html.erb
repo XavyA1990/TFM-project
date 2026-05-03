@@ -1,0 +1,12 @@
+<%
+  data = local_assigns[:data]
+  class_name = local_assigns[:class_name]
+  base_class = "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-700"
+%>
+
+<%= render "shared/atoms/text_link",
+  text: text,
+  path: path,
+  data: data,
+  base_class: "",
+  class_name: [base_class, class_name].compact.join(" ") %>

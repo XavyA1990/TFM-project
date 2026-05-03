@@ -1,0 +1,20 @@
+<%
+  active = local_assigns.fetch(:active, false)
+  mobile = local_assigns.fetch(:mobile, false)
+  class_name = local_assigns[:class_name]
+
+  base_class =
+    if mobile
+      [
+        "block rounded-md px-3 py-2 text-base font-medium transition",
+        (active ? "bg-white/10 text-white" : "text-gray-300 hover:bg-white/5 hover:text-white")
+      ].join(" ")
+    else
+      [
+        "rounded-md px-3 py-2 text-sm font-medium transition",
+        (active ? "bg-white/10 text-white" : "text-gray-300 hover:bg-white/5 hover:text-white")
+      ].join(" ")
+    end
+%>
+
+<%= link_to text, path, class: [base_class, class_name].compact.join(" ") %>

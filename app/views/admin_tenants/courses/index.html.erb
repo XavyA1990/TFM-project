@@ -29,7 +29,9 @@
 <%= render "shared/organisms/courses_table",
   headers: @course_table_headers,
   columns: @course_table_columns,
-  courses: @courses %>
+  courses: @courses,
+  empty_title: t(".empty_title"),
+  empty_description: t(".empty_description") %>
 
 <%= render "shared/molecules/pagination",
   displayed_count: @courses.size,

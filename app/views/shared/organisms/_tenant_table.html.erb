@@ -26,6 +26,8 @@
   records: tenants,
   headers: headers,
   columns: columns,
+  empty_title: local_assigns.fetch(:empty_title, t("shared.empty_state.table_empty_title")),
+  empty_description: local_assigns.fetch(:empty_description, t("shared.empty_state.table_empty_description")),
   mobile_title_builder: ->(tenant) { tenant[:name] },
   mobile_subtitle_builder: ->(tenant) { tenant[:slug] },
   record_name_builder: ->(tenant) { tenant[:name] },

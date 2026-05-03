@@ -215,6 +215,9 @@ es:
         empty_description: "Los módulos publicados aparecerán aquí en cuanto estén disponibles en este portal."
         empty_lessons: "Este módulo todavía no tiene lecciones publicadas."
   shared:
+    empty_state:
+      table_empty_title: "No hay registros disponibles"
+      table_empty_description: "Los registros aparecerán aquí en cuanto estén disponibles."
     asset_uploader:
       drop_title: "Arrastra tu archivo aquí"
       drop_description: "O haz clic para seleccionarlo desde tu equipo."
@@ -275,10 +278,14 @@ es:
         title: "Cursos"
         description: "Administración global de cursos de todos los tenants."
         tenant: "Tenant"
+        empty_title: "Todavía no hay cursos"
+        empty_description: "Los cursos creados en la plataforma aparecerán aquí."
     tenants:
       index:
         title: "Tenants"
         description: "Administración global de tenants para super admins."
+        empty_title: "Todavía no hay tenants"
+        empty_description: "Los tenants creados en la plataforma aparecerán aquí."
       show:
         title: "Detalle del tenant"
         description: "Detalles globales del tenant seleccionado."
@@ -301,6 +308,8 @@ es:
         tenant_role: "Rol en tenant"
         title: "Usuarios"
         description: "Administración global de usuarios para super admins."
+        empty_title: "Todavía no hay usuarios"
+        empty_description: "Los usuarios que se registren en la plataforma aparecerán aquí."
       show:
         title: "Detalle del usuario"
         description: "Detalles globales del usuario seleccionado."
@@ -316,6 +325,8 @@ es:
         role_defaulted_to_customer: "Se eliminó el rol %{role} de %{tenant} y se asignó %{fallback_role} para que el usuario no quede sin roles."
         customer_role_required: "El usuario debe conservar al menos el rol customer en %{tenant}."
         no_roles_assigned: "Sin roles asignados"
+        tenant_role_manager_empty_title: "No hay tenants para gestionar"
+        tenant_role_manager_empty_description: "La gestión de roles por tenant aparecerá aquí cuando existan asignaciones disponibles."
   admin_tenants:
     lessons:
       destroyed: "La lección fue eliminada exitosamente."
@@ -357,6 +368,8 @@ es:
       index:
         title: "Cursos"
         description: "Gestiona los cursos del tenant actual."
+        empty_title: "Todavía no hay cursos"
+        empty_description: "Los cursos creados para este tenant aparecerán aquí."
       show:
         title: "Detalle del curso"
         description: "Detalles del curso seleccionado en el tenant actual."
@@ -393,6 +406,8 @@ es:
       index:
         title: "Usuarios"
         description: "Gestiona los usuarios del tenant actual."
+        empty_title: "Todavía no hay usuarios"
+        empty_description: "Los usuarios con acceso a este tenant aparecerán aquí."
       show:
         title: "Detalle del usuario"
         description: "Detalles del usuario seleccionado en el tenant actual."
@@ -408,3 +423,5 @@ es:
         role_defaulted_to_customer: "Se eliminó el rol %{role} de %{tenant} y se asignó %{fallback_role} para que el usuario no quede sin roles."
         customer_role_required: "El usuario debe conservar al menos el rol customer en %{tenant}."
         no_roles_assigned: "Sin roles asignados"
+        tenant_role_manager_empty_title: "No hay tenants para gestionar"
+        tenant_role_manager_empty_description: "La gestión de roles por tenant aparecerá aquí cuando existan asignaciones disponibles."

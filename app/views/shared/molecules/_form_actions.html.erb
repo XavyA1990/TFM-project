@@ -1,0 +1,12 @@
+<%
+  back_text = local_assigns.fetch(:back_text, t("back"))
+%>
+
+<div class="mt-6 flex items-center justify-end gap-x-6">
+  <%= render "shared/atoms/text_link",
+    text: back_text,
+    path: back_path,
+    base_class: "",
+    class_name: "text-sm/6 font-semibold text-gray-900 dark:text-white" %>
+  <%= render "shared/atoms/button", text: submit_label, type: :submit %>
+</div>

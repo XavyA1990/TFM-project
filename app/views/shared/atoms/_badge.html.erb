@@ -1,0 +1,25 @@
+<%
+  variant = local_assigns.fetch(:variant, :success).to_sym
+  size = local_assigns.fetch(:size, :sm).to_sym
+  class_name = local_assigns[:class_name]
+
+  variant_class =
+    case variant
+    when :info
+      "app-badge--info"
+    when :neutral
+      "app-badge--neutral"
+    else
+      "app-badge--success"
+    end
+
+  size_class =
+    case size
+    when :xs
+      "app-badge--xs"
+    else
+      "app-badge--sm"
+    end
+%>
+
+<span class="<%= ["app-badge", variant_class, size_class, class_name].compact.join(" ") %>"><%= text %></span>

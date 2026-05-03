@@ -39,6 +39,8 @@
   records: courses,
   headers: headers,
   columns: columns,
+  empty_title: local_assigns.fetch(:empty_title, t("shared.empty_state.table_empty_title")),
+  empty_description: local_assigns.fetch(:empty_description, t("shared.empty_state.table_empty_description")),
   mobile_title_builder: ->(course) { course[:title] },
   mobile_subtitle_builder: ->(course) { course[:status] },
   record_name_builder: ->(course) { course[:title] },

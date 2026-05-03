@@ -4,6 +4,10 @@
   --app-color-text-strong: var(--color-white);
   --app-color-text-body: var(--color-gray-300);
   --app-color-text-muted: var(--color-gray-400);
+  --app-color-text-admin-strong: var(--color-gray-900);
+  --app-color-text-admin-body: var(--color-gray-700);
+  --app-color-text-admin-muted: var(--color-gray-600);
+  --app-color-text-admin-subtle: var(--color-gray-500);
   --app-color-brand-soft: var(--color-indigo-300);
   --app-color-brand: var(--color-indigo-400);
   --app-color-accent: var(--color-sky-300);
@@ -19,7 +23,13 @@
   --app-color-surface: color-mix(in oklab, var(--color-white) 5%, transparent);
   --app-color-surface-hover: color-mix(in oklab, var(--color-white) 10%, transparent);
   --app-color-surface-strong: color-mix(in oklab, var(--color-gray-950) 40%, transparent);
+  --app-color-surface-admin: var(--color-white);
+  --app-color-surface-admin-subtle: var(--color-gray-50);
+  --app-color-surface-admin-soft: color-mix(in oklab, var(--color-white) 80%, transparent);
   --app-color-border-subtle: color-mix(in oklab, var(--color-white) 10%, transparent);
+  --app-color-border-admin: var(--color-gray-200);
+  --app-color-border-admin-strong: var(--color-gray-300);
+  --app-color-ring-admin: color-mix(in oklab, var(--color-black) 5%, transparent);
 }
 
 @layer components {
@@ -34,6 +44,22 @@
 
   .app-text--muted {
     color: var(--app-color-text-muted);
+  }
+
+  .app-text--admin-strong {
+    color: var(--app-color-text-admin-strong);
+  }
+
+  .app-text--admin-body {
+    color: var(--app-color-text-admin-body);
+  }
+
+  .app-text--admin-muted {
+    color: var(--app-color-text-admin-muted);
+  }
+
+  .app-text--admin-subtle {
+    color: var(--app-color-text-admin-subtle);
   }
 
   .app-text--brand {
@@ -76,6 +102,34 @@
     background-color: var(--app-color-surface-strong);
   }
 
+  .app-surface--admin-card {
+    @apply rounded-2xl border shadow-sm;
+    border-color: var(--app-color-border-admin);
+    background-color: var(--app-color-surface-admin);
+  }
+
+  .app-surface--admin-card-subtle {
+    @apply rounded-2xl border;
+    border-color: var(--app-color-border-admin);
+    background-color: var(--app-color-surface-admin-subtle);
+  }
+
+  .app-surface--admin-card-soft {
+    @apply rounded-xl border;
+    border-color: var(--app-color-border-admin);
+    background-color: var(--app-color-surface-admin-soft);
+  }
+
+  .app-surface--admin-empty {
+    @apply rounded-2xl border border-dashed;
+    border-color: var(--app-color-border-admin-strong);
+    background-color: var(--app-color-surface-admin-subtle);
+  }
+
+  .app-surface--admin-table-head {
+    background-color: var(--app-color-surface-admin);
+  }
+
   .app-link--primary {
     @apply font-semibold;
     color: var(--color-indigo-600);
@@ -92,6 +146,15 @@
 
   .app-link--accent:hover {
     color: var(--app-color-accent-soft);
+  }
+
+  .app-link--danger {
+    @apply font-semibold;
+    color: var(--app-color-action-danger);
+  }
+
+  .app-link--danger:hover {
+    color: var(--app-color-action-danger-hover);
   }
 
   .app-button {
@@ -126,7 +189,29 @@
     background-color: var(--color-gray-700);
   }
 
-  .app-carousel {}
+  .app-badge {
+    @apply inline-flex items-center rounded-full px-3 py-1 ring-1 ring-inset;
+  }
+
+  .app-badge--success {
+    @apply bg-emerald-100 font-semibold text-emerald-800 ring-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-400/30;
+  }
+
+  .app-badge--info {
+    @apply bg-sky-100 font-semibold text-sky-800 ring-sky-200 dark:bg-sky-500/15 dark:text-sky-300 dark:ring-sky-400/30;
+  }
+
+  .app-badge--neutral {
+    @apply bg-gray-100 font-medium text-gray-600 ring-gray-200 dark:bg-white/10 dark:text-gray-300 dark:ring-white/10;
+  }
+
+  .app-badge--sm {
+    @apply text-sm;
+  }
+
+  .app-badge--xs {
+    @apply text-xs;
+  }
 
   .app-carousel__control {
     @apply inline-flex h-10 w-10 items-center justify-center rounded-full border text-white transition;
@@ -136,6 +221,18 @@
 
   .app-carousel__control:hover {
     background-color: var(--app-color-surface-hover);
+  }
+
+  .app-divider--admin {
+    border-color: var(--app-color-border-admin);
+  }
+
+  .app-divider--subtle {
+    border-color: var(--app-color-border-subtle);
+  }
+
+  .app-ring--admin {
+    --tw-ring-color: var(--app-color-ring-admin);
   }
 
   .app-background--aurora-portal {
@@ -181,6 +278,30 @@
       color: var(--app-color-brand-soft);
     }
 
+    .app-link--danger {
+      color: var(--app-color-action-danger-dark);
+    }
+
+    .app-link--danger:hover {
+      color: var(--app-color-action-danger-dark-hover);
+    }
+
+    .app-text--admin-strong {
+      color: var(--color-gray-100);
+    }
+
+    .app-text--admin-body {
+      color: var(--color-gray-300);
+    }
+
+    .app-text--admin-muted {
+      color: var(--color-gray-400);
+    }
+
+    .app-text--admin-subtle {
+      color: var(--color-gray-400);
+    }
+
     .app-button--primary {
       background-color: var(--app-color-action-primary-dark);
       outline-color: var(--app-color-action-primary-dark);
@@ -203,6 +324,39 @@
 
     .app-button--secondary {
       box-shadow: none;
+    }
+
+    .app-surface--admin-card {
+      border-color: var(--app-color-border-subtle);
+      background-color: var(--app-color-surface);
+      box-shadow: none;
+    }
+
+    .app-surface--admin-card-subtle {
+      border-color: var(--app-color-border-subtle);
+      background-color: var(--app-color-surface);
+    }
+
+    .app-surface--admin-card-soft {
+      border-color: var(--app-color-border-subtle);
+      background-color: var(--app-color-surface);
+    }
+
+    .app-surface--admin-empty {
+      border-color: var(--app-color-border-subtle);
+      background-color: var(--app-color-surface);
+    }
+
+    .app-surface--admin-table-head {
+      background-color: var(--color-gray-900);
+    }
+
+    .app-divider--admin {
+      border-color: var(--app-color-border-subtle);
+    }
+
+    .app-ring--admin {
+      --tw-ring-color: var(--app-color-border-subtle);
     }
   }
 }

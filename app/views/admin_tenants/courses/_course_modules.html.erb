@@ -10,7 +10,7 @@
   <% if course_modules.any? %>
     <div class="mt-6 grid gap-6">
       <% course_modules.each do |course_module| %>
-        <article class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5" data-controller="disclosure">
+        <article class="app-surface app-surface--admin-card p-5" data-controller="disclosure">
           <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <button
               type="button"
@@ -50,9 +50,7 @@
             </button>
 
             <div class="flex shrink-0 flex-wrap items-center gap-3 sm:pl-4">
-              <span class="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-800 ring-1 ring-inset ring-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-400/30">
-                <%= course_module[:status] %>
-              </span>
+              <%= render "shared/atoms/badge", text: course_module[:status] %>
 
               <% if can?(:update, course) %>
                 <%= render "shared/atoms/text_link",
@@ -73,7 +71,8 @@
                     course_id: course.slug,
                     id: course_module[:slug]
                   ),
-                  class_name: "text-sm font-semibold text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300",
+                  base_class: "app-link app-link--danger",
+                  class_name: "text-sm",
                   data: {
                     turbo_method: :delete,
                     turbo_confirm: t("actions.confirm_deletion", name: course_module[:title])
@@ -119,7 +118,7 @@
               <% if course_module[:lessons].any? %>
                 <div class="mt-4 grid gap-4">
                   <% course_module[:lessons].each do |lesson| %>
-                    <article class="rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-white/10 dark:bg-white/5">
+                    <article class="app-surface app-surface--admin-card-subtle p-4">
                       <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                         <div>
                           <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
@@ -129,12 +128,8 @@
                         </div>
 
                         <div class="flex flex-wrap items-center gap-2">
-                          <span class="inline-flex items-center rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold text-sky-800 ring-1 ring-inset ring-sky-200 dark:bg-sky-500/15 dark:text-sky-300 dark:ring-sky-400/30">
-                            <%= lesson[:lesson_type] %>
-                          </span>
-                          <span class="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800 ring-1 ring-inset ring-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-400/30">
-                            <%= lesson[:status] %>
-                          </span>
+                          <%= render "shared/atoms/badge", text: lesson[:lesson_type], variant: :info, size: :xs %>
+                          <%= render "shared/atoms/badge", text: lesson[:status], size: :xs %>
 
                           <% if can?(:update, course) %>
                             <%= render "shared/atoms/text_link",
@@ -157,7 +152,8 @@
                                 course_module_id: course_module[:slug],
                                 id: lesson[:slug]
                               ),
-                              class_name: "text-sm font-semibold text-red-600 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300",
+                              base_class: "app-link app-link--danger",
+                              class_name: "text-sm",
                               data: {
                                 turbo_method: :delete,
                                 turbo_confirm: t("actions.confirm_deletion", name: lesson[:title])
@@ -177,9 +173,9 @@
                   <% end %>
                 </div>
               <% else %>
-                <div class="mt-4 rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-6 text-sm text-gray-600 dark:border-white/10 dark:bg-white/5 dark:text-gray-300">
-                  <%= t("admin_tenants.courses.show.empty_lessons") %>
-                </div>
+                <%= render "shared/molecules/empty_state",
+                  message: t("admin_tenants.courses.show.empty_lessons"),
+                  class_name: "mt-4" %>
               <% end %>
             </section>
           </div>
@@ -187,8 +183,8 @@
       <% end %>
     </div>
   <% else %>
-    <div class="mt-6 rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-6 text-sm text-gray-600 dark:border-white/10 dark:bg-white/5 dark:text-gray-300">
-      <%= t("admin_tenants.courses.show.empty_modules") %>
-    </div>
+    <%= render "shared/molecules/empty_state",
+      message: t("admin_tenants.courses.show.empty_modules"),
+      class_name: "mt-6" %>
   <% end %>
 </section>

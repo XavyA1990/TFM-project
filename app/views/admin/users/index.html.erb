@@ -12,7 +12,9 @@
 <%= render "shared/organisms/users_table",
   headers: @user_table_headers,
   columns: @user_table_columns,
-  users: @users %>
+  users: @users,
+  empty_title: t(".empty_title"),
+  empty_description: t(".empty_description") %>
 
 <%= render "shared/molecules/pagination",
   displayed_count: @users.size,

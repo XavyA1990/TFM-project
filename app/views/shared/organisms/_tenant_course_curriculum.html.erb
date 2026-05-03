@@ -78,19 +78,20 @@
                   <% end %>
                 </ol>
               <% else %>
-                <div class="app-surface app-surface--empty-strong app-text app-text--body p-4 text-sm">
-                  <%= t("courses.show.curriculum.empty_lessons") %>
-                </div>
+                <%= render "shared/molecules/empty_state",
+                  message: t("courses.show.curriculum.empty_lessons"),
+                  variant: :portal_strong %>
               <% end %>
             </div>
           </article>
         <% end %>
       </div>
     <% else %>
-      <div class="app-surface app-surface--empty mt-10 p-8 text-center">
-        <p class="app-text app-text--strong text-base font-semibold"><%= t("courses.show.curriculum.empty_title") %></p>
-        <p class="app-text app-text--body mt-2 text-sm leading-6"><%= t("courses.show.curriculum.empty_description") %></p>
-      </div>
+      <%= render "shared/molecules/empty_state",
+        title: t("courses.show.curriculum.empty_title"),
+        description: t("courses.show.curriculum.empty_description"),
+        variant: :portal,
+        class_name: "mt-10" %>
     <% end %>
   </div>
 </section>

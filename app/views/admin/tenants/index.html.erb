@@ -22,7 +22,9 @@
 <%= render "shared/organisms/tenant_table",
   headers: @tenant_table_headers,
   columns: @tenant_table_columns,
-  tenants: @tenants %>
+  tenants: @tenants,
+  empty_title: t(".empty_title"),
+  empty_description: t(".empty_description") %>
 
 <%= render "shared/molecules/pagination",
   displayed_count: @tenants.size,

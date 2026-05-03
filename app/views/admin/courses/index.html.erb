@@ -13,6 +13,8 @@
   headers: @course_table_headers,
   columns: @course_table_columns,
   courses: @courses,
+  empty_title: t(".empty_title"),
+  empty_description: t(".empty_description"),
   course_path_builder: ->(course) { admin_tenants_course_path(tenant_slug: course[:tenant_slug], id: course[:slug]) },
   edit_course_path_builder: ->(course) { edit_admin_tenants_course_path(tenant_slug: course[:tenant_slug], id: course[:slug]) },
   delete_course_path_builder: ->(course) { admin_tenants_course_path(tenant_slug: course[:tenant_slug], id: course[:slug]) } %>
