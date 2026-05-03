@@ -42,10 +42,6 @@
       <div class="col-span-full">
         <%= render "shared/molecules/form_field", form: form, field: :body, type: :text_area, input_html: { rows: 5 } %>
       </div>
-
-      <div class="col-span-full">
-        <%= render "shared/molecules/form_field", form: form, field: :content_url %>
-      </div>
     <% end %>
 
     <%= render layout: "shared/molecules/form_section",
@@ -61,8 +57,7 @@
           label: Lesson.human_attribute_name(:lesson_content_asset),
           description: t("shared.asset_uploader.mixed_media_hint"),
           accept: "image/png,image/jpeg,image/webp,video/mp4,application/pdf",
-          current_asset: lesson.lesson_content_asset,
-          current_url: lesson.content_url %>
+          current_asset: lesson.lesson_content_asset %>
       </div>
     <% end %>
   </div>

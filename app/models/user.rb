@@ -26,7 +26,6 @@ class User < ApplicationRecord
 
   def avatar_source
     return avatar_asset if avatar_asset.attached?
-    return avatar_url if avatar_url.present?
 
     "default_avatar.svg"
   end

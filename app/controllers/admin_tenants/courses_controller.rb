@@ -128,7 +128,7 @@ class AdminTenants::CoursesController < AdminTenants::BaseController
   end
 
   def course_params
-    params.require(:course).permit(:title, :short_description, :description, :status, :cover_image_url, :course_cover_image_asset)
+    params.require(:course).permit(:title, :short_description, :description, :status, :course_cover_image_asset)
   end
 
   def authorize_courses_index!

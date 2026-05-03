@@ -121,14 +121,14 @@ module AdminTenants
     def course_cover_image_value
       return @course.course_cover_image_asset.filename.to_s if @course.course_cover_image_asset.attached?
 
-      @course.cover_image_url
+      nil
     end
 
     def lesson_content_value(lesson)
       return lesson.lesson_content_asset.filename.to_s if lesson.lesson_content_asset.attached?
       return I18n.t("admin_tenants.courses.show.text_content_available") if lesson.body.present?
 
-      lesson.content_url
+      nil
     end
   end
 end

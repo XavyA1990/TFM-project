@@ -17,7 +17,6 @@ class Tenant < ApplicationRecord
 
   def logo_source
     return logo_asset if logo_asset.attached?
-    return logo_url if logo_url.present?
 
     nil
   end

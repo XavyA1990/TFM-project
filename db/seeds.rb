@@ -161,8 +161,7 @@ def lesson_definitions(course_status:)
       lesson_type: lesson_type,
       status: course_status,
       position: lesson_index + 1,
-      body: text_body,
-      content_url: nil
+      body: text_body
     }
   end
 end
@@ -243,7 +242,6 @@ def create_lesson!(course_module:, attrs:)
   lesson.title = attrs[:title]
   lesson.description = attrs[:description]
   lesson.body = attrs[:body]
-  lesson.content_url = attrs[:content_url]
   lesson.lesson_type = attrs[:lesson_type]
   lesson.position = attrs[:position]
   lesson.status = attrs[:status]

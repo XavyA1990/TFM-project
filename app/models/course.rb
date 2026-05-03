@@ -17,7 +17,6 @@ class Course < ApplicationRecord
 
   def course_cover_image_source
     return course_cover_image_asset if course_cover_image_asset.attached?
-    return cover_image_url if cover_image_url.present?
 
     nil
   end

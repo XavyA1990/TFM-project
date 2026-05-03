@@ -19,8 +19,6 @@ class Lesson < ApplicationRecord
 
   def content_source
     return lesson_content_asset if lesson_content_asset.attached?
-    return content_url if content_url.present?
-
     nil
   end
 

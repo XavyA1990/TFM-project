@@ -39,9 +39,6 @@
         title: details_title,
         description: details_description
       } do %>
-      <div class="col-span-full">
-        <%= render "shared/molecules/form_field", form: form, field: :cover_image_url %>
-      </div>
 
       <div class="col-span-full">
         <%= render "shared/organisms/asset_uploader",
@@ -51,8 +48,7 @@
           label: Course.human_attribute_name(:course_cover_image_asset),
           description: t("shared.asset_uploader.image_only_hint"),
           accept: "image/png,image/jpeg,image/webp",
-          current_asset: course.course_cover_image_asset,
-          current_url: course.cover_image_url %>
+          current_asset: course.course_cover_image_asset %>
       </div>
     <% end %>
   </div>

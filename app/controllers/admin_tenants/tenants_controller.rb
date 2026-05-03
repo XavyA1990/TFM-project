@@ -72,7 +72,7 @@ class AdminTenants::TenantsController < AdminTenants::BaseController
   end
 
   def tenant_params
-    params.require(:tenant).permit(:name, :description, :header_text, :subheader_text, :logo_url, :logo_asset)
+    params.require(:tenant).permit(:name, :description, :header_text, :subheader_text, :logo_asset)
   end
 
   def authorize_tenant_read!

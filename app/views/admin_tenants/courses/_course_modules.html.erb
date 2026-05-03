@@ -155,7 +155,7 @@
                       <%= render "shared/molecules/detail_list", items: [
                         [Lesson.human_attribute_name(:description), lesson[:description]],
                         [Lesson.human_attribute_name(:body), lesson[:body]],
-                        [Lesson.human_attribute_name(:content_url), lesson[:content_reference]],
+                        [Lesson.human_attribute_name(:lesson_content_asset), lesson[:content_reference]],
                         [Lesson.human_attribute_name(:created_at), lesson[:created_at]],
                         [Lesson.human_attribute_name(:updated_at), lesson[:updated_at]]
                       ] %>

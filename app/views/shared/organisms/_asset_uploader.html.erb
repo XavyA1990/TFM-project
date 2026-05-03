@@ -5,7 +5,6 @@
   accept = local_assigns[:accept]
   direct_upload = local_assigns.fetch(:direct_upload, true)
   current_asset = local_assigns[:current_asset]
-  current_url = local_assigns[:current_url].presence
   is_current_asset_attached = current_asset&.attached?
   current_content_type = is_current_asset_attached ? current_asset.content_type.to_s : nil
 
@@ -45,13 +44,6 @@
 
   if [:image, :video].include?(current_preview_kind)
     current_preview_url = url_for(current_asset)
-  end
-
-  if current_url.present? && current_preview_kind.nil?
-    current_preview_kind = asset_type == :image ? :image : :file
-    current_preview_url = current_url if current_preview_kind == :image
-    current_filename = current_url
-    current_meta = t("shared.asset_uploader.current_file")
   end
 
   preview_visible = current_preview_kind.present?

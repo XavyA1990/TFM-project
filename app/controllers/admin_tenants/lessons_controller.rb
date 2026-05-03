@@ -129,7 +129,7 @@ class AdminTenants::LessonsController < AdminTenants::BaseController
   end
 
   def lesson_params
-    params.require(:lesson).permit(:title, :description, :body, :content_url, :position, :lesson_type, :status, :lesson_content_asset)
+    params.require(:lesson).permit(:title, :description, :body, :position, :lesson_type, :status, :lesson_content_asset)
   end
 
   def authorize_lesson_create!

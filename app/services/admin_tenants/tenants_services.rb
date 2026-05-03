@@ -41,7 +41,7 @@ module AdminTenants
     def tenant_logo_value
       return @tenant.logo_asset.filename.to_s if @tenant.logo_asset.attached?
 
-      @tenant.logo_url
+      nil
     end
   end
 end

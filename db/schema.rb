@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_28_031130) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_03_221338) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -58,7 +58,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_28_031130) do
   end
 
   create_table "courses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "cover_image_url"
     t.datetime "created_at", null: false
     t.text "description"
     t.string "short_description"
@@ -85,7 +84,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_28_031130) do
 
   create_table "lessons", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "body"
-    t.string "content_url"
     t.uuid "course_module_id", null: false
     t.datetime "created_at", null: false
     t.text "description"
@@ -131,7 +129,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_28_031130) do
     t.datetime "created_at", null: false
     t.string "description"
     t.string "header_text"
-    t.string "logo_url"
     t.string "name", null: false
     t.string "slug", null: false
     t.string "subheader_text"
@@ -151,7 +148,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_28_031130) do
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "avatar_url"
     t.datetime "confirmation_sent_at"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
