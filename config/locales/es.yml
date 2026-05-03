@@ -177,13 +177,11 @@ es:
       description: "Explora el catálogo publicado disponible en %{tenant}."
       search:
         label: "Buscar cursos"
-        description: "Busca por título del curso o descripción dentro de este tenant."
+        description: "Busca por título del curso o descripción"
         placeholder: "Buscar cursos publicados"
         submit: "Buscar"
-        reset: "Restablecer"
       filters:
         title: "Filtros"
-        description: "Elige cómo se deben ordenar los cursos publicados."
         sort_label: "Ordenar por"
         apply: "Aplicar filtros"
       results:

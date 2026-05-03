@@ -194,13 +194,11 @@ en:
       description: "Explore the published catalog available in %{tenant}."
       search:
         label: "Search courses"
-        description: "Search by course title or description within this tenant."
+        description: "Search by course title or description"
         placeholder: "Search published courses"
         submit: "Search"
-        reset: "Reset"
       filters:
         title: "Filters"
-        description: "Choose how the published courses should be ordered."
         sort_label: "Sort by"
         apply: "Apply filters"
       results:

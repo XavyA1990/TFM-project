@@ -23,7 +23,6 @@
 
         <div class="flex flex-wrap items-center gap-3">
           <%= render "shared/atoms/button", text: t("courses.index.search.submit"), type: :submit, class_name: "w-full justify-center sm:w-auto" %>
-          <%= render "shared/atoms/button_link", text: t("courses.index.search.reset"), path: tenant_courses_path(tenant_slug: current_tenant.slug), variant: :secondary, class_name: "w-full justify-center sm:w-auto" %>
         </div>
       </div>
     </section>
@@ -31,7 +30,6 @@
     <div class="grid gap-8 lg:grid-cols-[18rem_minmax(0,1fr)]">
       <aside class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/20 backdrop-blur">
         <h2 class="text-lg font-bold text-white"><%= t("courses.index.filters.title") %></h2>
-        <p class="mt-2 text-sm leading-6 text-gray-300"><%= t("courses.index.filters.description") %></p>
 
         <div class="mt-6 space-y-5">
           <%= render "shared/molecules/select_field",
