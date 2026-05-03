@@ -1,1 +1,208 @@
 @import "tailwindcss";
+
+@theme {
+  --app-color-text-strong: var(--color-white);
+  --app-color-text-body: var(--color-gray-300);
+  --app-color-text-muted: var(--color-gray-400);
+  --app-color-brand-soft: var(--color-indigo-300);
+  --app-color-brand: var(--color-indigo-400);
+  --app-color-accent: var(--color-sky-300);
+  --app-color-accent-soft: var(--color-sky-200);
+  --app-color-action-primary: var(--color-indigo-600);
+  --app-color-action-primary-hover: var(--color-indigo-500);
+  --app-color-action-primary-dark: var(--color-indigo-500);
+  --app-color-action-primary-dark-hover: var(--color-indigo-400);
+  --app-color-action-danger: var(--color-red-600);
+  --app-color-action-danger-hover: var(--color-red-500);
+  --app-color-action-danger-dark: var(--color-red-500);
+  --app-color-action-danger-dark-hover: var(--color-red-400);
+  --app-color-surface: color-mix(in oklab, var(--color-white) 5%, transparent);
+  --app-color-surface-hover: color-mix(in oklab, var(--color-white) 10%, transparent);
+  --app-color-surface-strong: color-mix(in oklab, var(--color-gray-950) 40%, transparent);
+  --app-color-border-subtle: color-mix(in oklab, var(--color-white) 10%, transparent);
+}
+
+@layer components {
+
+  .app-text--strong {
+    color: var(--app-color-text-strong);
+  }
+
+  .app-text--body {
+    color: var(--app-color-text-body);
+  }
+
+  .app-text--muted {
+    color: var(--app-color-text-muted);
+  }
+
+  .app-text--brand {
+    color: var(--app-color-brand);
+  }
+
+  .app-text--brand-soft {
+    color: var(--app-color-brand-soft);
+  }
+
+  .app-text--accent {
+    color: var(--app-color-accent);
+  }
+
+  .app-text--accent-soft {
+    color: var(--app-color-accent-soft);
+  }
+
+  .app-surface--card {
+    @apply rounded-3xl border shadow-2xl shadow-black/20 backdrop-blur;
+    border-color: var(--app-color-border-subtle);
+    background-color: var(--app-color-surface);
+  }
+
+  .app-surface--card-strong {
+    @apply rounded-2xl border;
+    border-color: var(--app-color-border-subtle);
+    background-color: var(--app-color-surface-strong);
+  }
+
+  .app-surface--empty {
+    @apply rounded-3xl border border-dashed;
+    border-color: var(--app-color-border-subtle);
+    background-color: var(--app-color-surface);
+  }
+
+  .app-surface--empty-strong {
+    @apply rounded-2xl border border-dashed;
+    border-color: var(--app-color-border-subtle);
+    background-color: var(--app-color-surface-strong);
+  }
+
+  .app-link--primary {
+    @apply font-semibold;
+    color: var(--color-indigo-600);
+  }
+
+  .app-link--primary:hover {
+    color: var(--color-indigo-500);
+  }
+
+  .app-link--accent {
+    @apply font-semibold;
+    color: var(--app-color-accent);
+  }
+
+  .app-link--accent:hover {
+    color: var(--app-color-accent-soft);
+  }
+
+  .app-button {
+    @apply rounded-md px-3 py-2 text-sm font-semibold text-white shadow-xs hover:cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2;
+  }
+
+  .app-button--primary {
+    background-color: var(--app-color-action-primary);
+    outline-color: var(--app-color-action-primary);
+  }
+
+  .app-button--primary:hover {
+    background-color: var(--app-color-action-primary-hover);
+  }
+
+  .app-button--danger {
+    background-color: var(--app-color-action-danger);
+    outline-color: var(--app-color-action-danger);
+  }
+
+  .app-button--danger:hover {
+    background-color: var(--app-color-action-danger-hover);
+  }
+
+  .app-button--secondary {
+    @apply relative inline-flex items-center gap-x-1.5;
+    background-color: var(--color-gray-800);
+    outline-color: var(--color-gray-500);
+  }
+
+  .app-button--secondary:hover {
+    background-color: var(--color-gray-700);
+  }
+
+  .app-carousel {}
+
+  .app-carousel__control {
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-full border text-white transition;
+    border-color: var(--app-color-border-subtle);
+    background-color: var(--app-color-surface);
+  }
+
+  .app-carousel__control:hover {
+    background-color: var(--app-color-surface-hover);
+  }
+
+  .app-background--aurora-portal {
+    background-image:
+      radial-gradient(circle at top left, rgba(99,102,241,0.22), transparent 32%),
+      radial-gradient(circle at bottom right, rgba(14,165,233,0.16), transparent 28%);
+  }
+
+  .app-background--aurora-showcase {
+    background-image:
+      radial-gradient(circle at top right, rgba(14,165,233,0.16), transparent 26%),
+      radial-gradient(circle at bottom left, rgba(251,191,36,0.10), transparent 26%);
+  }
+
+  .app-background--aurora-course {
+    background-image:
+      radial-gradient(circle at top left, rgba(14,165,233,0.24), transparent 30%),
+      radial-gradient(circle at bottom right, rgba(99,102,241,0.18), transparent 28%);
+  }
+
+  .app-background--aurora-curriculum {
+    background-image:
+      radial-gradient(circle at top right, rgba(99,102,241,0.18), transparent 30%),
+      radial-gradient(circle at bottom left, rgba(14,165,233,0.14), transparent 24%);
+  }
+
+  .app-background--course-cover {
+    background-image: linear-gradient(145deg, rgba(15,23,42,0.96), rgba(30,41,59,0.86), rgba(14,165,233,0.28));
+  }
+
+  .app-background--course-card-cover {
+    background-image: linear-gradient(135deg, rgba(15,23,42,0.92), rgba(30,41,59,0.82), rgba(14,165,233,0.30));
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  @layer components {
+    .app-link--primary {
+      color: var(--app-color-brand);
+    }
+
+    .app-link--primary:hover {
+      color: var(--app-color-brand-soft);
+    }
+
+    .app-button--primary {
+      background-color: var(--app-color-action-primary-dark);
+      outline-color: var(--app-color-action-primary-dark);
+      box-shadow: none;
+    }
+
+    .app-button--primary:hover {
+      background-color: var(--app-color-action-primary-dark-hover);
+    }
+
+    .app-button--danger {
+      background-color: var(--app-color-action-danger-dark);
+      outline-color: var(--app-color-action-danger-dark);
+      box-shadow: none;
+    }
+
+    .app-button--danger:hover {
+      background-color: var(--app-color-action-danger-dark-hover);
+    }
+
+    .app-button--secondary {
+      box-shadow: none;
+    }
+  }
+}

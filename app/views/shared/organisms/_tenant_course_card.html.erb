@@ -5,19 +5,19 @@
   path = local_assigns[:path]
   cta_text = local_assigns[:cta_text]
   article_class = [
-    "overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-2xl shadow-black/20 backdrop-blur",
+    "app-surface app-surface--card overflow-hidden",
     ("min-w-[85%] snap-start sm:min-w-[28rem] lg:min-w-[32rem]" if carousel)
   ].compact.join(" ")
   description = course[:short_description].presence || course[:description].presence || t("tenants.show.courses.description_fallback")
 %>
 
 <article class="<%= article_class %>">
-  <div class="aspect-[16/9] overflow-hidden bg-[linear-gradient(135deg,rgba(15,23,42,0.92),rgba(30,41,59,0.82),rgba(14,165,233,0.30))]">
+  <div class="app-background app-background--course-card-cover aspect-[16/9] overflow-hidden">
     <% if course[:cover_image_source].present? %>
       <%= image_tag course[:cover_image_source], alt: course[:title], class: "h-full w-full object-contain" %>
     <% else %>
       <div class="flex h-full items-end p-6">
-        <h3 class="max-w-md text-2xl font-black tracking-tight text-white sm:text-3xl">
+        <h3 class="app-text app-text--strong max-w-md text-2xl font-black tracking-tight sm:text-3xl">
           <%= course[:title] %>
         </h3>
       </div>
@@ -26,17 +26,17 @@
 
   <div class="p-6">
     <% if tenant_name.present? %>
-      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sky-300"><%= tenant_name %></p>
+      <p class="app-text app-text--accent text-xs font-semibold uppercase tracking-[0.18em]"><%= tenant_name %></p>
     <% end %>
-    <h3 class="text-xl font-bold text-white"><%= course[:title] %></h3>
-    <p class="mt-3 text-sm leading-6 text-gray-300"><%= description %></p>
+    <h3 class="app-text app-text--strong text-xl font-bold"><%= course[:title] %></h3>
+    <p class="app-text app-text--body mt-3 text-sm leading-6"><%= description %></p>
     <% if path.present? && cta_text.present? %>
       <div class="mt-5">
         <%= render "shared/atoms/text_link",
           text: cta_text,
           path: path,
           class_name: "text-sm font-semibold",
-          base_class: "text-sky-300 hover:text-sky-200" %>
+          base_class: "app-link app-link--accent" %>
       </div>
     <% end %>
   </div>

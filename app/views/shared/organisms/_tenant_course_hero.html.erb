@@ -5,7 +5,7 @@
 %>
 
 <section class="relative isolate overflow-hidden">
-  <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(14,165,233,0.24),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(99,102,241,0.18),_transparent_28%)]"></div>
+  <div class="app-background app-background--aurora-course absolute inset-0 -z-10"></div>
 
   <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
     <div class="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:items-start">
@@ -14,15 +14,15 @@
           text: t("courses.show.back_to_catalog"),
           path: tenant_courses_path(tenant_slug: tenant.slug),
           class_name: "text-sm font-semibold",
-          base_class: "text-sky-300 hover:text-sky-200" %>
+          base_class: "app-link app-link--accent" %>
 
         <%= render "shared/molecules/page_header",
           title: course[:title],
           description: description,
           wrapper_class: "mt-6 px-0",
           title_tag: :h1,
-          title_class: "text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl",
-          description_class: "mt-5 max-w-3xl text-base leading-7 text-gray-300 sm:text-lg sm:leading-8" %>
+          title_class: "app-text app-text--strong text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl",
+          description_class: "app-text app-text--body mt-5 max-w-3xl text-base leading-7 sm:text-lg sm:leading-8" %>
 
         <div class="mt-8 grid gap-4 sm:grid-cols-3">
           <%= render "shared/molecules/tenant_course_stat",
@@ -37,26 +37,26 @@
         </div>
 
         <% if course[:description].present? %>
-          <div class="mt-8 max-w-3xl rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/20 backdrop-blur">
-            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-indigo-300">
+          <div class="app-surface app-surface--card mt-8 max-w-3xl p-6">
+            <p class="app-text app-text--brand-soft text-sm font-semibold uppercase tracking-[0.18em]">
               <%= t("courses.show.details.about") %>
             </p>
-            <p class="mt-4 text-sm leading-7 text-gray-300 sm:text-base">
+            <p class="app-text app-text--body mt-4 text-sm leading-7 sm:text-base">
               <%= course[:description] %>
             </p>
           </div>
         <% end %>
       </div>
 
-      <div class="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl shadow-black/20 backdrop-blur">
-        <div class="aspect-[4/5] bg-[linear-gradient(145deg,rgba(15,23,42,0.96),rgba(30,41,59,0.86),rgba(14,165,233,0.28))]">
+      <div class="app-surface app-surface--card overflow-hidden rounded-[2rem]">
+        <div class="app-background app-background--course-cover aspect-[4/5]">
           <% if course[:cover_image_source].present? %>
             <%= image_tag course[:cover_image_source], alt: course[:title], class: "h-full w-full object-contain p-6" %>
           <% else %>
             <div class="flex h-full items-end p-8">
               <div>
-                <p class="text-sm font-semibold uppercase tracking-[0.18em] text-sky-300"><%= tenant.name %></p>
-                <p class="mt-4 text-3xl font-black tracking-tight text-white sm:text-4xl"><%= course[:title] %></p>
+                <p class="app-text app-text--accent text-sm font-semibold uppercase tracking-[0.18em]"><%= tenant.name %></p>
+                <p class="app-text app-text--strong mt-4 text-3xl font-black tracking-tight sm:text-4xl"><%= course[:title] %></p>
               </div>
             </div>
           <% end %>

@@ -1,37 +1,37 @@
 <section class="relative isolate overflow-hidden">
-  <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(99,102,241,0.22),_transparent_32%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.16),_transparent_28%)]"></div>
+  <div class="app-background app-background--aurora-portal absolute inset-0 -z-10"></div>
 
   <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
     <div class="grid gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(22rem,0.75fr)] lg:items-start">
       <div class="max-w-3xl">
-        <p class="text-sm font-semibold uppercase tracking-[0.24em] text-indigo-400"><%= eyebrow %></p>
-        <h1 class="mt-4 text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+        <p class="app-text app-text--brand text-sm font-semibold uppercase tracking-[0.24em]"><%= eyebrow %></p>
+        <h1 class="app-text app-text--strong mt-4 text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">
           <%= title %>
         </h1>
-        <p class="mt-6 max-w-2xl text-lg leading-8 text-gray-300">
+        <p class="app-text app-text--body mt-6 max-w-2xl text-lg leading-8">
           <%= description %>
         </p>
-        <p class="mt-4 max-w-2xl text-sm leading-7 text-gray-400">
+        <p class="app-text app-text--muted mt-4 max-w-2xl text-sm leading-7">
           <%= supporting_text %>
         </p>
       </div>
 
-      <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/20 backdrop-blur">
-        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-indigo-300"><%= panel_eyebrow %></p>
+      <div class="app-surface app-surface--card p-6">
+        <p class="app-text app-text--brand-soft text-sm font-semibold uppercase tracking-[0.18em]"><%= panel_eyebrow %></p>
         <div class="mt-6 grid gap-4 sm:grid-cols-2">
-          <div class="rounded-2xl border border-white/10 bg-gray-950/40 p-4">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400"><%= stats_portals_label %></p>
-            <p class="mt-2 text-3xl font-black text-white"><%= portals_count %></p>
+          <div class="app-surface app-surface--card-strong p-4">
+            <p class="app-text app-text--muted text-xs font-semibold uppercase tracking-[0.18em]"><%= stats_portals_label %></p>
+            <p class="app-text app-text--strong mt-2 text-3xl font-black"><%= portals_count %></p>
           </div>
-          <div class="rounded-2xl border border-white/10 bg-gray-950/40 p-4">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400"><%= stats_access_label %></p>
-            <p class="mt-2 text-base font-semibold text-white"><%= stats_access_value %></p>
+          <div class="app-surface app-surface--card-strong p-4">
+            <p class="app-text app-text--muted text-xs font-semibold uppercase tracking-[0.18em]"><%= stats_access_label %></p>
+            <p class="app-text app-text--strong mt-2 text-base font-semibold"><%= stats_access_value %></p>
           </div>
         </div>
 
-        <div class="mt-6 rounded-2xl border border-white/10 bg-gray-950/40 p-4">
-          <p class="text-sm font-semibold text-white"><%= panel_title %></p>
-          <p class="mt-2 text-sm leading-6 text-gray-300"><%= panel_description %></p>
+        <div class="app-surface app-surface--card-strong mt-6 p-4">
+          <p class="app-text app-text--strong text-sm font-semibold"><%= panel_title %></p>
+          <p class="app-text app-text--body mt-2 text-sm leading-6"><%= panel_description %></p>
         </div>
       </div>
     </div>
