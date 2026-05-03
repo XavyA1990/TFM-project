@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     scope "/:tenant_slug" do
       get "/" => "tenants#show", as: :tenant_root
       get "/courses" => "courses#index", as: :tenant_courses
+      get "/courses/:id" => "courses#show", as: :tenant_course
 
       namespace :admin_tenants do
         resource :tenant, only: [:show, :edit, :update]

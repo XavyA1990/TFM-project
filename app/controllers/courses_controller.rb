@@ -14,6 +14,13 @@ class CoursesController < TenantsBaseController
     @total_count = courses_index_data[:total_count]
   end
 
+  def show
+    @course = Catalog::CoursesServices.new(
+      :show,
+      { slug: params[:id], tenant: current_tenant }
+    ).call
+  end
+
   private
 
   def sort_params

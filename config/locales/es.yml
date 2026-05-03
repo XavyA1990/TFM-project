@@ -175,6 +175,7 @@ es:
     index:
       title: "Cursos Publicados"
       description: "Explora el catálogo publicado disponible en %{tenant}."
+      cta: "Ver curso"
       search:
         label: "Buscar cursos"
         description: "Busca por título del curso o descripción"
@@ -194,6 +195,25 @@ es:
         oldest: "Más antiguos primero"
         title_asc: "Título A-Z"
         title_desc: "Título Z-A"
+    show:
+      back_to_catalog: "Volver al catálogo"
+      description_fallback: "Curso publicado disponible en este portal."
+      details:
+        tenant: "Portal"
+        modules: "Módulos"
+        lessons: "Lecciones"
+        about: "Detalles del curso"
+      curriculum:
+        title: "Contenido del curso"
+        description:
+          one: "Este curso actualmente incluye 1 módulo publicado."
+          other: "Este curso actualmente incluye %{count} módulos publicados."
+        module_position: "Módulo %{position}"
+        lesson_position: "Lección %{position}"
+        lessons_label: "Lecciones"
+        empty_title: "Este curso todavía no tiene módulos publicados"
+        empty_description: "Los módulos publicados aparecerán aquí en cuanto estén disponibles en este portal."
+        empty_lessons: "Este módulo todavía no tiene lecciones publicadas."
   shared:
     asset_uploader:
       drop_title: "Arrastra tu archivo aquí"
@@ -243,6 +263,7 @@ es:
       courses:
         title: "Últimos cursos publicados"
         description: "Una vista de los contenidos publicados más recientes disponibles en este portal."
+        cta: "Ver curso"
         description_fallback: "Curso publicado disponible en este portal."
         empty_title: "Todavía no hay cursos publicados"
         empty_description: "A medida que este portal publique cursos, aparecerán aquí."

@@ -192,6 +192,7 @@ en:
     index:
       title: "Published Courses"
       description: "Explore the published catalog available in %{tenant}."
+      cta: "View course"
       search:
         label: "Search courses"
         description: "Search by course title or description"
@@ -211,6 +212,25 @@ en:
         oldest: "Oldest first"
         title_asc: "Title A-Z"
         title_desc: "Title Z-A"
+    show:
+      back_to_catalog: "Back to catalog"
+      description_fallback: "Published course available in this portal."
+      details:
+        tenant: "Portal"
+        modules: "Modules"
+        lessons: "Lessons"
+        about: "Course details"
+      curriculum:
+        title: "Course curriculum"
+        description:
+          one: "This course currently includes 1 published module."
+          other: "This course currently includes %{count} published modules."
+        module_position: "Module %{position}"
+        lesson_position: "Lesson %{position}"
+        lessons_label: "Lessons"
+        empty_title: "This course has no published modules yet"
+        empty_description: "Published modules will appear here as soon as they are available in this portal."
+        empty_lessons: "This module has no published lessons yet."
   shared:
     asset_uploader:
       drop_title: "Drag your file here"
@@ -260,6 +280,7 @@ en:
       courses:
         title: "Latest Published Courses"
         description: "A curated view of the most recent published content available in this portal."
+        cta: "View course"
         description_fallback: "Published course available in this portal."
         empty_title: "No published courses yet"
         empty_description: "As this portal publishes courses, they will appear here."

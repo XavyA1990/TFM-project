@@ -55,6 +55,16 @@ class CoursesRepository
       .find(slug)
   end
 
+  def self.find_published_by_slug_in_tenant(slug, tenant)
+    Course.where(tenant: tenant, status: :published)
+      .includes(
+        course_cover_image_asset_attachment: :blob,
+        course_modules: :lessons
+      )
+      .friendly
+      .find(slug)
+  end
+
   def self.create(params)
     Course.create(params)
   end

@@ -18,6 +18,7 @@ module Catalog
 
     def call
       return get_courses_for_index if @action == :index
+      return get_course_for_show_page if @action == :show
 
       raise ArgumentError, "Invalid action"
     end
@@ -66,6 +67,47 @@ module Catalog
         description: course.description,
         cover_image_source: course.course_cover_image_source
       }
+    end
+
+    def get_course_for_show_page
+      course = @repository.find_published_by_slug_in_tenant(@params[:slug], @tenant)
+      published_modules = sorted_published_modules(course)
+
+      {
+        slug: course.slug,
+        title: course.title,
+        short_description: course.short_description,
+        description: course.description,
+        cover_image_source: course.course_cover_image_source,
+        module_count: published_modules.size,
+        lesson_count: published_modules.sum { |course_module| sorted_published_lessons(course_module).size },
+        modules: published_modules.map do |course_module|
+          published_lessons = sorted_published_lessons(course_module)
+
+          {
+            slug: course_module.slug,
+            title: course_module.title,
+            description: course_module.description,
+            position: course_module.position,
+            lesson_count: published_lessons.size,
+            lessons: published_lessons.map do |lesson|
+              {
+                slug: lesson.slug,
+                title: lesson.title,
+                position: lesson.position
+              }
+            end
+          }
+        end
+      }
+    end
+
+    def sorted_published_modules(course)
+      course.course_modules.select(&:published?).sort_by(&:position)
+    end
+
+    def sorted_published_lessons(course_module)
+      course_module.lessons.select(&:published?).sort_by(&:position)
     end
   end
 end

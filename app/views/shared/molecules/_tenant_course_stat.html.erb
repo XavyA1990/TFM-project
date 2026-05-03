@@ -1,0 +1,9 @@
+<%
+  label = local_assigns.fetch(:label)
+  value = local_assigns.fetch(:value)
+%>
+
+<div class="rounded-2xl border border-white/10 bg-gray-950/40 p-4">
+  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300"><%= label %></p>
+  <p class="mt-2 text-2xl font-black tracking-tight text-white"><%= value %></p>
+</div>
