@@ -1,0 +1,50 @@
+<%
+  name = local_assigns.fetch(:name).to_s
+  class_name = local_assigns[:class_name]
+  data_attributes = local_assigns[:data]
+  aria_hidden = local_assigns.fetch(:aria_hidden, true)
+
+  svg_attributes = {
+    class: class_name,
+    aria: { hidden: aria_hidden }
+  }
+  svg_attributes[:data] = data_attributes if data_attributes.present?
+%>
+
+<% if name == "menu" %>
+  <svg <%= tag.attributes(svg_attributes.merge(viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", :"stroke-width" => "1.5")) %>>
+    <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+<% elsif name == "x-mark" %>
+  <svg <%= tag.attributes(svg_attributes.merge(viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", :"stroke-width" => "1.5")) %>>
+    <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+<% elsif name == "chevron-down" %>
+  <svg <%= tag.attributes(svg_attributes.merge(viewBox: "0 0 20 20", fill: "currentColor")) %>>
+    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+  </svg>
+<% elsif name == "chevron-up" %>
+  <svg <%= tag.attributes(svg_attributes.merge(viewBox: "0 0 20 20", fill: "currentColor")) %>>
+    <path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.83l-3.71 3.94a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd" />
+  </svg>
+<% elsif name == "upload" %>
+  <svg <%= tag.attributes(svg_attributes.merge(viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", :"stroke-width" => "1.5")) %>>
+    <path d="M12 16.5V6.75m0 0-3.75 3.75M12 6.75l3.75 3.75M3.75 15v2.25A2.25 2.25 0 0 0 6 19.5h12a2.25 2.25 0 0 0 2.25-2.25V15" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+<% elsif name == "status-alert" %>
+  <svg <%= tag.attributes(svg_attributes.merge(viewBox: "0 0 20 20", fill: "currentColor")) %>>
+    <path fill-rule="evenodd" d="M18 10A8 8 0 114.472 4.222a.75.75 0 11-1.01 1.108A6.5 6.5 0 1016.5 10a.75.75 0 011.5 0zm-8.75-3.25a.75.75 0 011.5 0v4a.75.75 0 01-1.5 0v-4zm0 7a.75.75 0 011.5 0v.5a.75.75 0 01-1.5 0v-.5z" clip-rule="evenodd" />
+  </svg>
+<% elsif name == "status-success" %>
+  <svg <%= tag.attributes(svg_attributes.merge(viewBox: "0 0 20 20", fill: "currentColor")) %>>
+    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.53-9.72a.75.75 0 10-1.06-1.06L9.25 10.44 7.53 8.72a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l3.75-3.75z" clip-rule="evenodd" />
+  </svg>
+<% elsif name == "status-info" %>
+  <svg <%= tag.attributes(svg_attributes.merge(viewBox: "0 0 20 20", fill: "currentColor")) %>>
+    <path fill-rule="evenodd" d="M18 10A8 8 0 112 10a8 8 0 0116 0zm-8.75-3a.75.75 0 111.5 0v.25a.75.75 0 11-1.5 0V7zm0 2.75a.75.75 0 011.5 0v3.25a.75.75 0 01-1.5 0V9.75z" clip-rule="evenodd" />
+  </svg>
+<% else %>
+  <svg <%= tag.attributes(svg_attributes.merge(viewBox: "0 0 20 20", fill: "currentColor")) %>>
+    <path fill-rule="evenodd" d="M18 10A8 8 0 112 10a8 8 0 0116 0zm-8.75-3a.75.75 0 111.5 0v.25a.75.75 0 11-1.5 0V7zm0 2.75a.75.75 0 011.5 0v3.25a.75.75 0 01-1.5 0V9.75z" clip-rule="evenodd" />
+  </svg>
+<% end %>

@@ -1,3 +1,23 @@
-<% flash.each do |type, message| %>
-  <%= render "shared/molecules/flash_message", type: type, message: message %>
+<%
+  visible_flash = flash.filter_map do |type, message|
+    next if type.to_s == "timedout"
+
+    normalized_message = message.to_s.strip
+    next if normalized_message.blank?
+
+    { type: type, message: normalized_message }
+  end
+%>
+
+<% if visible_flash.any? %>
+  <div class="<%= [
+    "pointer-events-none fixed inset-x-0 top-20 z-40 px-4 sm:px-6 lg:px-8",
+    (dashboard_sidebar_visible? ? "lg:left-80" : nil)
+  ].compact.join(" ") %>">
+    <div class="mx-auto max-w-7xl space-y-3">
+      <% visible_flash.each do |entry| %>
+        <%= render "shared/molecules/flash_message", type: entry[:type], message: entry[:message] %>
+      <% end %>
+    </div>
+  </div>
 <% end %>

@@ -213,6 +213,38 @@
     @apply text-xs;
   }
 
+  .app-flash {
+    @apply pointer-events-auto flex items-start gap-3 rounded-2xl border px-4 py-3 shadow-lg backdrop-blur;
+  }
+
+  .app-flash--notice {
+    @apply border-indigo-400/30 bg-indigo-500/15 text-indigo-100;
+  }
+
+  .app-flash--alert {
+    @apply border-red-400/30 bg-red-500/15 text-red-100;
+  }
+
+  .app-flash--success {
+    @apply border-emerald-400/30 bg-emerald-500/15 text-emerald-100;
+  }
+
+  .app-flash--neutral {
+    @apply border-white/15 bg-white/10 text-white;
+  }
+
+  .app-flash__icon {
+    @apply mt-0.5 shrink-0;
+  }
+
+  .app-flash__message {
+    @apply text-sm font-medium leading-6;
+  }
+
+  .app-flash__close {
+    @apply shrink-0 rounded-full p-1 text-current transition hover:cursor-pointer hover:bg-white/10;
+  }
+
   .app-carousel__control {
     @apply inline-flex h-10 w-10 items-center justify-center rounded-full border text-white transition;
     border-color: var(--app-color-border-subtle);

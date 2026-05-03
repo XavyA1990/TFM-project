@@ -1,21 +1,60 @@
 <%
-  bg_class =
+  normalized_type =
     case type.to_sym
     when :notice
-      "bg-blue-600 text-white"
+      :notice
     when :alert
-      "bg-red-600 text-white"
+      :alert
     when :success
-      "bg-green-600 text-white"
+      :success
     else
-      "bg-gray-600 text-white"
+      :neutral
+    end
+
+  variant_class =
+    case normalized_type
+    when :notice
+      "app-flash--notice"
+    when :alert
+      "app-flash--alert"
+    when :success
+      "app-flash--success"
+    else
+      "app-flash--neutral"
+    end
+
+  icon_name =
+    case normalized_type
+    when :alert
+      "status-alert"
+    when :success
+      "status-success"
+    else
+      "status-info"
     end
 %>
 
 <div
   data-controller="flash"
-  data-flash-delay-value="2000"
-  class="p-3 <%= bg_class %> flex items-center justify-between"
+  data-flash-delay-value="2600"
+  class="app-flash <%= variant_class %>"
+  role="status"
+  aria-live="polite"
 >
-  <span><%= message %></span>
+  <div class="app-flash__icon" aria-hidden="true">
+    <%= render "shared/atoms/icon", name: icon_name, class_name: "size-5" %>
+  </div>
+
+  <div class="min-w-0 flex-1">
+    <p class="app-flash__message"><%= message %></p>
+  </div>
+
+  <button
+    type="button"
+    data-action="flash#close"
+    class="app-flash__close"
+    aria-label="Close notification"
+  >
+    <%= render "shared/atoms/icon", name: "x-mark", class_name: "size-4" %>
+  </button>
 </div>
