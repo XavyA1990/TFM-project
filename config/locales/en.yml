@@ -49,6 +49,16 @@ en:
   current_password: "Current password"
   update: "Update"
   back: "Back"
+  enums:
+    statuses:
+      draft: "Draft"
+      published: "Published"
+      archived: "Archived"
+    lesson_types:
+      text: "Text"
+      video: "Video"
+      pdf: "PDF"
+      image: "Image"
   pagination:
     showing: "Showing %{shown} of %{total} %{resource}"
     previous: "Previous"
@@ -64,6 +74,15 @@ en:
     edit: "Edit"
     view: "View"
     delete: "Delete"
+  services:
+    errors:
+      invalid_action: "Invalid action"
+      unknown_action: "Unknown action: %{action}"
+      unknown_upload_profile: "Unknown upload profile: %{profile}"
+      missing_file: "Missing file"
+      invalid_file_upload: "Invalid file upload."
+      file_too_large: "File size exceeds the maximum allowed."
+      invalid_file_type: "Invalid file type."
   errors:
     attributes:
       current_password:
@@ -75,6 +94,14 @@ en:
       too_short: "is too short (minimum %{count} characters)"
       invalid: "is invalid"
   activerecord:
+    errors:
+      models:
+        lesson:
+          attributes:
+            lesson_content_asset:
+              invalid_for_type: "must match the selected lesson content type"
+              required_for_type: "is required for non-text lessons"
+              not_allowed_for_text: "cannot be uploaded for text lessons"
     attributes:
       user:
         email: "Email"
@@ -183,6 +210,7 @@ en:
     profile: "Profile"
     dashboard: "Dashboard"
     courses: "Courses"
+    open_main_menu: "Open main menu"
   courses:
     index:
       title: "Published Courses"
@@ -236,7 +264,13 @@ en:
       replace_hint: "You can replace the current file whenever you want."
       file_selected: "File ready"
       current_file: "Current file"
-      image_only_hint: "Supports PNG, JPG, GIF, WEBP, and SVG."
+      badges:
+        pdf: "PDF"
+        file: "FILE"
+        preview: "PREVIEW"
+      image_only_hint: "Supports PNG, JPG, and WEBP."
+      video_only_hint: "Supports MP4."
+      pdf_only_hint: "Supports PDF."
       mixed_media_hint: "Supports PNG, JPG, WEBP, MP4, and PDF."
     dashboard_sidebar:
       admin_tenants: "Tenants"
@@ -343,8 +377,10 @@ en:
     lessons:
       destroyed: "Lesson was successfully deleted."
       form:
+        text_title: "Text content"
+        text_description: "Write the lesson body here when the lesson type is text."
         asset_title: "Lesson content"
-        asset_description: "Upload an image, a video, or a PDF for this lesson."
+        asset_description: "Upload the file required by the selected lesson type."
       new:
         title: "New lesson"
         description: "Add a lesson to the selected module."

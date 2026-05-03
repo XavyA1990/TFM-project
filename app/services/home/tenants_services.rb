@@ -9,7 +9,7 @@ module Home
     def call
       return tenants_for_home if @action == :index
 
-      raise ArgumentError, "Invalid action"
+      raise ArgumentError, I18n.t("services.errors.invalid_action")
     end
 
     private

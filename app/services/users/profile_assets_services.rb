@@ -12,7 +12,7 @@ module Users
       return prepare_avatar if @action == :prepare_avatar
       return attach_avatar if @action == :attach_avatar
 
-      raise ArgumentError, "Invalid action"
+      raise ArgumentError, I18n.t("services.errors.invalid_action")
     end
 
     private

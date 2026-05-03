@@ -12,7 +12,7 @@ module Tenants
       return prepare_logo if @action == :prepare_logo
       return attach_logo if @action == :attach_logo
 
-      raise ArgumentError, "Invalid action"
+      raise ArgumentError, I18n.t("services.errors.invalid_action")
     end
 
     private

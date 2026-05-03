@@ -12,7 +12,7 @@ module AdminTenants
       return get_tenant if @action == :get
       return update if @action == :update
 
-      raise ArgumentError, "Invalid action"
+      raise ArgumentError, I18n.t("services.errors.invalid_action")
     end
 
     private

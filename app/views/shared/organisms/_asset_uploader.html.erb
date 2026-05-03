@@ -5,6 +5,11 @@
   accept = local_assigns[:accept]
   direct_upload = local_assigns.fetch(:direct_upload, true)
   current_asset = local_assigns[:current_asset]
+  container_data = (local_assigns[:container_data] || {}).dup
+  description_data = (local_assigns[:description_data] || {}).dup
+  input_data = (local_assigns[:input_data] || {}).dup
+  input_html = (local_assigns[:input_html] || {}).dup
+  preview_data = (local_assigns[:preview_data] || {}).dup
   is_current_asset_attached = current_asset&.attached?
   current_content_type = is_current_asset_attached ? current_asset.content_type.to_s : nil
 
@@ -48,28 +53,36 @@
 
   preview_visible = current_preview_kind.present?
   file_badge_text = {
-    pdf: "PDF",
-    file: "FILE",
-  }.fetch(current_preview_kind, "PREVIEW")
+    pdf: t("shared.asset_uploader.badges.pdf"),
+    file: t("shared.asset_uploader.badges.file"),
+  }.fetch(current_preview_kind, t("shared.asset_uploader.badges.preview"))
+
+  container_data = {
+    controller: "asset-uploader",
+    asset_uploader_type_value: asset_type,
+    asset_uploader_pdf_label_value: t("shared.asset_uploader.badges.pdf"),
+    asset_uploader_file_label_value: t("shared.asset_uploader.badges.file"),
+    asset_uploader_preview_label_value: t("shared.asset_uploader.badges.preview")
+  }.merge(container_data)
+
+  input_html[:class] = ["sr-only", input_html[:class]].compact.join(" ")
+  input_html[:direct_upload] = direct_upload
+  input_html[:accept] = accept
+  input_html[:data] = {
+    asset_uploader_target: "input",
+    action: "change->asset-uploader#change"
+  }.merge(input_html[:data] || {}).merge(input_data)
+
+  preview_data = { asset_uploader_target: "preview" }.merge(preview_data)
 %>
 
-<div
-  data-controller="asset-uploader"
-  data-asset-uploader-type-value="<%= asset_type %>"
->
+<div <%= tag.attributes(data: container_data) %>>
   <%= form.label field, label_text, class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
   <% if description.present? %>
-    <p class="text-sm/6 text-gray-500 dark:text-gray-400"><%= description %></p>
+    <p class="text-sm/6 text-gray-500 dark:text-gray-400" <%= tag.attributes(data: description_data) %>><%= description %></p>
   <% end %>
 
-  <%= form.file_field field,
-    direct_upload: direct_upload,
-    accept: accept,
-    class: "sr-only",
-    data: {
-      asset_uploader_target: "input",
-      action: "change->asset-uploader#change"
-    } %>
+  <%= form.file_field field, **input_html %>
 
   <button
     type="button"
@@ -85,10 +98,7 @@
     <p class="mt-3 text-xs font-medium uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-300"><%= t("shared.asset_uploader.replace_hint") %></p>
   </button>
 
-  <div
-    data-asset-uploader-target="preview"
-    class="<%= preview_visible ? "" : "hidden " %>mt-4 rounded-xl border border-gray-200 bg-white/80 p-4 dark:border-white/10 dark:bg-white/5"
-  >
+  <div <%= tag.attributes(data: preview_data) %> class="<%= preview_visible ? "" : "hidden " %>mt-4 rounded-xl border border-gray-200 bg-white/80 p-4 dark:border-white/10 dark:bg-white/5">
     <div class="flex items-start gap-4">
       <img
         data-asset-uploader-target="image"

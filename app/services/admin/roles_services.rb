@@ -12,7 +12,7 @@ module Admin
       return get_role_by_name if @action == :get_by_name
       return get_roles_available_for_assignment if @action == :available_for_assignment
 
-      raise ArgumentError, "Invalid action"
+      raise ArgumentError, I18n.t("services.errors.invalid_action")
     end
 
     private

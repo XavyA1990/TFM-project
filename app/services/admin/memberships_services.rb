@@ -12,7 +12,7 @@ module Admin
       return get_role_management_panels if @action == :role_management_panels
       return get_non_customer_memberships_for_tenant if @action == :for_tenant_without_customer
 
-      raise ArgumentError, "Invalid action"
+      raise ArgumentError, I18n.t("services.errors.invalid_action")
     end
 
     private

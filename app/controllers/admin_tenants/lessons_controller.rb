@@ -19,6 +19,7 @@ class AdminTenants::LessonsController < AdminTenants::BaseController
       { course_module: @course_module, attributes: lesson_attributes }
     ).call
     prepared_content = prepare_content_asset(@lesson)
+    validate_content_requirements(@lesson, prepared_content)
 
     if @lesson.errors.any?
       render :new, status: :unprocessable_entity
@@ -33,7 +34,7 @@ class AdminTenants::LessonsController < AdminTenants::BaseController
 
       raise ActiveRecord::Rollback if @lesson.errors.any?
 
-      attach_content_asset(@lesson, prepared_content)
+      sync_content_asset(@lesson, prepared_content)
 
       raise ActiveRecord::Rollback if @lesson.errors.any?
     end
@@ -49,7 +50,9 @@ class AdminTenants::LessonsController < AdminTenants::BaseController
   end
 
   def update
+    @lesson.assign_attributes(lesson_attributes)
     prepared_content = prepare_content_asset(@lesson)
+    validate_content_requirements(@lesson, prepared_content)
 
     if @lesson.errors.any?
       render :edit, status: :unprocessable_entity
@@ -64,7 +67,7 @@ class AdminTenants::LessonsController < AdminTenants::BaseController
 
       raise ActiveRecord::Rollback if @lesson.errors.any?
 
-      attach_content_asset(@lesson, prepared_content)
+      sync_content_asset(@lesson, prepared_content)
 
       raise ActiveRecord::Rollback if @lesson.errors.any?
     end
@@ -122,6 +125,39 @@ class AdminTenants::LessonsController < AdminTenants::BaseController
       :attach_content,
       { lesson: lesson, prepared_asset: prepared_content }
     ).call
+  end
+
+  def purge_content_asset(lesson)
+    Lessons::AssetsServices.new(
+      :purge_content,
+      { lesson: lesson }
+    ).call
+  end
+
+  def sync_content_asset(lesson, prepared_content)
+    return purge_content_asset(lesson) if lesson.text?
+
+    attach_content_asset(lesson, prepared_content)
+  end
+
+  def validate_content_requirements(lesson, prepared_content)
+    return if lesson.text?
+    return if prepared_content.present?
+
+    if lesson.lesson_content_asset.attached?
+      return if lesson.content_type_allowed_for_lesson_type?(lesson.lesson_content_asset.blob.content_type)
+
+      lesson.errors.add(
+        :lesson_content_asset,
+        I18n.t("activerecord.errors.models.lesson.attributes.lesson_content_asset.invalid_for_type")
+      )
+      return
+    end
+
+    lesson.errors.add(
+      :lesson_content_asset,
+      I18n.t("activerecord.errors.models.lesson.attributes.lesson_content_asset.required_for_type")
+    )
   end
 
   def lesson_attributes

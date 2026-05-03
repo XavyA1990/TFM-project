@@ -24,7 +24,7 @@
           form: form,
           field: :status,
           label: CourseModule.human_attribute_name(:status),
-          choices: CourseModule.statuses.keys.map { |status| [status.humanize, status] } %>
+          choices: CourseModule.statuses.keys.map { |status| [t("enums.statuses.#{status}"), status] } %>
       </div>
 
       <div class="col-span-full">

@@ -20,7 +20,7 @@ module Catalog
       return get_courses_for_index if @action == :index
       return get_course_for_show_page if @action == :show
 
-      raise ArgumentError, "Invalid action"
+      raise ArgumentError, I18n.t("services.errors.invalid_action")
     end
 
     private

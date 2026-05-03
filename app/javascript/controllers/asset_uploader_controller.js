@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = ["dropzone", "input", "preview", "image", "video", "fileCard", "filename", "meta"];
-  static values = { type: String };
+  static values = { type: String, pdfLabel: String, fileLabel: String, previewLabel: String };
 
   connect() {
     this.objectUrl = null;
@@ -94,11 +94,11 @@ export default class extends Controller {
     this.fileCardTarget.classList.toggle("hidden", !["pdf", "file"].includes(kind));
 
     const badgeLabels = {
-      pdf: "PDF",
-      file: "FILE",
+      pdf: this.pdfLabelValue,
+      file: this.fileLabelValue,
     };
 
-    this.fileCardTarget.textContent = badgeLabels[kind] || "PREVIEW";
+    this.fileCardTarget.textContent = badgeLabels[kind] || this.previewLabelValue;
   }
 
   buildMeta(file) {

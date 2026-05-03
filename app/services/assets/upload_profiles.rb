@@ -29,7 +29,7 @@ module Assets
     }.freeze
 
     def self.fetch(profile)
-      PROFILES[profile.to_sym] || raise(ArgumentError, "Unknown upload profile: #{profile}")
+      PROFILES[profile.to_sym] || raise(ArgumentError, I18n.t("services.errors.unknown_upload_profile", profile: profile))
     end
   end
 end

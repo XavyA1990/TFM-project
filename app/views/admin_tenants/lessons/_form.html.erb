@@ -1,8 +1,36 @@
 <%
   back_path = local_assigns.fetch(:back_path, admin_tenants_course_path(tenant_slug: current_tenant.slug, id: @course.slug))
+  text_lesson = lesson.text?
+  lesson_asset_configs = {
+    video: {
+      accept: Lesson.allowed_content_types_for(:video).join(","),
+      hint: t("shared.asset_uploader.video_only_hint"),
+      preview_type: "video"
+    },
+    pdf: {
+      accept: Lesson.allowed_content_types_for(:pdf).join(","),
+      hint: t("shared.asset_uploader.pdf_only_hint"),
+      preview_type: "pdf"
+    },
+    image: {
+      accept: Lesson.allowed_content_types_for(:image).join(","),
+      hint: t("shared.asset_uploader.image_only_hint"),
+      preview_type: "image"
+    }
+  }
+  active_asset_config = lesson_asset_configs[lesson.lesson_type&.to_sym]
 %>
 
-<%= form_with model: lesson, url: url, class: "mt-10" do |form| %>
+<%= form_with(
+  model: lesson,
+  url: url,
+  class: "mt-10",
+  data: {
+    controller: "lesson-form",
+    lesson_form_text_type_value: Lesson.lesson_types[:text],
+    lesson_form_asset_configs_value: lesson_asset_configs.to_json
+  }
+) do |form| %>
   <%= render "shared/molecules/error_summary", resource: lesson %>
 
   <div class="space-y-12">
@@ -24,7 +52,13 @@
           form: form,
           field: :lesson_type,
           label: Lesson.human_attribute_name(:lesson_type),
-          choices: Lesson.lesson_types.keys.map { |type| [type.humanize, type] } %>
+          choices: Lesson.lesson_types.keys.map { |type| [t("enums.lesson_types.#{type}"), type] },
+          input_html: {
+            data: {
+              lesson_form_target: "typeSelect",
+              action: "change->lesson-form#sync"
+            }
+          } %>
       </div>
 
       <div class="sm:col-span-3">
@@ -32,34 +66,66 @@
           form: form,
           field: :status,
           label: Lesson.human_attribute_name(:status),
-          choices: Lesson.statuses.keys.map { |status| [status.humanize, status] } %>
+          choices: Lesson.statuses.keys.map { |status| [t("enums.statuses.#{status}"), status] } %>
       </div>
 
       <div class="col-span-full">
         <%= render "shared/molecules/form_field", form: form, field: :description, type: :text_area, input_html: { rows: 3 } %>
       </div>
-
-      <div class="col-span-full">
-        <%= render "shared/molecules/form_field", form: form, field: :body, type: :text_area, input_html: { rows: 5 } %>
-      </div>
     <% end %>
 
-    <%= render layout: "shared/molecules/form_section",
-      locals: {
-        title: t("admin_tenants.lessons.form.asset_title"),
-        description: t("admin_tenants.lessons.form.asset_description")
-      } do %>
-      <div class="col-span-full">
-        <%= render "shared/organisms/asset_uploader",
-          form: form,
-          field: :lesson_content_asset,
-          type: :mixed,
-          label: Lesson.human_attribute_name(:lesson_content_asset),
-          description: t("shared.asset_uploader.mixed_media_hint"),
-          accept: "image/png,image/jpeg,image/webp,video/mp4,application/pdf",
-          current_asset: lesson.lesson_content_asset %>
-      </div>
-    <% end %>
+    <div data-lesson-form-target="bodySection" class="<%= text_lesson ? "" : "hidden " %>">
+      <%= render layout: "shared/molecules/form_section",
+        locals: {
+          title: t("admin_tenants.lessons.form.text_title"),
+          description: t("admin_tenants.lessons.form.text_description")
+        } do %>
+        <div class="col-span-full">
+          <%= render "shared/molecules/form_field",
+            form: form,
+            field: :body,
+            type: :text_area,
+            input_html: {
+              rows: 5,
+              disabled: !text_lesson,
+              data: {
+                lesson_form_target: "bodyInput"
+              }
+            } %>
+        </div>
+      <% end %>
+    </div>
+
+    <div data-lesson-form-target="assetSection" class="<%= text_lesson ? "hidden " : "" %>">
+      <%= render layout: "shared/molecules/form_section",
+        locals: {
+          title: t("admin_tenants.lessons.form.asset_title"),
+          description: t("admin_tenants.lessons.form.asset_description")
+        } do %>
+        <div class="col-span-full">
+          <%= render "shared/organisms/asset_uploader",
+            form: form,
+            field: :lesson_content_asset,
+            type: active_asset_config ? active_asset_config[:preview_type].to_sym : :mixed,
+            label: Lesson.human_attribute_name(:lesson_content_asset),
+            description: active_asset_config ? active_asset_config[:hint] : t("shared.asset_uploader.mixed_media_hint"),
+            accept: active_asset_config ? active_asset_config[:accept] : nil,
+            current_asset: lesson.lesson_content_asset,
+            input_html: {
+              disabled: text_lesson
+            },
+            container_data: {
+              lesson_form_target: "assetUploader"
+            },
+            input_data: {
+              lesson_form_target: "assetInput"
+            },
+            description_data: {
+              lesson_form_target: "assetHint"
+            } %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <%= render "shared/molecules/form_actions", back_path: back_path, submit_label: submit_label %>

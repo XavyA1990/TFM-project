@@ -11,7 +11,7 @@ module Admin
     def call
       return get_courses_for_index if @action == :index
 
-      raise ArgumentError, "Invalid action"
+      raise ArgumentError, I18n.t("services.errors.invalid_action")
     end
 
     private
@@ -30,7 +30,7 @@ module Admin
             title: course.title,
             tenant_slug: course.tenant.slug,
             tenant_name: course.tenant.name,
-            status: course.status.humanize,
+            status: I18n.t("enums.statuses.#{course.status}"),
             created_at: I18n.l(course.created_at),
             updated_at: I18n.l(course.updated_at)
           }

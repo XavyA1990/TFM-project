@@ -19,7 +19,7 @@ module AdminTenants
       return update if @action == :update
       return destroy if @action == :destroy
 
-      raise ArgumentError, "Invalid action"
+      raise ArgumentError, I18n.t("services.errors.invalid_action")
     end
 
     private
@@ -36,7 +36,7 @@ module AdminTenants
           {
             slug: course.slug,
             title: course.title,
-            status: course.status.humanize,
+            status: I18n.t("enums.statuses.#{course.status}"),
             created_at: I18n.l(course.created_at),
             updated_at: I18n.l(course.updated_at)
           }
@@ -54,7 +54,7 @@ module AdminTenants
           [Course.human_attribute_name(:title), @course.title],
           [Course.human_attribute_name(:short_description), @course.short_description],
           [Course.human_attribute_name(:description), @course.description],
-          [Course.human_attribute_name(:status), @course.status.humanize],
+          [Course.human_attribute_name(:status), I18n.t("enums.statuses.#{@course.status}")],
           [Course.human_attribute_name(:course_cover_image_asset), course_cover_image_value],
           [I18n.t("admin_tenants.courses.show.module_count"), sorted_modules.size],
           [I18n.t("admin_tenants.courses.show.lesson_count"), sorted_modules.sum { |course_module| course_module.lessons.size }],
@@ -66,7 +66,7 @@ module AdminTenants
             slug: course_module.slug,
             title: course_module.title,
             description: course_module.description,
-            status: course_module.status.humanize,
+            status: I18n.t("enums.statuses.#{course_module.status}"),
             position: course_module.position,
             module_cover_image: course_module.module_cover_image_asset.attached? ? course_module.module_cover_image_asset.filename.to_s : nil,
             created_at: course_module.created_at ? I18n.l(course_module.created_at) : nil,
@@ -77,8 +77,8 @@ module AdminTenants
                 title: lesson.title,
                 description: lesson.description,
                 body: lesson.body,
-                lesson_type: lesson.lesson_type.humanize,
-                status: lesson.status.humanize,
+                lesson_type: I18n.t("enums.lesson_types.#{lesson.lesson_type}"),
+                status: I18n.t("enums.statuses.#{lesson.status}"),
                 position: lesson.position,
                 content_reference: lesson_content_value(lesson),
                 created_at: lesson.created_at ? I18n.l(lesson.created_at) : nil,

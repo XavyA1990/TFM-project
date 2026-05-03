@@ -15,7 +15,7 @@ module AdminTenants
       return get_user_for_show_page if @action == :show
       return get_user if @action == :get
 
-      raise ArgumentError, "Invalid action"
+      raise ArgumentError, I18n.t("services.errors.invalid_action")
     end
 
     private

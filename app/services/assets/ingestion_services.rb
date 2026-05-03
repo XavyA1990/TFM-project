@@ -10,7 +10,7 @@ module Assets
       return prepare_asset if @action == :prepare
       return attach_asset if @action == :attach
 
-      raise ArgumentError, "Unknown action: #{@action}"
+      raise ArgumentError, I18n.t("services.errors.unknown_action", action: @action)
     end
 
     private
@@ -18,7 +18,7 @@ module Assets
     def prepare_asset
       record = @params[:record]
       signed_blob_id = @params[:signed_blob_id]
-      raise ArgumentError, "Missing file" if signed_blob_id.blank?
+      raise ArgumentError, I18n.t("services.errors.missing_file") if signed_blob_id.blank?
 
       blob = nil
       blob = ActiveStorage::Blob.find_signed!(signed_blob_id)
@@ -32,7 +32,7 @@ module Assets
         blob: blob,
       }
     rescue ActiveSupport::MessageVerifier::InvalidSignature, ActiveRecord::RecordNotFound
-      raise ArgumentError, "Invalid file upload."
+      raise ArgumentError, I18n.t("services.errors.invalid_file_upload")
     rescue ArgumentError => error
       purge_blob_if_present(blob)
       raise error
@@ -42,9 +42,9 @@ module Assets
     end
 
     def validate_blob!(blob, profile)
-      raise ArgumentError, "Missing file" if blob.blank?
-      raise ArgumentError, "File size exceeds the maximum allowed." if blob.byte_size > profile[:max_size]
-      raise ArgumentError, "Invalid file type." unless profile[:allowed_types].include?(blob.content_type)
+      raise ArgumentError, I18n.t("services.errors.missing_file") if blob.blank?
+      raise ArgumentError, I18n.t("services.errors.file_too_large") if blob.byte_size > profile[:max_size]
+      raise ArgumentError, I18n.t("services.errors.invalid_file_type") unless profile[:allowed_types].include?(blob.content_type)
     end
 
     def purge_blob_if_present(blob)

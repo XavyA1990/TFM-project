@@ -13,7 +13,7 @@ module Positioning
       return move_within_siblings if %i[update move_within_siblings].include?(@action)
       return remove_from_siblings if %i[destroy remove_from_siblings].include?(@action)
 
-      raise ArgumentError, "Invalid action"
+      raise ArgumentError, I18n.t("services.errors.invalid_action")
     end
 
     private

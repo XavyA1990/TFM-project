@@ -12,7 +12,7 @@ module Tenants
     def call
       return published_showcase_courses if @action == :published_showcase
 
-      raise ArgumentError, "Invalid action"
+      raise ArgumentError, I18n.t("services.errors.invalid_action")
     end
 
     private

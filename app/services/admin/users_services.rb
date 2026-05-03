@@ -20,7 +20,7 @@ module Admin
       return update if @action == :update
       return destroy if @action == :destroy
 
-      raise ArgumentError, "Invalid action"
+      raise ArgumentError, I18n.t("services.errors.invalid_action")
     end
 
     private

@@ -20,6 +20,16 @@ es:
   current_password: "Contraseña actual"
   update: "Actualizar"
   back: "Volver"
+  enums:
+    statuses:
+      draft: "Borrador"
+      published: "Publicado"
+      archived: "Archivado"
+    lesson_types:
+      text: "Texto"
+      video: "Video"
+      pdf: "PDF"
+      image: "Imagen"
   pagination:
     showing: "Mostrando %{shown} de %{total} %{resource}"
     previous: "Anterior"
@@ -40,6 +50,15 @@ es:
     confirm_deletion: "¿Estás seguro de que deseas eliminar %{name}?"
     view: "Ver"
     delete: "Eliminar"
+  services:
+    errors:
+      invalid_action: "Acción no válida"
+      unknown_action: "Acción desconocida: %{action}"
+      unknown_upload_profile: "Perfil de carga desconocido: %{profile}"
+      missing_file: "Falta el archivo"
+      invalid_file_upload: "La carga del archivo no es válida."
+      file_too_large: "El tamaño del archivo supera el máximo permitido."
+      invalid_file_type: "El tipo de archivo no es válido."
   errors:
     attributes:
       current_password:
@@ -51,6 +70,14 @@ es:
       too_short: "es demasiado corto (mínimo %{count} caracteres)"
       invalid: "no es válido"
   activerecord:
+    errors:
+      models:
+        lesson:
+          attributes:
+            lesson_content_asset:
+              invalid_for_type: "debe coincidir con el tipo de contenido seleccionado"
+              required_for_type: "es obligatorio para lecciones que no son de texto"
+              not_allowed_for_text: "no se puede cargar para lecciones de texto"
     attributes:
       user:
         email: "Correo electrónico"
@@ -166,6 +193,7 @@ es:
     profile: "Perfil"
     dashboard: "Tablero de control"
     courses: "Cursos"
+    open_main_menu: "Abrir menú principal"
   courses:
     index:
       title: "Cursos Publicados"
@@ -219,7 +247,13 @@ es:
       replace_hint: "Puedes reemplazar el archivo actual cuando quieras."
       file_selected: "Archivo listo"
       current_file: "Archivo actual"
+      badges:
+        pdf: "PDF"
+        file: "ARCHIVO"
+        preview: "VISTA PREVIA"
       image_only_hint: "Admite PNG, JPG y WEBP"
+      video_only_hint: "Admite MP4"
+      pdf_only_hint: "Admite PDF"
       mixed_media_hint: "Admite PNG, JPG, WEBP, MP4 y PDF"
     dashboard_sidebar:
       admin_tenants: "Tenants"
@@ -326,8 +360,10 @@ es:
     lessons:
       destroyed: "La lección fue eliminada exitosamente."
       form:
+        text_title: "Contenido de texto"
+        text_description: "Escribe aquí el cuerpo de la lección cuando el tipo de lección sea texto."
         asset_title: "Contenido de la lección"
-        asset_description: "Carga una imagen, un video o un PDF para esta lección."
+        asset_description: "Carga el archivo requerido por el tipo de contenido seleccionado."
       new:
         title: "Nueva lección"
         description: "Agrega una lección al módulo seleccionado."

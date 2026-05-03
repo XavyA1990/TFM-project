@@ -12,7 +12,7 @@ module Courses
       return prepare_cover_image if @action == :prepare_cover_image
       return attach_cover_image if @action == :attach_cover_image
 
-      raise ArgumentError, "Invalid action"
+      raise ArgumentError, I18n.t("services.errors.invalid_action")
     end
 
     private
